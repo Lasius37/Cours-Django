@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/init.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/script.js" defer></script>
+    <title>Afficher des données dans un template</title>
+</head>
+<body>
+    <!-- ***************************************************************************************************************
+         HEADER
+    **************************************************************************************************************** -->
+    <header>
+        <h1>Afficher des données dans un template</h1>
+
+        <!-- navbar
+             ======================================================================================================= -->
+        <nav>
+            <ul class="navbar"></ul>
+        </nav>
+    </header>
+
+    <!-- ***************************************************************************************************************
+         ASIDE
+    **************************************************************************************************************** -->
+    <aside>
+
+        <!-- sidebar
+             ======================================================================================================= -->
+        <nav class="sidebar">
+
+            <!-- sidebar group ------------------------------------------------------------------------------------- -->
+            <section class="sidebar__group">
+                <h2>Dans cette page</h2>
+                <ul>
+                    <li class="sidebar__element">
+                        <a href="#context">Envoyer des données au template</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#variable">Afficher une variable</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#loop">Afficher plusieurs objets</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#relation">Afficher une relation</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#if">Afficher selon une condition</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#empty">Gérer une liste vide</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#errors">Erreurs fréquentes</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+    </aside>
+
+    <!-- ***************************************************************************************************************
+         MAIN
+    **************************************************************************************************************** -->
+    <main>
+
+        <!-- content section ====================================================================================== -->
+        <section id="context">
+            <h2>Envoyer des données au template</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Dans une vue, les données sont récupérées puis transmises au template
+                        avec<span class="comment"> render()</span>.
+                    </p>
+                    <pre class="python"><code>from django.shortcuts import render
+from .models import Student, Teacher
+
+
+def student_list(request):
+    students = Student.objects.all()
+    teacher = Teacher.objects.get(id=1)
+
+    context = {"students": students, "teacher": teacher}
+
+    return render(request, "students.html", context)</code></pre>
+                    <ul>
+                        <li><span class="comment">students = Student.objects.all() </span>récupère les élèves.</li>
+                        <li><span class="comment">teacher = Teacher.objects.get(id=1) </span>récupère un enseignant.</li>
+                        <li><span class="comment">context </span>est un dictionnaire qui envoie les variables au template.</li>
+                        <li>dans le template, les noms disponibles seront<span class="comment"> students </span>et<span class="comment"> teacher</span>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="variable">
+            <h2>Afficher une variable</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Pour afficher une donnée dans un template, on utilise des doubles accolades.
+                    </p>
+                    <pre class="html"><code>&lt;p&gt;{{ teacher.last_name }} {{ teacher.first_name }}&lt;/p&gt;</code></pre>
+                    <p>
+                        Si le template reçoit un objet<span class="comment"> teacher</span>, cette instruction affiche
+                        son nom et son prénom.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="loop">
+            <h2>Afficher plusieurs objets</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Quand le template reçoit plusieurs objets, on utilise une boucle
+                        <span class="comment">{% for %}</span>.
+                    </p>
+                    <pre class="html"><code>&lt;ul&gt;
+    {% for student in students %}
+        &lt;li&gt;{{ student.first_name }} {{ student.last_name }}&lt;/li&gt;
+    {% endfor %}
+&lt;/ul&gt;</code></pre>
+                    <p>
+                        Cette boucle parcourt tous les objets contenus dans<span class="comment"> students </span>
+                        et affiche une ligne pour chacun.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="relation">
+            <h2>Afficher une relation</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Si les modèles sont liés, le template peut accéder directement aux objets associés.
+                    </p>
+                    <pre class="html"><code>&lt;ul&gt;
+    {% for student in students %}
+        &lt;li&gt;
+            {{ student.first_name }} {{ student.last_name }} - {{ student.classroom }}
+        &lt;/li&gt;
+    {% endfor %}
+&lt;/ul&gt;</code></pre>
+                    <p>
+                        Ici, on affiche aussi la classe de chaque élève.
+                    </p>
+                    <pre class="html"><code>&lt;p&gt;Classe : {{ student.classroom.level }}{{ student.classroom.letter }}&lt;/p&gt;</code></pre>
+                    <p>
+                        On peut donc afficher directement un champ lié, comme le niveau ou la lettre de la classe.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="if">
+            <h2>Afficher selon une condition</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <p>
+                        Un template Django peut afficher du contenu seulement si une condition est vraie. Pour cela,
+                        on utilise une structure<span class="comment"> {% if %}</span>.
+                    </p>
+                    <pre class="html"><code>{% if student.classroom %}
+    &lt;p&gt;Classe : {{ student.classroom }}&lt;/p&gt;
+{% endif %}</code></pre>
+                    <p>
+                        Ici, la classe n’est affichée que si l’élève possède bien une classe associée. On peut aussi
+                        utiliser<span class="comment"> {% else %} </span>pour prévoir un autre affichage, et
+                        éventuellement<span class="comment"> {% elif %} </span>puis<span class="comment"> {% else %}</span>,
+                        comme en Python.
+                    </p>
+                    <pre class="html"><code>{% if student.classroom %}
+    &lt;p&gt;Classe : {{ student.classroom }}&lt;/p&gt;
+{% else %}
+    &lt;p&gt;Aucune classe renseignée.&lt;/p&gt;
+{% endif %}</code></pre>
+
+                    <p>
+                        Cette structure est utile pour gérer les données absentes ou afficher un contenu différent selon les cas.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="empty">
+            <h2>Gérer une liste vide</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Il est souvent utile de prévoir le cas où aucun objet n’est présent dans la base.
+                    </p>
+                    <pre class="html"><code>&lt;ul&gt;
+    {% for student in students %}
+        &lt;li&gt;{{ student.first_name }} {{ student.last_name }}&lt;/li&gt;
+    {% empty %}
+        &lt;li&gt;Aucun élève enregistré.&lt;/li&gt;
+    {% endfor %}
+&lt;/ul&gt;</code></pre>
+                    <p>
+                        Le bloc<span class="comment"> {% empty %} </span>est exécuté si la liste est vide ; sa syntaxe
+                        est plus légère que <span class="comment"> {% if %} </span>dans ce contexte.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="errors">
+            <h2>Erreurs fréquentes</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <ul>
+                        <li>Oublier d’envoyer la variable dans<span class="comment"> render() </span>:<span class="error"> le template ne peut pas l’utiliser</span>.</li>
+                        <li>Utiliser dans le template un nom différent de celui envoyé par la vue :<span class="error"> rien ne s’affiche</span>.</li>
+                        <li>Oublier les doubles accolades<span class="comment"> {{ ... }} </span>pour afficher une variable :<span class="error"> la donnée n’apparaît pas</span>.</li>
+                        <li>Confondre<span class="comment"> {% ... %} </span>et<span class="comment"> {{ ... }} </span>:<span class="error"> l’un sert aux instructions, l’autre à l’affichage</span>.</li>
+                        <li>Essayer d’accéder à une relation inexistante, par exemple<span class="comment"> student.room </span>au lieu de<span class="comment"> student.classroom </span>:<span class="error"> erreur ou affichage vide</span>.</li>
+                        <li>Penser qu’un template interroge directement la base de données :<span class="error"> c’est la vue qui prépare les données</span>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ***************************************************************************************************************
+         FOOTER
+    **************************************************************************************************************** -->
+    <footer>
+        <div>© Copyright - Guillaume Peyrard</div>
+    </footer>
+</body>
+</html>

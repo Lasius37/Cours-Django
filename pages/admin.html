@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/init.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/script.js" defer></script>
+    <title>Utiliser l'interface d'administration</title>
+</head>
+<body>
+    <!-- ***************************************************************************************************************
+         HEADER
+    **************************************************************************************************************** -->
+    <header>
+        <h1>Utiliser l'interface d'administration</h1>
+
+        <!-- navbar
+             ======================================================================================================= -->
+        <nav>
+            <ul class="navbar"></ul>
+        </nav>
+    </header>
+
+    <!-- ***************************************************************************************************************
+         ASIDE
+    **************************************************************************************************************** -->
+    <aside>
+
+        <!-- sidebar
+             ======================================================================================================= -->
+        <nav class="sidebar">
+
+            <!-- sidebar group ------------------------------------------------------------------------------------- -->
+            <section class="sidebar__group">
+                <h2>Dans cette page</h2>
+                <ul>
+                    <li class="sidebar__element">
+                        <a href="#superuser">Créer un superutilisateur</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#register">Enregistrer un modèle</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#visit">Accéder à l’administration</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#manage">Gérer les données</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#custom">Personnaliser l’affichage</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#errors">Erreurs fréquentes</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+    </aside>
+
+    <!-- ***************************************************************************************************************
+         MAIN
+    **************************************************************************************************************** -->
+    <main>
+
+
+        <!-- content section ====================================================================================== -->
+        <section id="superuser">
+            <h2>Créer un superutilisateur</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <p>
+                        Django possède une interface d’administration intégrée, qui permet de gérer rapidement les données
+                        de l’application sans créer tout de suite des pages HTML spécifiques. Elle est très utile pour :
+                    </p>
+                    <ul>
+                        <li>ajouter des objets</li>
+                        <li>modifier des objets</li>
+                        <li>supprimer des objets</li>
+                        <li>vérifier que les modèles et les relations fonctionnent correctement.</li>
+                    </ul>
+                    <p>
+                        C’est donc un outil pratique pour tester un projet Django et manipuler la base de données.
+                        Pour accéder à l’administration, il faut créer un compte administrateur.
+                    </p>
+                    <pre class="console"><code>python manage.py createsuperuser</code></pre>
+                    <p>
+                        Django demande ensuite plusieurs informations :
+                    </p>
+                    <ul>
+                        <li>un nom d’utilisateur</li>
+                        <li>une adresse email (facultative selon les cas)</li>
+                        <li>un mot de passe</li>
+                    </ul>
+                    <p>
+                        Ce compte permet de se connecter à l’interface d’administration du projet.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="register">
+            <h2>Enregistrer un modèle</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <p>
+                        Les modèles n’apparaissent pas automatiquement dans l’administration. Il faut les enregistrer
+                        dans le fichier<span class="comment"> admin.py </span>de l’application.
+                    </p>
+                    <pre class="python"><code>from django.contrib import admin
+from .models import Student, Classroom, Teacher
+
+
+admin.site.register(Student)
+admin.site.register(Classroom)
+admin.site.register(Teacher)</code></pre>
+                    <p>
+                        Une fois enregistrés, ces modèles deviennent visibles dans l’interface d’administration.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="visit">
+            <h2>Accéder à l’administration</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Une fois le superutilisateur créé et le serveur lancé, l’administration est accessible à l’adresse :
+                    </p>
+                    <pre class="console"><code>http://127.0.0.1:8000/admin/</code></pre>
+                    <p>
+                        Après connexion, Django affiche la liste des modèles enregistrés.
+                    </p>
+                    <p>
+                        On peut alors ouvrir les sections<span class="comment"> Students</span>,<span class="comment"> Classrooms </span>
+                        et<span class="comment"> Teachers </span>pour gérer les données.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="manage">
+            <h2>Gérer les données</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        L’interface d’administration permet de créer et modifier facilement des objets. Par exemple :
+                    </p>
+                    <ul>
+                        <li>ajouter une classe</li>
+                        <li>ajouter plusieurs professeurs</li>
+                        <li>ajouter des élèves</li>
+                        <li>associer un élève à une classe</li>
+                        <li>associer plusieurs professeurs à une classe</li>
+                    </ul>
+                    <p>
+                        Cela permet de tester rapidement les relations définies dans les modèles. L’administration
+                        constitue donc une première interface CRUD :
+                    </p>
+                    <ul>
+                        <li><span class="comment">Create </span>: créer un objet</li>
+                        <li><span class="comment">Read </span>: afficher les objets</li>
+                        <li><span class="comment">Update </span>: modifier un objet</li>
+                        <li><span class="comment">Delete </span>: supprimer un objet</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="custom">
+            <h2>Personnaliser l’affichage</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        L’enregistrement simple avec<span class="comment"> admin.site.register() </span>est suffisant pour
+                        commencer. Mais on peut aussi améliorer l’affichage dans l’administration.
+                    </p>
+                    <pre class="python"><code>from django.contrib import admin
+from .models import Student
+
+
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ("last_name", "first_name", "classroom")
+    search_fields = ("last_name", "first_name")
+    list_filter = ("classroom",)</code></pre>
+                    <p>
+                        Dans cet exemple :
+                    </p>
+                    <ul>
+                        <li><span class="comment">list_display </span>choisit les colonnes visibles</li>
+                        <li><span class="comment">search_fields </span>ajoute une barre de recherche</li>
+                        <li><span class="comment">list_filter </span>ajoute un filtre dans la colonne latérale</li>
+                    </ul>
+
+                    <p>
+                        Il est possible de personnaliser le nom affiché dans l’administration. Par défaut, Django
+                        utilise le nom du modèle (par exemple <span class="comment">Students</span>).
+                        On peut modifier ce nom avec la classe<span class="comment"> Meta </span>dans le modèle.
+                    </p>
+                    <pre class="python"><code>from django.db import models
+
+
+class Student(models.Model):
+    ...
+    class Meta:
+        verbose_name = "Élève" <span class="comment">&nbsp;# nom affiché au singulier</span>
+        verbose_name_plural = "Élèves" <span class="comment">&nbsp;# nom affiché au pluriel</span></code></pre>
+                    <p>
+                        Ces modifications ne sont pas obligatoire au début, mais rendent l’interface beaucoup plus pratique.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="errors">
+            <h2>Erreurs fréquentes</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <ul>
+                        <li>Oublier de créer un superutilisateur :<span class="error"> impossible de se connecter à l’administration</span>.</li>
+                        <li>Oublier d’enregistrer un modèle dans<span class="comment"> admin.py </span>:<span class="error"> le modèle n’apparaît pas dans l’interface</span>.</li>
+                        <li>Oublier les migrations avant d’utiliser l’administration :<span class="error"> la base de données n’est pas prête</span>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ***************************************************************************************************************
+         FOOTER
+    **************************************************************************************************************** -->
+    <footer>
+        <div>© Copyright - Guillaume Peyrard</div>
+    </footer>
+</body>
+</html>

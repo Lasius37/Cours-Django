@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/init.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/script.js" defer></script>
+    <title>Définir un modèle</title>
+</head>
+<body>
+    <!-- ***************************************************************************************************************
+         HEADER
+    **************************************************************************************************************** -->
+    <header>
+        <h1>Définir un modèle</h1>
+
+        <!-- navbar
+             ======================================================================================================= -->
+        <nav>
+            <ul class="navbar"></ul>
+        </nav>
+    </header>
+
+    <!-- ***************************************************************************************************************
+         ASIDE
+    **************************************************************************************************************** -->
+    <aside>
+
+        <!-- sidebar
+             ======================================================================================================= -->
+        <nav class="sidebar">
+
+            <!-- sidebar group ------------------------------------------------------------------------------------- -->
+            <section class="sidebar__group">
+                <h2>Dans cette page</h2>
+                <ul>
+                    <li class="sidebar__element">
+                        <a href="#role">Rôle d’un modèle</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#location">Où définir les modèles</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#create">Créer un premier modèle</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#fields">Ajouter des champs</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#str">Améliorer l’affichage avec __str__()</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#makemigrations">Générer une migration</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#migrate">Appliquer les migrations à la base de données</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#errors">Erreurs fréquentes</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+    </aside>
+
+    <!-- ***************************************************************************************************************
+         MAIN
+    **************************************************************************************************************** -->
+    <main>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="role">
+            <h2>Rôle d’un modèle</h2>
+            <div class="layout">
+
+                <!-- layout element -------------------------------------------------------------------------------- -->
+                <div class="layout__text">
+                    <p>
+                        Un modèle Django représente une structure de données du projet. Il sert à décrire les
+                        informations que l’application doit stocker dans la base de données. Chaque modèle correspond
+                        généralement à un type d’objet du projet :
+                    </p>
+                    <ul>
+                        <li>un livre dans une bibliothèque</li>
+                        <li>un élève dans une application scolaire</li>
+                        <li>une tâche dans un gestionnaire de projet</li>
+                    </ul>
+                    <p>
+                        Un modèle est défini en Python sous la forme d’une classe qui hérite
+                        de<span class="comment"> models.Model</span>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="location">
+            <h2>Où définir les modèles</h2>
+            <div class="layout">
+
+                <!-- layout element -------------------------------------------------------------------------------- -->
+                <div class="layout__text">
+                    <p>
+                        Les modèles sont généralement définis dans le fichier<span class="comment"> models.py </span>de
+                        l’application.
+                    </p>
+                    <pre class="console"><code>apps/
+└── mon_app/
+    ├── admin.py
+    ├── apps.py
+    ├── models.py
+    ├── tests.py
+    └── views.py</code></pre>
+                    <p>
+                        Chaque application peut posséder ses propres modèles. Django utilisera ensuite ces modèles
+                        pour créer les tables correspondantes dans la base de données.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="create">
+            <h2>Créer un premier modèle</h2>
+            <div class="layout">
+
+                <!-- layout element -------------------------------------------------------------------------------- -->
+                <div class="layout__text">
+                    <p>
+                        Pour créer un modèle, on importe le module<span class="comment"> models </span>de
+                        Django, puis on écrit une classe.
+                    </p>
+                    <pre class="python"><code>from django.db import models
+
+
+class Student(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    age = models.IntegerField()
+    email = models.EmailField()
+    is_present = models.BooleanField(default=True)</code></pre>
+                    <p>
+                        Ici, le modèle<span class="comment"> Student </span>représente un élève.
+                    </p>
+                    <ul>
+                        <li><span class="comment">first_name </span>stocke le prénom de l'élève</li>
+                        <li><span class="comment">last_name </span>stocke son nom</li>
+                        <li><span class="comment">age </span>stocke son âge</li>
+                        <li><span class="comment">email </span>stocke son email</li>
+                        <li><span class="comment">is_present </span>stocke son statut de présence</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="fields">
+            <h2>Ajouter des champs</h2>
+            <div class="layout">
+
+                <!-- layout element -------------------------------------------------------------------------------- -->
+                <div class="layout__text">
+                    <p>
+                        Un champ décrit un type d’information à enregistrer. Django propose de nombreux types
+                        de champs. Voici les plus utiles :
+                    </p>
+                    <ul>
+                        <li><span class="comment">CharField </span>: texte court</li>
+                        <li><span class="comment">TextField </span>: texte long</li>
+                        <li><span class="comment">IntegerField </span>: nombre entier</li>
+                        <li><span class="comment">BooleanField </span>: vrai / faux</li>
+                        <li><span class="comment">DateField </span>: date</li>
+                        <li><span class="comment">DateTimeField </span>: date et heure</li>
+                        <li><span class="comment">EmailField </span>: adresse email</li>
+                        <li><span class="comment">FloatField </span>: nombre décimal</li>
+                    </ul>
+                    <p>
+                        Certains champs demandent des paramètres, par exemple<span class="comment"> max_length </span>pour
+                        limiter la longueur d’un texte.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="str">
+            <h2>Améliorer l’affichage avec __str__()</h2>
+            <div class="layout">
+
+                <!-- layout element -------------------------------------------------------------------------------- -->
+                <div class="layout__text">
+                    <p>
+                        Par défaut, Django affiche les objets d’une manière peu lisible. Il est donc utile d’ajouter
+                        une méthode<span class="comment"> __str__() </span>dans le modèle pour
+                        obtenir un affichage plus clair, notamment dans l’administration Django.
+                    </p>
+                    <pre class="python"><code>from django.db import models
+
+
+class Student(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    age = models.IntegerField()
+    email = models.EmailField()
+    is_present = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"</code></pre>
+                    <p>
+                        Ici, chaque objet<span class="comment"> Student </span>sera affiché avec son nom complet.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="makemigrations">
+            <h2>Générer une migration</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <p>
+                        Après avoir créé ou modifié un modèle, il faut préparer les changements à appliquer à la base de
+                        données : on doit générer une migration.
+                    </p>
+                    <pre class="console"><code>python manage.py makemigrations</code></pre>
+                    <p>
+                        Cette commande demande à Django d’analyser les changements dans les modèles et de produire un
+                        fichier de migration. Django crée alors un dossier<span class="comment"> migrations </span>
+                        dans l’application, avec un fichier du type :
+                    </p>
+
+                    <pre class="console"><code>apps/
+└── mon_app/
+    ├── migrations/
+    │   ├── __init__.py
+    │   └── 0001_initial.py
+    ├── models.py
+    └── views.py</code></pre>
+
+                    <p>
+                        Le fichier<span class="comment"> 0001_initial.py </span>contient les instructions nécessaires
+                        pour créer les premières tables du modèle.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="migrate">
+            <h2>Appliquer les migrations à la base de données</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <p>
+                        Créer une migration ne modifie pas encore la base de données : on doit appliquer les
+                        migrations avec :
+                    </p>
+                    <pre class="console"><code>python manage.py migrate</code></pre>
+                    <p>
+                        Cette commande exécute les migrations et met à jour la base de données. En pratique :
+                    </p>
+                    <ul>
+                        <li><span class="comment">makemigrations </span>prépare les changements</li>
+                        <li><span class="comment">migrate </span>les applique réellement</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="errors">
+            <h2>Erreurs fréquentes</h2>
+            <div class="layout">
+
+                <!-- layout element -------------------------------------------------------------------------------- -->
+                <div class="layout__text">
+                    <ul>
+                        <li>Oublier d’hériter de<span class="comment"> models.Model </span>:<span class="error"> Django ne reconnaît pas le modèle</span>.</li>
+                        <li>Oublier d’importer<span class="comment"> from django.db import models </span>:<span class="error"> erreur Python</span>.</li>
+                        <li>Utiliser un champ sans paramètre obligatoire, comme<span class="comment"> CharField </span>sans<span class="comment"> max_length </span>:<span class="error"> modèle invalide</span>.</li>
+                        <li>Modifier<span class="comment"> models.py </span>sans relancer les migrations :<span class="error">la base de données n’est pas mise à jour</span>.</li>
+                        <li>Lancer<span class="comment"> makemigrations </span>mais oublier<span class="comment"> migrate </span>:<span class="error"> la migration existe, mais elle n’est pas appliquée</span>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ***************************************************************************************************************
+         FOOTER
+    **************************************************************************************************************** -->
+    <footer>
+        <div>© Copyright - Guillaume Peyrard</div>
+    </footer>
+</body>
+</html>

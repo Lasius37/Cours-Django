@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/init.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/script.js" defer></script>
+    <title>Créer des formulaires</title>
+</head>
+<body>
+    <!-- ***************************************************************************************************************
+         HEADER
+    **************************************************************************************************************** -->
+    <header>
+        <h1>Créer des formulaires</h1>
+
+        <!-- navbar
+             ======================================================================================================= -->
+        <nav>
+            <ul class="navbar"></ul>
+        </nav>
+    </header>
+
+    <!-- ***************************************************************************************************************
+         ASIDE
+    **************************************************************************************************************** -->
+    <aside>
+
+        <!-- sidebar
+             ======================================================================================================= -->
+        <nav class="sidebar">
+
+            <!-- sidebar group ------------------------------------------------------------------------------------- -->
+            <section class="sidebar__group">
+                <h2>Dans cette page</h2>
+                <ul>
+                    <li class="sidebar__element">
+                        <a href="#file">Créer le fichier forms.py</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#create">Créer un formulaire avec Form</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#view">Envoyer le formulaire à une vue</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#template">Afficher le formulaire dans un template</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#modelform">Utiliser ModelForm</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#errors">Erreurs fréquentes</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+    </aside>
+
+    <!-- ***************************************************************************************************************
+         MAIN
+    **************************************************************************************************************** -->
+    <main>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="file">
+            <h2>Créer le fichier forms.py</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Django propose un système de formulaires qui évite d’écrire tout le HTML et toute la logique à
+                        la main. Les formulaires sont généralement définis dans un
+                        fichier<span class="comment"> forms.py </span>placé dans l’application. Ce fichier n’est pas
+                        créé automatiquement par Django lors du<span class="comment"> startapp </span>:
+                        il faut donc l’ajouter manuellement.
+                    </p>
+                    <pre class="console"><code>apps/
+└── mon_app/
+    ├── forms.py        <span class="comment">le fichier à ajouter</span>
+    ├── models.py
+    ├── views.py
+    └── templates/</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="create">
+            <h2>Créer un formulaire avec Form</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Pour créer un formulaire simple, on importe le module<span class="comment"> forms </span>de
+                        Django, puis on définit une classe qui hérite de<span class="comment"> forms.Form</span>.
+                    </p>
+                    <pre class="python"><code>from django import forms
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)</code></pre>
+                    <p>
+                        Ici, le formulaire contient trois champs :
+                    </p>
+                    <ul>
+                        <li><span class="comment">name </span>: un texte court</li>
+                        <li><span class="comment">email </span>: une adresse email</li>
+                        <li><span class="comment">message </span>: un texte plus long grâce au widget<span class="comment"> Textarea</span></li>
+                    </ul>
+                    <p>
+                        Chaque champ est défini comme un attribut de la classe.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="view">
+            <h2>Envoyer le formulaire à une vue</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Pour afficher un formulaire, la vue doit créer une instance du formulaire
+                        et l’envoyer au template dans le contexte.
+                    </p>
+                    <pre class="python"><code>from django.shortcuts import render
+from .forms import ContactForm
+
+
+def contact(request):
+    context = {"form": ContactForm()}
+    return render(request, "contact.html", context)</code></pre>
+                    <p>
+                        Ici, la variable<span class="comment"> form </span>est transmise au template
+                        avec<span class="comment"> render()</span>. À ce stade, le formulaire est seulement affiché.
+                        Le traitement des données envoyées sera fait ensuite.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="template">
+            <h2>Afficher le formulaire dans un template</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Dans le template, on place le formulaire à l’intérieur d’une balise<span class="comment"> &lt;form&gt;</span>.
+                    </p>
+                    <pre class="html"><code>&lt;form method="post"&gt;
+    {% csrf_token %}
+    {{ form }}
+    &lt;button type="submit"&gt;Envoyer&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    <ul>
+                        <li><span class="comment">method="post" </span>indique que les données sont envoyées au serveur (requête de type POST)</li>
+                        <li><span class="comment">{% csrf_token %} </span>ajoute une protection de sécurité</li>
+                        <li><span class="comment">{{ form }} </span>affiche automatiquement tous les champs du formulaire</li>
+                    </ul>
+                    <p>
+                        Django peut aussi afficher le formulaire avec une mise en forme légèrement différente :
+                    </p>
+                    <pre class="html"><code>{{ form.as_p }}</code></pre>
+                    <p>
+                        Chaque champ sera alors affiché dans une balise<span class="comment"> &lt;p&gt; </span>HTML.
+                        La structure du formulaire est un peu plus lisible et moins "brute".
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="modelform">
+            <h2>Utiliser ModelForm</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Quand un formulaire doit être lié à un modèle Django, il est souvent plus pratique
+                        d’utiliser<span class="comment"> ModelForm </span>plutôt que<span class="comment"> forms.Form</span>.
+                    </p>
+                    <pre class="python"><code>from django import forms
+from .models import Book
+
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ["title", "publication_year", "author", "categories"]</code></pre>
+                    <p>
+                        Dans ce cas, Django crée automatiquement les champs du formulaire à partir du modèle.
+                    </p>
+                    <ul>
+                        <li><span class="comment">model </span>indique le modèle utilisé ;</li>
+                        <li><span class="comment">fields </span>indique les champs à afficher dans le formulaire.</li>
+                    </ul>
+                    <p>
+                        Cette solution est particulièrement utile pour créer ou modifier des objets liés à la base
+                        de données.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="errors">
+            <h2>Erreurs fréquentes</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <ul>
+                        <li>Oublier de créer le fichier<span class="comment"> forms.py </span>:<span class="error"> impossible d’importer le formulaire</span>.</li>
+                        <li>Oublier d’hériter de<span class="comment"> forms.Form </span>ou<span class="comment"> forms.ModelForm </span>:<span class="error"> le formulaire ne fonctionne pas correctement</span>.</li>
+                        <li>Oublier d’importer<span class="comment"> from django import forms </span>:<span class="error"> NameError</span>.</li>
+                        <li>Oublier d’envoyer<span class="comment"> form </span>dans le<span class="comment"> context </span>de<span class="comment"> render() </span>:<span class="error"> rien ne s’affiche dans le template</span>.</li>
+                        <li>Oublier la balise<span class="comment"> &lt;form&gt; </span>dans le template :<span class="error"> le formulaire s’affiche, mais l’envoi n’est pas correct</span>.</li>
+                        <li>Oublier<span class="comment"> {% csrf_token %} </span>dans un formulaire en<span class="comment"> POST </span>:<span class="error"> Django refuse la requête</span>.</li>
+                        <li>Utiliser un nom de champ inexistant dans<span class="comment"> fields </span>d’un<span class="comment"> ModelForm </span>:<span class="error"> erreur de configuration</span>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ***************************************************************************************************************
+         FOOTER
+    **************************************************************************************************************** -->
+    <footer>
+        <div>© Copyright - Guillaume Peyrard</div>
+    </footer>
+</body>
+</html>

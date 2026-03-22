@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/init.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/script.js" defer></script>
+    <title>Définir les relations entre modèles</title>
+</head>
+<body>
+    <!-- ***************************************************************************************************************
+         HEADER
+    **************************************************************************************************************** -->
+    <header>
+        <h1>Définir les relations entre modèles</h1>
+
+        <!-- navbar
+             ======================================================================================================= -->
+        <nav>
+            <ul class="navbar"></ul>
+        </nav>
+    </header>
+
+    <!-- ***************************************************************************************************************
+         ASIDE
+    **************************************************************************************************************** -->
+    <aside>
+
+        <!-- sidebar
+             ======================================================================================================= -->
+        <nav class="sidebar">
+
+            <!-- sidebar group ------------------------------------------------------------------------------------- -->
+            <section class="sidebar__group">
+                <h2>Dans cette page</h2>
+                <ul>
+                    <li class="sidebar__element">
+                        <a href="#definition">Définition</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#foreignkey">Créer une relation avec ForeignKey</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#manytomany">Créer une relation avec ManyToManyField</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#related">Accéder aux données liées</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#queries">Interroger une relation</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#errors">Erreurs fréquentes</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+    </aside>
+
+    <!-- ***************************************************************************************************************
+         MAIN
+    **************************************************************************************************************** -->
+    <main>
+
+        <!-- content section ====================================================================================== -->
+        <section id="definition">
+            <h2>Définition</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <p>
+                        Dans une application réelle, les données ne sont pas isolées. Un élève appartient à une classe,
+                        par exemple.  Django permet de créer des relations entre les modèles pour représenter ces
+                        dépendances. Les deux relations les plus utilisées sont :
+                    </p>
+                    <ul>
+                        <li><span class="comment">ForeignKey </span>: plusieurs objets pointent vers un seul autre objet</li>
+                        <li><span class="comment">ManyToManyField </span>: plusieurs objets peuvent être liés entre eux dans les deux sens</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="foreignkey">
+            <h2>Créer une relation avec ForeignKey</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <p>
+                        Une<span class="comment"> ForeignKey </span>sert à relier plusieurs objets à un seul autre
+                        objet. Exemple : plusieurs élèves peuvent appartenir à une même classe.
+                    </p>
+                    <pre class="python"><code>from django.db import models
+
+
+class Classroom(models.Model):
+    level = models.CharField(max_length=1)
+    letter = models.CharField(max_length=1)
+
+    def __str__(self):
+        return f"{self.level}ème {self.letter}"
+
+
+class Student(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"</code></pre>
+
+                    <p>
+                        Chaque objet<span class="comment"> Student </span>est lié à un seul
+                        objet<span class="comment"> Classroom</span>.<span class="comment"> models.CASCADE </span>
+                        signifie : si une classe est supprimée, tous les élèves liés à cette classe sont supprimés aussi.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="manytomany">
+            <h2>Créer une relation avec ManyToManyField</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <p>
+                        Une relation<span class="comment"> ManyToManyField </span>est utile quand plusieurs objets
+                        peuvent être liés à plusieurs autres objets. Exemple : une classe peut avoir
+                        plusieurs professeurs, et un professeur peut enseigner dans plusieurs classes.
+                    </p>
+
+                    <pre class="python"><code>from django.db import models
+
+
+class Teacher(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+
+class Classroom(models.Model):
+    level = models.CharField(max_length=1)
+    letter = models.CharField(max_length=1)
+    teachers = models.ManyToManyField(Teacher)
+
+    def __str__(self):
+        return f"{self.level}ème {self.letter}"</code></pre>
+                    <p>
+                        Django crée automatiquement une table intermédiaire pour gérer cette relation.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="related">
+            <h2>Accéder aux données liées</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Une fois la relation créée, on peut accéder aux données liées très simplement.
+                    </p>
+                    <pre class="python"><code>student = Student.objects.get(id=1)
+student.classroom</code></pre>
+                    <p>
+                        Cette expression renvoie la classe liée à l'élève.
+                    </p>
+                    <pre class="python"><code>student.classroom.level</code></pre>
+                    <p>
+                        On peut donc accéder directement aux champs de l’objet lié.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="queries">
+            <h2>Interroger une relation</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Les relations peuvent aussi être utilisées dans les requêtes.
+                    </p>
+                    <pre class="python"><code>students = Student.objects.filter(classroom__level="6")</code></pre>
+                    <p>
+                        Le double underscore<span class="comment"> __ </span>permet de traverser la relation.
+                    </p>
+                    <pre class="python"><code>students = Student.objects.order_by("classroom__level", "last_name")</code></pre>
+                    <p>
+                        Ici, les élèves sont triés d’abord par niveau de classe, puis par nom.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section ====================================================================================== -->
+        <section id="errors">
+            <h2>Erreurs fréquentes</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+                    <ul>
+                        <li>Oublier d’importer<span class="comment"> models </span>:<span class="error"> erreur Python</span>.</li>
+                        <li>Créer une relation puis oublier<span class="comment"> makemigrations </span>et<span class="comment"> migrate </span>:<span class="error"> la base de données n’est pas mise à jour</span>.</li>
+                        <li>Utiliser un nom de modèle inexistant dans<span class="comment"> ForeignKey </span>ou<span class="comment"> ManyToManyField </span>:<span class="error"> erreur au démarrage</span>.</li>
+                        <li>Oublier le paramètre<span class="comment"> on_delete </span>dans<span class="comment"> ForeignKey </span>:<span class="error"> Django refuse le modèle</span>.</li>
+                        <li>Utiliser un mauvais nom de champ relationnel dans une requête, comme<span class="comment"> classroom__leve </span>au lieu de<span class="comment"> classroom__level </span>:<span class="error"> FieldError</span>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ***************************************************************************************************************
+         FOOTER
+    **************************************************************************************************************** -->
+    <footer>
+        <div>© Copyright - Guillaume Peyrard</div>
+    </footer>
+</body>
+</html>

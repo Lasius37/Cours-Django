@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/init.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/script.js" defer></script>
+    <title>Paramétrer le projet</title>
+</head>
+<body>
+    <!-- ***************************************************************************************************************
+         HEADER
+    **************************************************************************************************************** -->
+    <header>
+        <h1>Paramétrer le projet</h1>
+
+        <!-- navbar
+             ======================================================================================================= -->
+        <nav>
+            <ul class="navbar"></ul>
+        </nav>
+    </header>
+
+    <!-- ***************************************************************************************************************
+         ASIDE
+    **************************************************************************************************************** -->
+    <aside>
+
+        <!-- sidebar
+             ======================================================================================================= -->
+        <nav class="sidebar">
+
+            <!-- sidebar group ------------------------------------------------------------------------------------- -->
+            <section class="sidebar__group">
+                <h2>Dans cette page</h2>
+                <ul>
+                    <li class="sidebar__element">
+                        <a href="#role">Rôle du fichier settings.py</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#others">Régler les paramètres généraux</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#apps">Déclarer une application</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#templates">Configurer les templates</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#static">Configurer les fichiers statiques</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#media">Configurer les fichiers médias</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#errors">Erreurs fréquentes</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+    </aside>
+
+    <!-- ***************************************************************************************************************
+         MAIN
+    **************************************************************************************************************** -->
+    <main>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="role">
+            <h2>Rôle du fichier settings.py</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Le fichier<span class="comment"> settings.py </span>contient les paramètres globaux du projet.
+                        On y configure notamment :
+                    </p>
+                    <ul>
+                        <li>les applications installées ;</li>
+                        <li>les templates HTML ;</li>
+                        <li>les fichiers statiques ;</li>
+                        <li>la base de données ;</li>
+                        <li>la sécurité et le mode debug.</li>
+                    </ul>
+                    <p>
+                        Après la création d'une application avec<span class="comment"> startapp</span>, il faut
+                        l'ajouter dans<span class="comment"> INSTALLED_APPS</span>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="others">
+            <h2>Régler les paramètres généraux</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        On commence par modifier quelques paramètres dans<span class="comment"> settings.py </span>:
+                    </p>
+                    <pre class="python"><code>LANGUAGE_CODE = 'fr-FR'
+
+TIME_ZONE = 'Europe/Paris'</code></pre>
+                    <p>
+                        Ces paramètres permettent d'adapter le projet à la langue et au fuseau horaire utilisés.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="apps">
+            <h2>Déclarer une application</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Django doit connaître les applications du projet pour pouvoir les utiliser.
+                        On les ajoute à la liste <span class="comment">INSTALLED_APPS</span>, déjà déclarée
+                        dans<span class="comment"> settings.py </span>.
+                    </p>
+                    <pre class="python"><code>INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+
+    "apps.mon_app",                 <span class="comment">#  Ajouter le nom de chaque application du projet</span>
+]</code></pre>
+                    <p>
+                        Une fois l'application ajoutée, Django peut utiliser ses modèles, ses templates, ses
+                        fichiers d'administration, ses migrations.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="templates">
+            <h2>Configurer les templates</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Django peut charger des templates depuis les applications, mais on peut aussi définir un dossier
+                        global. Le dossier<span class="comment"> templates </span>a déjà été créé
+                        à la racine du projet, on y ajoute le fichier<span class="comment"> base.html</span>.
+                    </p>
+                    <pre class="console"><code>mon_projet/
+│
+├── templates/
+│   └── base.html</code></pre>
+                    <p>
+                        Il faut ensuite déclarer ce dossier dans<span class="comment"> settings.py </span>:
+                    </p>
+                    <pre class="python"><code>TEMPLATES = [
+    {...
+        'DIRS': [BASE_DIR / "templates"],
+        'APP_DIRS' = True,
+    ...}
+]</code></pre>
+                    <p>
+                        Django cherchera alors les templates :
+                    </p>
+                    <ul>
+                        <li>dans le dossier global <span class="comment">templates</span> ;</li>
+                        <li>dans les dossiers <span class="comment">templates</span> des applications.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="static">
+            <h2>Configurer les fichiers statiques</h2>
+            <div class="layout">
+                <div class="layout__text">
+
+                    <p>
+                        Les fichiers statiques correspondent aux fichiers front-end : CSS, JavaScript, images, polices.
+                    </p>
+                    <p>
+                        Le dossier<span class="comment"> static </span>est déjà à la racine du projet. On peut y ajouter
+                        de nombreus sous-dossiers selon les besoins, si ces fichiers sont nombreux :
+                    </p>
+                    <pre class="console"><code>mon_projet/
+│
+├── static/
+│   ├── audios/         <span class="comment">les fichiers audio du projet</span>
+│   ├── css/            <span class="comment">les feuilles de style</span>
+│   ├── documents/      <span class="comment">les documents (pdf...) du projet</span>
+│   ├── fonts/          <span class="comment">les polices d'écriture</span>
+│   ├── images/         <span class="comment">les images fournies par le développeur</span>
+│   ├── js/             <span class="comment">les scripts</span>
+│   └── videos/         <span class="comment">les fichiers vidéo du projet</span>
+
+</code></pre>
+                    <p>
+                        On indique ensuite où se trouve ce dossier dans<span class="comment"> settings.py </span>:
+                    </p>
+                    <pre class="python"><code>STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]</code></pre>
+                    <p>
+                        L'URL utilisée pour accéder aux fichiers statiques est définie par :
+                    </p>
+                    <pre class="python"><code>STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles" <span class="comment"> # Cette ligne sera utilisée au moment du déploiement</span></code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="media">
+            <h2>Configurer les fichiers médias</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Les fichiers médias correspondent aux fichiers envoyés par les utilisateurs, par exemple des
+                        images ou des documents. Le dossier <span class="comment"> media </span>existe déjà :
+                    </p>
+                    <pre class="console"><code>mon_projet/
+    │
+    └── media/</code></pre>
+                    <p>
+                        On ajoute ensuite les paramètres suivants dans<span class="comment"> settings.py </span>:
+                    </p>
+                    <pre class="python"><code>MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media" <span class="comment"> # Cette ligne sera utilisée au moment du déploiement</span></code></pre>
+                    <p>
+                        Ces paramètres seront utilisés plus tard pour servir les fichiers médias. Selon les besoins, on
+                        peut ajouter des sous-dossiers pour séparer les fichiers.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="errors">
+            <h2>Erreurs fréquentes</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+
+                    <ul>
+                        <li>Oublier d'ajouter l'application dans <span class="comment">INSTALLED_APPS</span> : <span class="error">Django ignore l'application</span>.</li>
+                        <li>Oublier de créer les dossiers <span class="comment">templates</span> ou <span class="comment">static</span> : <span class="error">les fichiers ne sont pas trouvés</span>.</li>
+                        <li>Modifier la configuration sans redémarrer le serveur : <span class="error">les changements ne sont pas pris en compte</span>.</li>
+                        <li>Utiliser un chemin incorrect dans <span class="comment">STATICFILES_DIRS</span> : <span class="error">les fichiers statiques ne sont pas chargés</span>.</li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ***************************************************************************************************************
+         FOOTER
+    **************************************************************************************************************** -->
+    <footer>
+        <div>© Copyright - Guillaume Peyrard</div>
+    </footer>
+</body>
+</html>

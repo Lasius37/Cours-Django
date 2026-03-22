@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/init.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/script.js" defer></script>
+    <title>Valider un formulaire</title>
+</head>
+<body>
+    <!-- ***************************************************************************************************************
+         HEADER
+    **************************************************************************************************************** -->
+    <header>
+        <h1>Valider un formulaire</h1>
+
+        <!-- navbar
+             ======================================================================================================= -->
+        <nav>
+            <ul class="navbar"></ul>
+        </nav>
+    </header>
+
+    <!-- ***************************************************************************************************************
+         ASIDE
+    **************************************************************************************************************** -->
+    <aside>
+
+        <!-- sidebar
+             ======================================================================================================= -->
+        <nav class="sidebar">
+
+            <!-- sidebar group ------------------------------------------------------------------------------------- -->
+            <section class="sidebar__group">
+                <h2>Dans cette page</h2>
+                <ul>
+                    <li class="sidebar__element">
+                        <a href="#automatic">Validation automatique des champs</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#errors-template">Afficher les erreurs dans le template</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#clean-field">Valider un champ avec clean_&lt;my_field&gt;()</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#clean">Valider plusieurs champs avec clean()</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#validationerror">Lever une ValidationError</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#errors">Erreurs fréquentes</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+    </aside>
+
+    <!-- ***************************************************************************************************************
+         MAIN
+    **************************************************************************************************************** -->
+    <main>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="automatic">
+            <h2>Validation automatique des champs</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Django valide automatiquement les données selon le type de chaque champ du formulaire. La
+                        validation est déclenchée quand on appelle<span class="comment"> form.is_valid()</span>.
+                    </p>
+                    <pre class="python"><code>from django import forms
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    age = forms.IntegerField(min_value=10, max_value=99)</code></pre>
+                    <p>
+                        Ici :
+                    </p>
+                    <ul>
+                        <li><span class="comment">name </span>ne peut pas dépasser 100 caractères ;</li>
+                        <li><span class="comment">email </span>doit contenir une adresse email valide ;</li>
+                        <li><span class="comment">age </span>doit être un entier compris entre 10 et 99.</li>
+                    </ul>
+                    <p>
+                        Si une donnée ne respecte pas ces contraintes, Django considère que le formulaire n’est pas valide.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="errors-template">
+            <h2>Afficher les erreurs dans le template</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Si<span class="comment"> form.is_valid() </span>renvoie<span class="comment"> False</span>,
+                        Django conserve les données saisies et ajoute les messages d’erreur au formulaire.
+                    </p>
+                    <pre class="html"><code>&lt;form method="post"&gt;
+    {% csrf_token %}
+    {{ form.as_p }}
+    &lt;button type="submit"&gt;Envoyer&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    <p>
+                        Avec<span class="comment"> {{ form.as_p }} </span>ou<span class="comment"> {{ form }} </span>,
+                        les erreurs sont affichées automatiquement à côté des champs concernés. On peut aussi
+                        afficher les erreurs plus explicitement :
+                    </p>
+                    <pre class="html"><code>{{ form.errors }}</code></pre>
+                    <p>
+                        Cela permet de visualiser rapidement les problèmes détectés par Django.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="clean-field">
+            <h2>Valider un champ avec clean_&lt;my_field&gt;()</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Pour ajouter une règle personnalisée sur un champ précis, on peut écrire une méthode
+                        <span class="comment">clean_&lt;my_field&gt;()</span> dans la classe du formulaire.
+                    </p>
+                    <pre class="python"><code>from django import forms
+from django.core.exceptions import ValidationError
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100)
+
+    def clean_name(self):
+        name = self.cleaned_data["name"]
+
+        if len(name) &lt; 3:
+            raise ValidationError("Le nom doit contenir au moins 3 caractères.")
+
+        return name</code></pre>
+                    <p>
+                        Ici, Django appelle automatiquement<span class="comment"> clean_name() </span>pendant la validation.
+                    </p>
+                    <ul>
+                        <li>si la valeur est correcte, la méthode retourne la valeur</li>
+                        <li>sinon, elle lève une erreur de validation</li>
+                    </ul>
+                    <p>
+                        Cette méthode est utile pour ajouter une règle métier simple sur un seul champ.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="clean">
+            <h2>Valider plusieurs champs avec clean()</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Quand la validation dépend de plusieurs champs à la fois, on peut redéfinir la méthode
+                        <span class="comment">clean()</span>.
+                    </p>
+                    <pre class="python"><code>from django import forms
+from django.core.exceptions import ValidationError
+
+
+class RegistrationForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            raise ValidationError("Les deux mots de passe doivent être identiques.")
+
+        return cleaned_data</code></pre>
+                    <p>
+                        Ici, la validation ne porte pas sur un champ isolé, mais sur la cohérence
+                        entre<span class="comment"> password </span>et<span class="comment"> confirm_password</span>.
+                        La méthode<span class="comment"> super().clean() </span>permet de conserver le comportement
+                        normal de Django avant d’ajouter la règle personnalisée.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="validationerror">
+            <h2>Lever une ValidationError</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Pour signaler qu’une donnée n’est pas acceptable, Django utilise
+                        l’exception<span class="comment"> ValidationError</span>.
+                    </p>
+                    <pre class="python"><code>from django.core.exceptions import ValidationError
+
+raise ValidationError("Ce champ contient une valeur invalide.")</code></pre>
+                    <p>
+                        Cette exception peut être utilisée :
+                    </p>
+                    <ul>
+                        <li>dans une méthode<span class="comment"> clean_&lt;my_field&gt;()</span> ;</li>
+                        <li>dans la méthode<span class="comment"> clean()</span> ;</li>
+                        <li>dans certains validateurs personnalisés.</li>
+                    </ul>
+                    <p>
+                        Le message fourni sera affiché à l’utilisateur dans le formulaire.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="errors">
+            <h2>Erreurs fréquentes</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <ul>
+                        <li>Utiliser<span class="comment"> cleaned_data </span>avant<span class="comment"> is_valid() </span>:<span class="error"> les données ne sont pas encore validées</span>.</li>
+                        <li>Oublier de retourner la valeur dans<span class="comment"> clean_&lt;my_field&gt;() </span>:<span class="error"> la donnée validée n’est pas correctement renvoyée</span>.</li>
+                        <li>Oublier<span class="comment"> super().clean() </span>dans<span class="comment"> clean() </span>:<span class="error"> certaines données peuvent ne pas être récupérées correctement</span>.</li>
+                        <li>Lever une exception classique au lieu de<span class="comment"> ValidationError </span>:<span class="error"> Django n’affiche pas l’erreur comme une erreur de formulaire normale</span>.</li>
+                        <li>Écrire<span class="comment"> clean_name </span>au lieu de<span class="comment"> clean_name() </span>comme méthode de la classe :<span class="error"> la validation personnalisée n’est pas exécutée</span>.</li>
+                        <li>Tester une règle sur plusieurs champs dans<span class="comment"> clean_&lt;my_field&gt;() </span>au lieu d’utiliser<span class="comment"> clean() </span>:<span class="error"> la logique de validation devient confuse</span>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ***************************************************************************************************************
+         FOOTER
+    **************************************************************************************************************** -->
+    <footer>
+        <div>© Copyright - Guillaume Peyrard</div>
+    </footer>
+</body>
+</html>

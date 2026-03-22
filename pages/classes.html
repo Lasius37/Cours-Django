@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/init.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/script.js" defer></script>
+    <title>Créer une vue avec une classe</title>
+</head>
+<body>
+    <!-- ***************************************************************************************************************
+         HEADER
+    **************************************************************************************************************** -->
+    <header>
+        <h1>Créer une vue avec une classe</h1>
+
+        <!-- navbar
+             ======================================================================================================= -->
+        <nav>
+            <ul class="navbar"></ul>
+        </nav>
+    </header>
+
+    <!-- ***************************************************************************************************************
+         ASIDE
+    **************************************************************************************************************** -->
+    <aside>
+
+        <!-- sidebar
+             ======================================================================================================= -->
+        <nav class="sidebar">
+
+            <!-- sidebar group ------------------------------------------------------------------------------------- -->
+            <section class="sidebar__group">
+                <h2>Dans cette page</h2>
+                <ul>
+                    <li class="sidebar__element">
+                        <a href="#create">Créer une première vue avec une classe</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#urls">Relier la vue à urls.py avec as_view()</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#templateview">Afficher un template avec TemplateView</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#listview">Afficher une liste d'objets avec ListView</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#detailview">Afficher un objet avec DetailView</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#errors">Erreurs fréquentes</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+    </aside>
+
+    <!-- ***************************************************************************************************************
+         MAIN
+    **************************************************************************************************************** -->
+    <main>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="create">
+            <h2>Créer une première vue avec une classe</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        En Django, une vue peut être écrite sous la forme d’une fonction, mais aussi sous la forme
+                        d’une classe. Cela permet de regrouper le comportement d’une page dans une structure
+                        plus organisée. Elle devient particulièrement utile quand plusieurs vues se ressemblent
+                        ou quand on veut réutiliser des comportements déjà fournis par Django.
+                    </p>
+                    <pre class="python"><code>from django.http import HttpResponse
+from django.views import View
+
+
+class HomeView(View):
+    def get(self, request):
+        return HttpResponse("Bonjour depuis une vue de classe !")</code></pre>
+                    <ul>
+                        <li><span class="comment">View </span>est la classe de base des vues Django ;</li>
+                        <li><span class="comment">HomeView </span>est la vue créée ;</li>
+                        <li><span class="comment">get() </span>correspond à une requête HTTP GET.</li>
+                    </ul>
+                    <p>
+                        Ici, quand l’utilisateur ouvre la page dans son navigateur, Django exécute la
+                        méthode<span class="comment"> get()</span>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="urls">
+            <h2>Relier la vue à urls.py avec as_view()</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Contrairement à une vue fonctionnelle, une vue basée sur une classe ne se relie pas directement
+                        dans<span class="comment"> urls.py</span>. Il faut utiliser la méthode<span class="comment"> as_view()</span>.
+                    </p>
+                    <pre class="python"><code>from django.urls import path
+from .views import HomeView
+
+urlpatterns = [
+    path("", HomeView.as_view()),
+]</code></pre>
+                    <p>
+                        La méthode<span class="comment"> as_view() </span>transforme la classe en vue exploitable par
+                        Django. Sans elle, Django ne peut pas appeler correctement la vue.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="templateview">
+            <h2>Afficher un template avec TemplateView</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Si une vue doit seulement afficher un template, Django propose une vue générique déjà prête
+                        :<span class="comment"> TemplateView</span>.
+                    </p>
+                    <pre class="python"><code>from django.views.generic import TemplateView
+
+
+class HomePageView(TemplateView):
+    template_name = "home.html"</code></pre>
+                    <p>
+                        Ici, Django affiche directement le template<span class="comment"> home.html </span>sans qu’il
+                        soit nécessaire d’écrire une méthode<span class="comment"> get()</span>. Cette solution est
+                        pratique pour les pages simples comme :
+                    </p>
+                    <ul>
+                        <li>une page d’accueil</li>
+                        <li>une page de présentation</li>
+                        <li>une page de contact statique</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="listview">
+            <h2>Afficher une liste d'objets avec ListView</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Pour afficher automatiquement une liste d’objets d’un modèle, Django propose
+                        la vue générique<span class="comment"> ListView</span>.
+                    </p>
+                    <pre class="python"><code>from django.views.generic import ListView
+from .models import Student
+
+
+class StudentListView(ListView):
+    model = Student
+    template_name = "students.html"
+    context_object_name = "students"</code></pre>
+                    <ul>
+                        <li><span class="comment">model </span>indique le modèle utilisé ;</li>
+                        <li><span class="comment">template_name </span>indique le template à afficher ;</li>
+                        <li><span class="comment">context_object_name </span>définit le nom de la variable envoyée au template.</li>
+                    </ul>
+                    <p>
+                        Avec cette vue, Django récupère automatiquement tous les objets du modèle
+                        <span class="comment">Student</span> puis les envoie au template.
+                    </p>
+                    <pre class="html"><code>&lt;ul&gt;
+    {% for student in students %}
+        &lt;li&gt;{{ student.first_name }} {{ student.last_name }}&lt;/li&gt;
+    {% endfor %}
+&lt;/ul&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="detailview">
+            <h2>Afficher un objet avec DetailView</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        La classe <span class="comment">DetailView</span> permet d’afficher un seul objet
+                        récupéré dans la base de données, alors que<span class="comment"> ListView </span> en affiche
+                        plusieurs. Elle est utilisée pour créer des pages de détail, comme la
+                        fiche d'un livre, par exemple.
+                    </p>
+                    <p>On crée d'abord une vue :</p>
+                    <pre class="python"><code>from django.views.generic import DetailView
+from .models import Book
+
+
+class BookDetailView(DetailView):
+    model = Book
+    template_name = "book_detail.html"</code></pre>
+                    <ul>
+                        <li><span class="comment">model </span>: modèle utilisé pour récupérer l’objet ;</li>
+                        <li><span class="comment">template_name </span>: template utilisé pour l’affichage.</li>
+                    </ul>
+                    <p>Puis on configure l'URL</p>
+
+                    <pre class="python"><code>from django.urls import path
+from .views import BookDetailView
+
+urlpatterns = [
+    path("books/&lt;int:pk&gt;/", BookDetailView.as_view(), name="book_detail"),
+]</code></pre>
+                    <ul>
+                        <li><span class="comment">&lt;int:pk&gt; </span>: identifiant de l’objet ;</li>
+                        <li><span class="comment">pk </span>= clé primaire (id par défaut).</li>
+                    </ul>
+                    <p>
+                        Par défaut, l’objet est accessible avec le nom<span class="comment"> {{ object }}</span>.
+                        On peut aussi définir un nom plus explicite :
+                    </p>
+                    <pre class="python"><code>class BookDetailView(DetailView):
+    model = Book
+    template_name = "book_detail.html"
+    context_object_name = "book"</code></pre>
+
+                    <p>
+                        Dans ce cas, le template utilise<span class="comment"> {{ book.title }}</span>. Cela rend plus
+                        lisible le code Django dans le template.
+                    </p>
+                    <pre class="html"><code>&lt;h1&gt;{{ book.title }}&lt;/h1&gt;
+&lt;p&gt;Auteur : {{ book.author }}&lt;/p&gt;
+&lt;ul&gt;
+    {% for category in book.categories.all %}
+        &lt;li&gt;{{ category.name }}&lt;/li&gt;
+    {% endfor %}
+&lt;/ul&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="errors">
+            <h2>Erreurs fréquentes</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <ul>
+                        <li>Oublier d’hériter de<span class="comment"> View</span>,<span class="comment"> TemplateView </span>,<span class="comment"> ListView </span>ou<span class="comment"> DetailView </span>:<span class="error"> la vue n’a pas le bon comportement</span>.</li>
+                        <li>Oublier<span class="comment"> as_view() </span>dans<span class="comment"> urls.py </span>:<span class="error"> la route ne fonctionne pas</span>.</li>
+                        <li>Écrire une méthode<span class="comment"> get </span>sans paramètre<span class="comment"> request </span>:<span class="error"> erreur lors de l’appel de la vue</span>.</li>
+                        <li>Indiquer un template inexistant dans<span class="comment"> template_name </span>:<span class="error"> TemplateDoesNotExist</span>.</li>
+                        <li>Utiliser<span class="comment"> ListView </span>ou<span class="comment"> DetailView </span>sans préciser le bon modèle :<span class="error"> données absentes ou mauvaise vue</span>.</li>
+                        <li>Oublier<span class="comment"> &lt;int:pk&gt; </span>dans l’URL d’une<span class="comment"> DetailView </span>:<span class="error"> Django ne peut pas retrouver l’objet demandé</span>.</li>
+                        <li>Ne pas avoir de données dans la base :<span class="error"> page vide ou erreur 404</span>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ***************************************************************************************************************
+         FOOTER
+    **************************************************************************************************************** -->
+    <footer>
+        <div>© Copyright - Guillaume Peyrard</div>
+    </footer>
+</body>
+</html>

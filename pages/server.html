@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/init.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/script.js" defer></script>
+    <title>Démarrer le serveur</title>
+</head>
+<body>
+    <!-- ***************************************************************************************************************
+         HEADER
+    **************************************************************************************************************** -->
+    <header>
+        <h1>Démarrer le serveur</h1>
+
+        <!-- navbar
+             ======================================================================================================= -->
+        <nav>
+            <ul class="navbar"></ul>
+        </nav>
+    </header>
+
+    <!-- ***************************************************************************************************************
+         ASIDE
+    **************************************************************************************************************** -->
+    <aside>
+
+        <!-- sidebar
+             ======================================================================================================= -->
+        <nav class="sidebar">
+
+            <!-- sidebar group ------------------------------------------------------------------------------------- -->
+            <section class="sidebar__group">
+                <h2>Dans cette page</h2>
+                <ul>
+                    <li class="sidebar__element">
+                        <a href="#run">Lancer le serveur de développement</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#browser">Ouvrir le site dans le navigateur</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#pycharm-server">Configurer le serveur dans PyCharm</a>
+                    </li>
+                    <li class="sidebar__element">
+                        <a href="#errors">Erreurs fréquentes</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+    </aside>
+
+    <!-- ***************************************************************************************************************
+         MAIN
+    **************************************************************************************************************** -->
+    <main>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="run">
+            <h2>Lancer le serveur de développement</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Django possède un serveur de développement intégré qui permet de tester rapidement un projet.
+                        La commande doit être exécutée depuis le dossier contenant<span class="comment"> manage.py</span>.
+                    </p>
+                    <pre class="console"><code>python manage.py runserver</code></pre>
+                    <p>
+                        Après l'exécution de la commande, le terminal affiche plusieurs informations :
+                    </p>
+                    <pre class="console"><code>Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.</code></pre>
+                    <p>
+                        Cela signifie que le serveur est actif et que le projet est accessible dans le navigateur.
+                    </p>
+                    <p>
+                        Pour arrêter le serveur de développement, il suffit d'utiliser le raccourci clavier :
+                    </p>
+                    <pre class="console"><code>CTRL + C</code></pre>
+                    <p>
+                        Le terminal revient alors à l'invite de commande.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="browser">
+            <h2>Ouvrir le site dans le navigateur</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <p>
+                        Une fois le serveur lancé, il suffit d'ouvrir l'adresse indiquée dans le navigateur :
+                    </p>
+                    <pre class="console"><code>http://127.0.0.1:8000</code></pre>
+                    <p>
+                        Si tout fonctionne correctement, Django affiche une page de confirmation indiquant que
+                        l'installation est réussie. Cette page apparaît tant qu'aucune route personnalisée n'a été
+                        définie dans le projet.
+                    </p>
+                    <p>
+                        Si le port<span class="comment"> 8000 </span>est occupé, on peut utiliser un autre port :
+                    </p>
+                    <pre class="console"><code>python manage.py runserver 8001</code></pre>
+                    <p>
+                        Le serveur de développement recharge automatiquement le projet lorsque des fichiers Python
+                        sont modifiés. Cela permet de tester immédiatement les modifications sans redémarrer le serveur.
+                        Par exemple, après avoir modifié une vue ou un fichier de configuration, il suffit
+                        d'actualiser la page dans le navigateur. Attention, dans certains cas, il est préférable de
+                        redémarrer le serveur.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="pycharm-server">
+            <h2>Configurer le serveur dans PyCharm</h2>
+            <div class="layout">
+                <div class="layout__text">
+                    <ul>
+                        <li>
+                            Choisir<span class="comment"> Run → EditConfiguration → Add new run configuration
+                            → Python</span>.
+                        </li>
+                        <li>Compléter le formulaire comme ci-dessous :
+                            <img src="../assets/server/pycharm-server-config.png" alt="La fenêtre modale de configuration du serveur dans PyCharm">
+                        </li>
+                        <li>Pour lancer le serveur, cliquer sur la flèche verte tout en haut de la fenêtre PyCharm.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- content section
+             ======================================================================================================= -->
+        <section id="errors">
+            <h2>Erreurs fréquentes</h2>
+            <div class="layout">
+
+                <div class="layout__text">
+
+                    <ul>
+                        <li>Lancer le serveur depuis un mauvais dossier :<span class="error"> la commande ne trouve pas manage.py</span>.</li>
+                        <li>Le port<span class="comment"> 8000 </span>est déjà utilisé :<span class="error"> le serveur ne démarre pas</span>.</li>
+                        <li>Modifier<span class="comment"> settings.py </span>sans redémarrer le serveur :<span class="error"> les changements ne sont pas pris en compte</span>.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ***************************************************************************************************************
+         FOOTER
+    **************************************************************************************************************** -->
+    <footer>
+        <div>© Copyright - Guillaume Peyrard</div>
+    </footer>
+</body>
+</html>
