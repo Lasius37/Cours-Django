@@ -6,6 +6,15 @@
 	},
 	"menu": [
 		{
+			"title": "Introduction",
+			"subMenu": [
+				{
+					"tag": "flask-django",
+					"text": "Comparaison Django / Flask"
+				}
+			]
+		},
+		{
 			"title": "Concepts de base",
 			"subMenu": [
 				{
