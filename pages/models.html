@@ -144,7 +144,7 @@
                     <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
 
 
-<span class="word">def</span> Student(models.Model):
+<span class="word">class</span> Student(models.Model):
     first_name = models.CharField(max_length=<span class="number">50</span>)
     last_name = models.CharField(max_length=<span class="number">50</span>)
     age = models.IntegerField()

@@ -102,6 +102,8 @@
                     <p>
                         Pour créer un formulaire simple, on importe le module<span class="comment"> forms </span>de
                         Django, puis on définit une classe qui hérite de<span class="comment"> forms.Form</span>.
+                        Ce type de formulaire est utilisé pour les formulaires qui ne sont pas corrélés avec un modèle
+                        (formulaire de contact, recherche, filtre)
                     </p>
                     <pre class="python"><code><span class="word">from</span> django <span class="word">import</span> forms
 
@@ -189,8 +191,9 @@
             <div class="layout">
                 <div class="layout__text">
                     <p>
-                        Quand un formulaire doit être lié à un modèle Django, il est souvent plus pratique
-                        d’utiliser<span class="comment"> ModelForm </span>plutôt que<span class="comment"> forms.Form</span>.
+                        Quand un formulaire doit être lié à un modèle Django, il est préférable
+                        d’utiliser<span class="comment"> ModelForm </span>plutôt
+                        que<span class="comment"> forms.Form </span>si le formulaire est associé à un modèle.
                     </p>
                     <pre class="python"><code><span class="word">from</span> django <span class="word">import</span> forms
 <span class="word">from</span> .models <span class="word">import</span> Book
