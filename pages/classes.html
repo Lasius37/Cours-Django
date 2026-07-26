@@ -82,13 +82,13 @@
                         plus organisée. Elle devient particulièrement utile quand plusieurs vues se ressemblent
                         ou quand on veut réutiliser des comportements déjà fournis par Django.
                     </p>
-                    <pre class="python"><code>from django.http import HttpResponse
-from django.views import View
+                    <pre class="python"><code><span class="word">from</span> django.http <span class="word">import</span> HttpResponse
+<span class="word">from</span> django.views <span class="word">import</span> View
 
 
-class HomeView(View):
-    def get(self, request):
-        return HttpResponse("Bonjour depuis une vue de classe !")</code></pre>
+<span class="word">class</span> HomeView(View):
+    <span class="word">def</span> <span class="function">get</span>(self, request):
+        <span class="word">return</span> HttpResponse(<span class="text">"Bonjour depuis une vue de classe !"</span>)</code></pre>
                     <ul>
                         <li><span class="comment">View </span>est la classe de base des vues Django ;</li>
                         <li><span class="comment">HomeView </span>est la vue créée ;</li>
@@ -112,11 +112,11 @@ class HomeView(View):
                         Contrairement à une vue fonctionnelle, une vue basée sur une classe ne se relie pas directement
                         dans<span class="comment"> urls.py</span>. Il faut utiliser la méthode<span class="comment"> as_view()</span>.
                     </p>
-                    <pre class="python"><code>from django.urls import path
-from .views import HomeView
+                    <pre class="python"><code><span class="word">from</span> django.urls <span class="word">import</span> path
+<span class="word">from</span> .views <span class="word">import</span> HomeView
 
 urlpatterns = [
-    path("", HomeView.as_view()),
+    <span class="function">path</span>(<span class="text">""</span>, HomeView.<span class="function">as_view</span>()),
 ]</code></pre>
                     <p>
                         La méthode<span class="comment"> as_view() </span>transforme la classe en vue exploitable par
@@ -136,11 +136,11 @@ urlpatterns = [
                         Si une vue doit seulement afficher un template, Django propose une vue générique déjà prête
                         :<span class="comment"> TemplateView</span>.
                     </p>
-                    <pre class="python"><code>from django.views.generic import TemplateView
+                    <pre class="python"><code><span class="word">from</span> django.views.generic <span class="word">import</span> TemplateView
 
 
-class HomePageView(TemplateView):
-    template_name = "home.html"</code></pre>
+<span class="word">class</span> HomePageView(TemplateView):
+    template_name = <span class="text">"home.html"</span></code></pre>
                     <p>
                         Ici, Django affiche directement le template<span class="comment"> home.html </span>sans qu’il
                         soit nécessaire d’écrire une méthode<span class="comment"> get()</span>. Cette solution est
@@ -165,14 +165,14 @@ class HomePageView(TemplateView):
                         Pour afficher automatiquement une liste d’objets d’un modèle, Django propose
                         la vue générique<span class="comment"> ListView</span>.
                     </p>
-                    <pre class="python"><code>from django.views.generic import ListView
-from .models import Student
+                    <pre class="python"><code><span class="word">from</span> django.views.generic <span class="word">import</span> ListView
+<span class="word">from</span> .models <span class="word">import</span> Student
 
 
-class StudentListView(ListView):
+<span class="word">class</span> StudentListView(ListView):
     model = Student
-    template_name = "students.html"
-    context_object_name = "students"</code></pre>
+    template_name = <span class="text">"students.html"</span>
+    context_object_name = <span class="text">"students"</span></code></pre>
                     <ul>
                         <li><span class="comment">model </span>indique le modèle utilisé ;</li>
                         <li><span class="comment">template_name </span>indique le template à afficher ;</li>
@@ -204,24 +204,24 @@ class StudentListView(ListView):
                         fiche d'un livre, par exemple.
                     </p>
                     <p>On crée d'abord une vue :</p>
-                    <pre class="python"><code>from django.views.generic import DetailView
-from .models import Book
+                    <pre class="python"><code><span class="word">from</span> django.views.generic <span class="word">import</span> DetailView
+<span class="word">from</span> .models <span class="word">import</span> Book
 
 
-class BookDetailView(DetailView):
+<span class="word">class</span> BookDetailView(DetailView):
     model = Book
-    template_name = "book_detail.html"</code></pre>
+    template_name = <span class="text">"book_detail.html"</span></code></pre>
                     <ul>
                         <li><span class="comment">model </span>: modèle utilisé pour récupérer l’objet ;</li>
                         <li><span class="comment">template_name </span>: template utilisé pour l’affichage.</li>
                     </ul>
                     <p>Puis on configure l'URL</p>
 
-                    <pre class="python"><code>from django.urls import path
-from .views import BookDetailView
+                    <pre class="python"><code><span class="word">from</span> django.urls <span class="word">import</span> path
+<span class="word">from</span> .views <span class="word">import</span> BookDetailView
 
 urlpatterns = [
-    path("books/&lt;int:pk&gt;/", BookDetailView.as_view(), name="book_detail"),
+    path(<span class="text">"books/&lt;int:pk&gt;/"</span>, BookDetailView.<span class="function">as_view</span>(), name=<span class="text">"book_detail"</span>),
 ]</code></pre>
                     <ul>
                         <li><span class="comment">&lt;int:pk&gt; </span>: identifiant de l’objet ;</li>
@@ -231,10 +231,10 @@ urlpatterns = [
                         Par défaut, l’objet est accessible avec le nom<span class="comment"> {{ object }}</span>.
                         On peut aussi définir un nom plus explicite :
                     </p>
-                    <pre class="python"><code>class BookDetailView(DetailView):
+                    <pre class="python"><code><span class="word">class</span> BookDetailView(DetailView):
     model = Book
-    template_name = "book_detail.html"
-    context_object_name = "book"</code></pre>
+    template_name = <span class="text">"book_detail.html"</span>
+    context_object_name = <span class="text">"book"</span></code></pre>
 
                     <p>
                         Dans ce cas, le template utilise<span class="comment"> {{ book.title }}</span>. Cela rend plus
@@ -250,9 +250,6 @@ urlpatterns = [
                 </div>
             </div>
         </section>
-
-
-
 
         <!-- content section
              ======================================================================================================= -->

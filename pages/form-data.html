@@ -107,11 +107,11 @@
                         de type<span class="comment"> GET</span>. Quand il envoie le formulaire, la requête
                         est généralement de type<span class="comment"> POST</span>.
                     </p>
-                    <pre class="python"><code>def contact(request):
-    if request.method == "POST":
-        pass
-    else:
-        pass</code></pre>
+                    <pre class="python"><code><span class="word">def</span> <span class="function">contact</span>(request):
+    <span class="word">if</span> request.method == <span class="text">"POST"</span>:
+        <span class="word">pass</span>
+    <span class="word">else</span>:
+        <span class="word">pass</span></code></pre>
                     <p>
                         Cette structure permet à la vue de distinguer :
                     </p>
@@ -133,19 +133,19 @@
                         Quand le formulaire est envoyé avec<span class="comment"> method="post"</span>,
                         les données saisies sont accessibles dans<span class="comment"> request.POST</span>.
                     </p>
-                    <pre class="python"><code>from django.shortcuts import render
-from .forms import ContactForm
+                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
+<span class="word">from</span> .forms <span class="word">import</span> ContactForm
 
 
-def contact(request):
-    if request.method == "POST":
+<span class="word">def</span> <span class="function">contact</span>(request):
+    <span class="word">if</span> request.method == <span class="text">"POST"</span>:
         form = ContactForm(request.POST)
-    else:
+    <span class="word">else</span>:
         form = ContactForm()
 
-    context = {"form": form}
+    context = {<span class="text">"form"</span>: form}
 
-    return render(request, "contact.html", context)</code></pre>
+    <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"contact.html"</span>, context)</code></pre>
                     <p>
                         Ici, Django remplit le formulaire avec les données reçues. Cela permet ensuite
                         de vérifier si les champs contiennent des valeurs correctes.
@@ -165,17 +165,17 @@ def contact(request):
                         on peut demander à Django de vérifier les données avec la
                         méthode<span class="comment"> is_valid()</span>.
                     </p>
-                    <pre class="python"><code>def contact(request):
-    if request.method == "POST":
+                    <pre class="python"><code><span class="word">def</span> <span class="function">contact</span>(request):
+    <span class="word">if</span> request.method == "POST":
         form = ContactForm(request.POST)
-        if form.is_valid():
-            pass
-    else:
+        <span class="word">if</span> form.<span class="function">is_valid</span>():
+            <span class="word">pass</span>
+    <span class="word">else</span>:
         form = ContactForm()
 
-    context = {"form": form}
+    context = {<span class="text">"form"</span>: form}
 
-    return render(request, "contact.html", context)</code></pre>
+    <span class="word">return <span class="function">render</span></span>(request, <span class="text">"contact.html"</span>, context)</code></pre>
                     <p>
                         La méthode<span class="comment"> is_valid() </span>retourne :
                     </p>
@@ -201,19 +201,19 @@ def contact(request):
                         Quand<span class="comment"> form.is_valid() </span>renvoie<span class="comment"> True</span>,
                         les données validées sont disponibles dans<span class="comment"> form.cleaned_data</span>.
                     </p>
-                    <pre class="python"><code>def contact(request):
-    if request.method == "POST":
+                    <pre class="python"><code><span class="word">def</span> <span class="function">contact</span>(request):
+    <span class="word">if</span> request.method == <span class="text">"POST"</span>:
         form = ContactForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data["name"]
-            email = form.cleaned_data["email"]
-            message = form.cleaned_data["message"]
-    else:
+        <span class="word">if</span> form.<span class="function">is_valid</span>():
+            name = form.cleaned_data[<span class="text">"name"</span>]
+            email = form.cleaned_data[<span class="text">"email"</span>]
+            message = form.cleaned_data[<span class="text">"message"</span>]
+    <span class="word">else</span>:
         form = ContactForm()
 
-    context = {"form": form}
+    context = {<span class="text">"form"</span>: form}
 
-    return render(request, "contact.html", context)</code></pre>
+    <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"contact.html"</span>, context)</code></pre>
                     <p>
                         <span class="comment">cleaned_data </span>contient les valeurs déjà vérifiées et converties
                         dans un format utilisable par Python. Il vaut mieux
@@ -239,21 +239,21 @@ def contact(request):
                         <li>envoyer un email</li>
                         <li>rediriger l’utilisateur vers une autre page</li>
                     </ul>
-                    <pre class="python"><code>from django.shortcuts import redirect, render
-from .forms import ContactForm
+                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> redirect, render
+<span class="word">from</span> .forms <span class="word">import</span> ContactForm
 
 
-def contact(request):
-    if request.method == "POST":
+<span class="word">def</span> <span class="function">contact</span>(request):
+    <span class="word">if</span> request.method == <span class="text">"POST"</span>:
         form = ContactForm(request.POST)
-        if form.is_valid():
-            return redirect("home")
-    else:
+        <span class="word">if</span> form.<span class="function">is_valid</span>():
+            <span class="word">return</span> <span class="function">redirect</span>(<span class="text">"home"</span>)
+    <span class="word">else</span>:
         form = ContactForm()
 
-    context = {"form": form}
+    context = {<span class="text">"form"</span>: form}
 
-    return render(request, "contact.html", context)</code></pre>
+    <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"contact.html"</span>, context)</code></pre>
                     <p>
                         Ici, si le formulaire est valide, l’utilisateur est redirigé vers la
                         page<span class="comment"> "home"</span>.

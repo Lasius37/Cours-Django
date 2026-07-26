@@ -81,7 +81,7 @@
                         données. Ces requêtes se font à l'aide des<span class="comment"> QuerySets</span>. Un QuerySet
                         est une collection d'objets récupérés depuis la base de données.
                     </p>
-                    <pre class="python"><code>students = Student.objects.all()</code></pre>
+                    <pre class="python"><code>students = Student.objects.<span class="function">all</span>()</code></pre>
                     <p>
                         Cette requête récupère tous les objets du modèle<span class="comment"> Student</span>.
                     </p>
@@ -96,7 +96,7 @@
 
                 <div class="layout__text">
                     <p>Parfois, on cherche à récupérer un seul objet du modèle.</p>
-                    <pre class="python"><code>student = Student.objects.get(id=1)</code></pre>
+                    <pre class="python"><code>student = Student.objects.<span class="function">get</span>(id=<span class="number">1</span>)</code></pre>
                     <p>
                         Cette méthode permet de récupérer un seul objet (ici, par son
                         identifiant<span class="comment"> id</span>). Si aucun objet ou plusieurs objets
@@ -112,12 +112,12 @@
             <div class="layout">
 
                 <div class="layout__text">
-                    <pre class="python"><code>students = Student.objects.filter(age=14)</code></pre>
+                    <pre class="python"><code>students = Student.objects.<span class="function">filter</span>(age=<span class="number">14</span>)</code></pre>
                     <p>
                         Cette requête retourne tous les élèves ayant 14 ans. Contrairement
                         à<span class="comment"> get()</span>, elle peut renvoyer plusieurs résultats.
                     </p>
-                    <pre class="python"><code>students = Student.objects.exclude(age=14)</code></pre>
+                    <pre class="python"><code>students = Student.objects.<span class="function">exclude</span>(age=<span class="number">14</span>)</code></pre>
                     <p>
                         Ce filtre permet d'exclure certains résultats.
                     </p>
@@ -132,9 +132,9 @@
             <div class="layout">
 
                 <div class="layout__text">
-                    <pre class="python"><code>students = Student.objects.order_by("last_name")</code></pre>
+                    <pre class="python"><code>students = Student.objects.<span class="function">order_by</span>(<span class="text">"last_name"</span>)</code></pre>
                     <p>Ici, on trie les élèves par ordre alphabétique de leur nom.</p>
-                    <pre class="python"><code>students = Student.objects.order_by("-age")</code></pre>
+                    <pre class="python"><code>students = Student.objects.<span class="function">order_by</span>(<span class="text">"-age"</span>)</code></pre>
                     <p>Le signe<span class="comment"> - </span>permet de trier en ordre inverse (décroissant dans ce cas).</p>
                 </div>
             </div>
@@ -145,13 +145,13 @@
             <h2>Utilisation dans une vue</h2>
             <div class="layout">
                 <div class="layout__text">
-                    <pre class="python"><code>from django.shortcuts import render
-from .models import Student
+                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
+<span class="word">from</span> .models <span class="word">import</span> Student
 
 
-def student_list(request):
-    students = Student.objects.all()
-    return render(request, "students.html", {"students": students})</code></pre>
+<span class="word">def</span> student_list(request):
+    students = Student.objects.<span class="function">all</span>()
+    <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"students.html"</span>, {<span class="text">"students"</span>: students})</code></pre>
                     <p>
                         Les données sont ensuite accessibles dans le template.
                     </p>

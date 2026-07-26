@@ -81,9 +81,9 @@
                     <p>
                         Un mixin s’utilise en ajoutant une classe supplémentaire dans l’héritage.
                     </p>
-                    <pre class="python"><code>class MyView(MonMixin, ListView):
+                    <pre class="python"><code><span class="word">class</span> MyView(MonMixin, ListView):
     model = Book
-    template_name = "books.html"</code></pre>
+    template_name = <span class="text">"books.html"</span></code></pre>
                     <p>
                         Ici, la vue<span class="comment"> MyView </span>hérite de deux classes : c'est un héritage multiple
                     </p>
@@ -109,14 +109,14 @@
                         Django fournit déjà plusieurs mixins prêts à l’emploi. L’un des plus courants
                         est<span class="comment"> LoginRequiredMixin</span>.
                     </p>
-                    <pre class="python"><code>from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
-from .models import Book
+                    <pre class="python"><code><span class="word">from</span> django.contrib.auth.mixins <span class="word">import</span> LoginRequiredMixin
+<span class="word">from</span> django.views.generic <span class="word">import</span> ListView
+<span class="word">from</span> .models <span class="word">import</span> Book
 
 
-class BookListView(LoginRequiredMixin, ListView):
+<span class="word">class</span> BookListView(LoginRequiredMixin, ListView):
     model = Book
-    template_name = "books.html"</code></pre>
+    template_name = <span class="text">"books.html"</span></code></pre>
                     <p>
                         Avec ce mixin, seuls les utilisateurs connectés peuvent accéder à la vue. Si l’utilisateur
                         n’est pas connecté, Django le redirige vers la page de connexion.
@@ -150,26 +150,26 @@ class BookListView(LoginRequiredMixin, ListView):
                     <p>
                         Dans ce fichier, on ajoute les mixins :
                     </p>
-                    <pre class="python"><code>class PageTitleMixin:
-    page_title = ""
+                    <pre class="python"><code><span class="word">class</span> PageTitleMixin:
+    page_title = <span class="text">""</span>
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = self.page_title
-        return context</code></pre>
+    <span class="word">def</span> <span class="function">get_context_data</span>(self, **kwargs):
+        context = <span class="function">super</span>().<span class="function">get_context_data</span>(**kwargs)
+        context[<span class="text">"page_title"</span>] = self.page_title
+        <span class="word">return</span> context</code></pre>
                     <p>
                         Ce mixin ajoute une variable<span class="comment"> page_title </span>au contexte envoyé au
                         template. On peut ensuite l’utiliser dans plusieurs vues :
                     </p>
-                    <pre class="python"><code>from django.views.generic import ListView
-from .models import Book
-from .mixins import PageTitleMixin
+                    <pre class="python"><code><span class="word">/span>from</span> django.views.generic <span class="word">import</span> ListView
+<span class="word">from</span> .models <span class="word">import</span> Book
+<span class="word">from</span> .mixins <span class="word">import</span> PageTitleMixin
 
 
-class BookListView(PageTitleMixin, ListView):
+<span class="word">class</span> BookListView(PageTitleMixin, ListView):
     model = Book
-    template_name = "books.html"
-    page_title = "Liste des livres"</code></pre>
+    template_name = <span class="text">"books.html"</span>
+    page_title = <span class="text">"Liste des livres"</span></code></pre>
                     <p>
                         Le template peut alors utiliser :
                     </p>
@@ -189,17 +189,17 @@ class BookListView(PageTitleMixin, ListView):
                         En général, le mixin est placé avant la vue principale. Cela permet à Django et à Python
                         d’utiliser correctement les méthodes fournies par le mixin avant celles de la vue générique.
                     </p>
-                    <pre class="python"><code>class BookListView(LoginRequiredMixin, ListView):
+                    <pre class="python"><code><span class="word">class</span> BookListView(LoginRequiredMixin, ListView):
     model = Book</code></pre>
                     <p>
                         Quand un mixin redéfinit une méthode comme<span class="comment"> get_context_data() </span>ou
                         <span class="comment">dispatch()</span>, il doit souvent appeler<span class="comment"> super() </span>
                         pour conserver le comportement normal des autres classes.
                     </p>
-                    <pre class="python"><code>def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    context["page_title"] = self.page_title
-    return context</code></pre>
+                    <pre class="python"><code><span class="word">def</span> <span class="function">get_context_data</span>(self, **kwargs):
+    context = <span class="function">super</span>().<span class="function">get_context_data</span>(**kwargs)
+    context[<span class="text">"page_title"</span>] = self.page_title
+    <span class="word">return</span> context</code></pre>
                 </div>
             </div>
         </section>

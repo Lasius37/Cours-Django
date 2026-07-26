@@ -80,13 +80,13 @@
                         Django valide automatiquement les données selon le type de chaque champ du formulaire. La
                         validation est déclenchée quand on appelle<span class="comment"> form.is_valid()</span>.
                     </p>
-                    <pre class="python"><code>from django import forms
+                    <pre class="python"><code><span class="word">from</span> django <span class="word">import</span> forms
 
 
-class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100)
+<span class="function">class</span> ContactForm(forms.Form):
+    name = forms.CharField(max_length=<span class="number">100</span>)
     email = forms.EmailField()
-    age = forms.IntegerField(min_value=10, max_value=99)</code></pre>
+    age = forms.IntegerField(min_value=<span class="number">10</span>, max_value=<span class="number">99</span>)</code></pre>
                     <p>
                         Ici :
                     </p>
@@ -140,20 +140,20 @@ class ContactForm(forms.Form):
                         Pour ajouter une règle personnalisée sur un champ précis, on peut écrire une méthode
                         <span class="comment">clean_&lt;my_field&gt;()</span> dans la classe du formulaire.
                     </p>
-                    <pre class="python"><code>from django import forms
-from django.core.exceptions import ValidationError
+                    <pre class="python"><code><span class="word">from</span> django <span class="word">import</span> forms
+<span class="word">from</span> django.core.exceptions <span class="word">import</span> ValidationError
 
 
-class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100)
+<span class="word">class</span> ContactForm(forms.Form):
+    name = forms.CharField(max_length=<span class="number">100</span>)
 
-    def clean_name(self):
-        name = self.cleaned_data["name"]
+    <span class="word">def</span> <span class="function">clean_name</span>(self):
+        name = self.cleaned_data[<span class="text">"name"</span>]
 
-        if len(name) &lt; 3:
-            raise ValidationError("Le nom doit contenir au moins 3 caractères.")
+        <span class="word">if</span> <span class="function">len</span>(name) &lt; <span class="number">3</span>:
+            <span class="word">raise</span> ValidationError(<span class="text">"Le nom doit contenir au moins 3 caractères."</span>)
 
-        return name</code></pre>
+        <span class="word">return</span> name</code></pre>
                     <p>
                         Ici, Django appelle automatiquement<span class="comment"> clean_name() </span>pendant la validation.
                     </p>
@@ -178,23 +178,23 @@ class ContactForm(forms.Form):
                         Quand la validation dépend de plusieurs champs à la fois, on peut redéfinir la méthode
                         <span class="comment">clean()</span>.
                     </p>
-                    <pre class="python"><code>from django import forms
-from django.core.exceptions import ValidationError
+                    <pre class="python"><code><span class="word">from</span> django <span class="word">import</span> forms
+<span class="word">from</span> django.core.exceptions <span class="word">import</span> ValidationError
 
 
-class RegistrationForm(forms.Form):
+<span class="word">class</span> RegistrationForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
     confirm_password = forms.CharField(widget=forms.PasswordInput)
 
-    def clean(self):
-        cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
+    <span class="word">def</span> clean(self):
+        cleaned_data = <span class="function">super</span>().<span class="function">clean</span>()
+        password = cleaned_data.<span class="function">get</span>(<span class="text">"password"</span>)
+        confirm_password = cleaned_data.<span class="function">get</span>(<span class="text">"confirm_password"</span>)
 
-        if password != confirm_password:
-            raise ValidationError("Les deux mots de passe doivent être identiques.")
+        <span class="word">if</span> password != confirm_password:
+            <span class="word">raise</span> ValidationError(<span class="text">"Les deux mots de passe doivent être identiques."</span>)
 
-        return cleaned_data</code></pre>
+        <span class="word">return</span> cleaned_data</code></pre>
                     <p>
                         Ici, la validation ne porte pas sur un champ isolé, mais sur la cohérence
                         entre<span class="comment"> password </span>et<span class="comment"> confirm_password</span>.
@@ -215,9 +215,9 @@ class RegistrationForm(forms.Form):
                         Pour signaler qu’une donnée n’est pas acceptable, Django utilise
                         l’exception<span class="comment"> ValidationError</span>.
                     </p>
-                    <pre class="python"><code>from django.core.exceptions import ValidationError
+                    <pre class="python"><code><span class="word">from</span> django.core.exceptions <span class="word">import</span> ValidationError
 
-raise ValidationError("Ce champ contient une valeur invalide.")</code></pre>
+<span class="word">raise</span> ValidationError(<span class="text">"Ce champ contient une valeur invalide."</span>)</code></pre>
                     <p>
                         Cette exception peut être utilisée :
                     </p>

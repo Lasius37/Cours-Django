@@ -93,12 +93,12 @@ Page envoyée au navigateur</code></pre>
                     dans<span class="comment"> config/urls.py</span>. On modifie ce fichier pour connecter les routes
                     de l'application.
                 </p>
-                <pre class="python"><code>from django.contrib import admin
-from django.urls import path, include
+                <pre class="python"><code><span class="word">from</span> django.contrib <span class="word">import</span> admin
+<span class="word">from</span> django.urls <span class="word">import</span> path, include
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("apps.mon_app.urls")),  <span class="comment">&nbsp;# include permet de déléguer les routes à l'application</span>
+    path(<span class="text">"admin/"</span>, admin.site.urls),
+    path(<span class="text">""</span>, include(<span class="text">"apps.mon_app.urls"</span>)),  <span class="comment">&nbsp;# include permet de déléguer les routes à l'application</span>
 ]</code></pre>
                 </div>
             </div>
@@ -117,11 +117,11 @@ urlpatterns = [
                         Puis on définit les routes de l'application. Ici, l'URL principale du site appelle la
                         vue<span class="comment"> home</span>.
                     </p>
-                    <pre class="python"><code>from django.urls import path
-from . import views
+                    <pre class="python"><code><span class="word">from</span> django.urls <span class="word">import</span> path
+<span class="word">from</span> . <span class="word">import</span> views
 
 urlpatterns = [
-    path("", views.home),
+    path(<span class="text">""</span>, views.home),
 ]</code></pre>
                 </div>
             </div>
@@ -138,7 +138,7 @@ urlpatterns = [
                     <ul>
                         <li>
                             Le projet délègue les routes principales :
-                            <pre class="python"><code>path("", include("apps.mon_app.urls"))</code></pre>
+                            <pre class="python"><code>path(<span class="text">""</span>, include(<span class="text">"apps.mon_app.urls"</span>))</code></pre>
                         </li>
                         <li>
                             L'application définit ensuite ses propres routes

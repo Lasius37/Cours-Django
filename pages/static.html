@@ -100,10 +100,10 @@
                         Django doit savoir où trouver les fichiers statiques. Il les trouve grâce aux lignes suivantes
                         dans<span class="comment"> settings.py</span> :
                     </p>
-                    <pre class="python"><code>STATIC_URL = "/static/"
+                    <pre class="python"><code>STATIC_URL = <span class="text">"/static/"</span>
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static"
+    BASE_DIR / <span class="text">"static"</span>
 ]</code></pre>
                     <ul>
                         <li><span class="comment">STATIC_URL </span>: chemin utilisé dans le navigateur</li>

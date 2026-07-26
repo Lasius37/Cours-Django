@@ -99,24 +99,24 @@
                         Une<span class="comment"> ForeignKey </span>sert à relier plusieurs objets à un seul autre
                         objet. Exemple : plusieurs élèves peuvent appartenir à une même classe.
                     </p>
-                    <pre class="python"><code>from django.db import models
+                    <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
 
 
-class Classroom(models.Model):
-    level = models.CharField(max_length=1)
-    letter = models.CharField(max_length=1)
+<span class="word">class</span> Classroom(models.Model):
+    level = models.CharField(max_length=<span class="number">1</span>)
+    letter = models.CharField(max_length=<span class="number">1</span>)
 
-    def __str__(self):
-        return f"{self.level}ème {self.letter}"
+    <span class="word">def</span> __str__(self):
+        <span class="word">return</span> <span class="text">f"{self.level}ème {self.letter}"</span>
 
 
-class Student(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+<span class="word">class</span> Student(models.Model):
+    first_name = models.CharField(max_length=<span class="number">50</span>)
+    last_name = models.CharField(max_length=<span class="number">50</span>)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"</code></pre>
+    <span class="word">def</span> __str__(self):
+        <span class="word">return</span> <span class="text">f"{self.last_name} {self.first_name}</span>"</code></pre>
 
                     <p>
                         Chaque objet<span class="comment"> Student </span>est lié à un seul
@@ -139,24 +139,24 @@ class Student(models.Model):
                         plusieurs professeurs, et un professeur peut enseigner dans plusieurs classes.
                     </p>
 
-                    <pre class="python"><code>from django.db import models
+                    <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
 
 
-class Teacher(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+<span class="word">class</span> Teacher(models.Model):
+    first_name = models.CharField(max_length=<span class="number">50</span>)
+    last_name = models.CharField(max_length=<span class="number">50</span>)
 
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"
+    <span class="word">def</span> __str__(self):
+        <span class="word">return</span> <span class="text">f"{self.last_name} {self.first_name}"</span>
 
 
-class Classroom(models.Model):
-    level = models.CharField(max_length=1)
-    letter = models.CharField(max_length=1)
+<span class="word">class</span> Classroom(models.Model):
+    level = models.CharField(max_length=<span class="number">1</span>)
+    letter = models.CharField(max_length=<span class="number">1</span>)
     teachers = models.ManyToManyField(Teacher)
 
-    def __str__(self):
-        return f"{self.level}ème {self.letter}"</code></pre>
+    <span class="word">def</span> __str__(self):
+        <span class="word">return</span> <span class="text">f"{self.level}ème {self.letter}"</span></code></pre>
                     <p>
                         Django crée automatiquement une table intermédiaire pour gérer cette relation.
                     </p>
@@ -172,7 +172,7 @@ class Classroom(models.Model):
                     <p>
                         Une fois la relation créée, on peut accéder aux données liées très simplement.
                     </p>
-                    <pre class="python"><code>student = Student.objects.get(id=1)
+                    <pre class="python"><code>student = Student.objects.<span class="function">get</span>(id=<span class="number">1</span>)
 student.classroom</code></pre>
                     <p>
                         Cette expression renvoie la classe liée à l'élève.
@@ -193,11 +193,11 @@ student.classroom</code></pre>
                     <p>
                         Les relations peuvent aussi être utilisées dans les requêtes.
                     </p>
-                    <pre class="python"><code>students = Student.objects.filter(classroom__level="6")</code></pre>
+                    <pre class="python"><code>students = Student.objects.<span class="function">filter</span>(classroom__level=<span class="text">"6"</span>)</code></pre>
                     <p>
                         Le double underscore<span class="comment"> __ </span>permet de traverser la relation.
                     </p>
-                    <pre class="python"><code>students = Student.objects.order_by("classroom__level", "last_name")</code></pre>
+                    <pre class="python"><code>students = Student.objects.<span class="function">order_by</span>(<span class="text">"classroom__level"</span>, <span class="text">"last_name"</span>)</code></pre>
                     <p>
                         Ici, les élèves sont triés d’abord par niveau de classe, puis par nom.
                     </p>

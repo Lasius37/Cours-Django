@@ -83,12 +83,12 @@
                         Pour enregistrer un fichier dans un modèle, on peut utiliser
                         <span class="comment">FileField</span>.
                     </p>
-                    <pre class="python"><code>from django.db import models
+                    <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
 
 
-class Document(models.Model):
-    title = models.CharField(max_length=100)
-    file = models.FileField(upload_to="documents/")</code></pre>
+<span class="word">class</span> Document(models.Model):
+    title = models.CharField(max_length=<span class="number">100</span>)
+    file = models.FileField(upload_to=<span class="text">"documents/"</span>)</code></pre>
                     <ul>
                         <li><span class="comment">file </span>contient le fichier envoyé</li>
                         <li><span class="comment">upload_to </span>indique le sous-dossier de destination</li>
@@ -109,12 +109,12 @@ class Document(models.Model):
                     <p>
                         Pour stocker une image, on utilise plutôt<span class="comment"> ImageField</span>.
                     </p>
-                    <pre class="python"><code>from django.db import models
+                    <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
 
 
-class Book(models.Model):
-    title = models.CharField(max_length=100)
-    cover = models.ImageField(upload_to="covers/")</code></pre>
+<span class="word">class</span> Book(models.Model):
+    title = models.CharField(max_length=<span class="number">100</span>)
+    cover = models.ImageField(upload_to=<span class="text">"covers/"</span>)</code></pre>
                     <p>
                         <span class="comment">ImageField </span>fonctionne comme<span class="comment"> FileField</span>,
                         mais il est spécialisé pour les images. Il nécessite généralement l’installation de la
@@ -134,8 +134,8 @@ class Book(models.Model):
                         Pour que Django sache où enregistrer et servir les fichiers<span class="comment"> media</span>,
                         il faut ajouter deux variables dans<span class="comment"> settings.py</span>.
                     </p>
-                    <pre class="python"><code>MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"</code></pre>
+                    <pre class="python"><code>MEDIA_URL = <span class="text">"/media/"</span>
+MEDIA_ROOT = BASE_DIR / <span class="text">"media"</span></code></pre>
                     <ul>
                         <li><span class="comment">MEDIA_URL </span>définit l’URL de base des fichiers media</li>
                         <li><span class="comment">MEDIA_ROOT </span>définit le dossier réel de stockage</li>
@@ -158,15 +158,15 @@ MEDIA_ROOT = BASE_DIR / "media"</code></pre>
                         En développement, il faut aussi configurer<span class="comment"> urls.py </span>pour que
                         Django puisse afficher les fichiers envoyés.
                     </p>
-                    <pre class="python"><code>from django.conf import settings
-from django.conf.urls.static import static
-from django.urls import path
+                    <pre class="python"><code><span class="word">from</span> django.conf <span class="word">import</span> settings
+<span class="word">from</span> django.conf.urls.static <span class="word">import</span> static
+<span class="word">from</span> django.urls <span class="word">import</span> path
 
 urlpatterns = [
     # les routes du projet
 ]
 
-if settings.DEBUG:
+<span class="word">if</span> settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)</code></pre>
                     <p>
                         Cette configuration permet d’accéder aux fichiers<span class="comment"> media </span>pendant
@@ -195,22 +195,22 @@ if settings.DEBUG:
                         Dans la vue, il faut transmettre à la fois<span class="comment"> request.POST </span>et
                         <span class="comment">request.FILES</span>.
                     </p>
-                    <pre class="python"><code>from django.shortcuts import redirect, render
-from .forms import DocumentForm
+                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> redirect, render
+<span class="word">from</span> .forms <span class="word">import</span> DocumentForm
 
 
-def upload_document(request):
-    if request.method == "POST":
+<span class="word">def</span> <span class="function">upload_document</span>(request):
+    <span class="word">if</span> request.method == <span class="text">"POST"</span>:
         form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect("home")
-    else:
+        <span class="word">if</span> form.<span class="function">is_valid</span>():
+            form.<span class="function">save</span>()
+            return <span class="function">redirect</span>(<span class="text">"home"</span>)
+    <span class="word">else</span>:
         form = DocumentForm()
 
-    context = {"form": form}
+    context = {<span class="text">"form"</span>: form}
 
-    return render(request, "upload.html", context)</code></pre>
+    <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"upload.html"</span>, context)</code></pre>
                     <p>
                         Sans<span class="comment"> request.FILES</span>, Django ne récupère pas le fichier envoyé.
                     </p>

@@ -105,10 +105,10 @@
                         Une vue fonctionnelle est une fonction classique qui prend au minimum le
                         paramètre<span class="comment"> request</span>.
                     </p>
-                    <pre class="python"><code>from django.http import HttpResponse
+                    <pre class="python"><code><span class="word">from</span> django.http <span class="word">import</span> HttpResponse
 
-def home(request):
-    return HttpResponse("Bonjour depuis Django !")</code></pre>
+<span class="word">def</span> <span class="function">home</span>(request):
+    <span class="word">return</span> HttpResponse(<span class="text">"Bonjour depuis Django !"</span>)</code></pre>
                     <ul>
                         <li><span class="comment">request </span>représente la requête HTTP reçue ;</li>
                         <li><span class="comment">home </span>est le nom de la vue ;</li>
@@ -131,10 +131,10 @@ def home(request):
                         Pour vérifier rapidement qu'une route fonctionne, on peut renvoyer un texte brut
                         avec<span class="comment"> HttpResponse</span>.
                     </p>
-                    <pre class="python"><code>from django.http import HttpResponse
+                    <pre class="python"><code><span class="word">from</span> django.http <span class="word">import</span> HttpResponse
 
-def about(request):
-    return HttpResponse("Page à propos")</code></pre>
+<span class="word">def</span> <span class="function">about</span>(request):
+    <span class="word">return</span> HttpResponse(<span class="text">"Page à propos"</span>)</code></pre>
                     <p>
                         Cette méthode est pratique pour tester une URL ou valider le lien entre :
                     </p>
@@ -157,10 +157,10 @@ réponse envoyée au navigateur</code></pre>
                         Pour afficher une vraie page HTML, on utilise généralement la
                         fonction<span class="comment"> render()</span>.
                     </p>
-                    <pre class="python"><code>from django.shortcuts import render
+                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
 
-def home(request):
-    return render(request, "home.html")</code></pre>
+<span class="word">def</span> <span class="function">home</span>(request):
+    <span class="word">return</span> <span class="function">render</span>(request, "home.html")</code></pre>
                     <ul>
                         <li><span class="comment">request </span>est la requête reçue ;</li>
                         <li><span class="comment">"home.html" </span>est le template à afficher.</li>

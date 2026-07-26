@@ -103,11 +103,11 @@
                         Pour créer un formulaire simple, on importe le module<span class="comment"> forms </span>de
                         Django, puis on définit une classe qui hérite de<span class="comment"> forms.Form</span>.
                     </p>
-                    <pre class="python"><code>from django import forms
+                    <pre class="python"><code><span class="word">from</span> django <span class="word">import</span> forms
 
 
-class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100)
+<span class="word">class</span> ContactForm(forms.Form):
+    name = forms.CharField(max_length=<span class="number">100</span>)
     email = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea)</code></pre>
                     <p>
@@ -135,13 +135,13 @@ class ContactForm(forms.Form):
                         Pour afficher un formulaire, la vue doit créer une instance du formulaire
                         et l’envoyer au template dans le contexte.
                     </p>
-                    <pre class="python"><code>from django.shortcuts import render
-from .forms import ContactForm
+                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
+<span class="word">from</span> .forms <span class="word">import</span> ContactForm
 
 
-def contact(request):
-    context = {"form": ContactForm()}
-    return render(request, "contact.html", context)</code></pre>
+<span class="word">def</span> contact(request):
+    context = {<span class="text">"form"</span>: ContactForm()}
+    <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"contact.html"</span>, context)</code></pre>
                     <p>
                         Ici, la variable<span class="comment"> form </span>est transmise au template
                         avec<span class="comment"> render()</span>. À ce stade, le formulaire est seulement affiché.
@@ -192,14 +192,14 @@ def contact(request):
                         Quand un formulaire doit être lié à un modèle Django, il est souvent plus pratique
                         d’utiliser<span class="comment"> ModelForm </span>plutôt que<span class="comment"> forms.Form</span>.
                     </p>
-                    <pre class="python"><code>from django import forms
-from .models import Book
+                    <pre class="python"><code><span class="word">from</span> django <span class="word">import</span> forms
+<span class="word">from</span> .models <span class="word">import</span> Book
 
 
-class BookForm(forms.ModelForm):
-    class Meta:
+<span class="word">class</span> BookForm(forms.ModelForm):
+    <span class="word">class</span> Meta:
         model = Book
-        fields = ["title", "publication_year", "author", "categories"]</code></pre>
+        fields = [<span class="text">"title"</span>, <span class="text">"publication_year"</span>, <span class="text">"author"</span>, <span class="text">"categories"</span>]</code></pre>
                     <p>
                         Dans ce cas, Django crée automatiquement les champs du formulaire à partir du modèle.
                     </p>

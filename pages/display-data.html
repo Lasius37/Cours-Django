@@ -82,17 +82,17 @@
                         Dans une vue, les données sont récupérées puis transmises au template
                         avec<span class="comment"> render()</span>.
                     </p>
-                    <pre class="python"><code>from django.shortcuts import render
-from .models import Student, Teacher
+                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
+<span class="word">from</span> .models <span class="word">import</span> Student, Teacher
 
 
-def student_list(request):
-    students = Student.objects.all()
-    teacher = Teacher.objects.get(id=1)
+<span class="word">def</span> student_list(request):
+    students = Student.objects.<span class="function">all</span>()
+    teacher = Teacher.objects.<span class="function">get</span>(id=<span class="number">1</span>)
 
-    context = {"students": students, "teacher": teacher}
+    context = {<span class="text">"students"</span>: students, <span class="text">"teacher"</span>: teacher}
 
-    return render(request, "students.html", context)</code></pre>
+    <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"students.html"</span>, context)</code></pre>
                     <ul>
                         <li><span class="comment">students = Student.objects.all() </span>récupère les élèves.</li>
                         <li><span class="comment">teacher = Teacher.objects.get(id=1) </span>récupère un enseignant.</li>

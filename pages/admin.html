@@ -117,13 +117,13 @@
                         Les modèles n’apparaissent pas automatiquement dans l’administration. Il faut les enregistrer
                         dans le fichier<span class="comment"> admin.py </span>de l’application.
                     </p>
-                    <pre class="python"><code>from django.contrib import admin
-from .models import Student, Classroom, Teacher
+                    <pre class="python"><code><span class="word">from</span> django.contrib <span class="word">import</span> admin
+<span class="word">from</span> .models <span class="word">import</span> Student, Classroom, Teacher
 
 
-admin.site.register(Student)
-admin.site.register(Classroom)
-admin.site.register(Teacher)</code></pre>
+admin.site.<span class="function">register</span>(Student)
+admin.site.<span class="function">register</span>(Classroom)
+admin.site.<span class="function">register</span>(Teacher)</code></pre>
                     <p>
                         Une fois enregistrés, ces modèles deviennent visibles dans l’interface d’administration.
                     </p>
@@ -189,15 +189,15 @@ admin.site.register(Teacher)</code></pre>
                         L’enregistrement simple avec<span class="comment"> admin.site.register() </span>est suffisant pour
                         commencer. Mais on peut aussi améliorer l’affichage dans l’administration.
                     </p>
-                    <pre class="python"><code>from django.contrib import admin
-from .models import Student
+                    <pre class="python"><code><span class="word">from</span> django.contrib <span class="word">import</span> admin
+<span class="word">from</span> .models <span class="word">import</span> Student
 
 
 @admin.register(Student)
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ("last_name", "first_name", "classroom")
-    search_fields = ("last_name", "first_name")
-    list_filter = ("classroom",)</code></pre>
+<span class="word">class</span> StudentAdmin(admin.ModelAdmin):
+    list_display = (<span class="text">"last_name"</span>, <span class="text">"first_name"</span>, <span class="text">"classroom"</span>)
+    search_fields = (<span class="text">"last_name"</span>, <span class="text">"first_name"</span>)
+    list_filter = (<span class="text">"classroom"</span>,)</code></pre>
                     <p>
                         Dans cet exemple :
                     </p>
@@ -212,14 +212,14 @@ class StudentAdmin(admin.ModelAdmin):
                         utilise le nom du modèle (par exemple <span class="comment">Students</span>).
                         On peut modifier ce nom avec la classe<span class="comment"> Meta </span>dans le modèle.
                     </p>
-                    <pre class="python"><code>from django.db import models
+                    <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
 
 
-class Student(models.Model):
+<span class="word">class</span> Student(models.Model):
     ...
-    class Meta:
-        verbose_name = "Élève" <span class="comment">&nbsp;# nom affiché au singulier</span>
-        verbose_name_plural = "Élèves" <span class="comment">&nbsp;# nom affiché au pluriel</span></code></pre>
+    <span class="word">class</span> Meta:
+        verbose_name = <span class="text">"Élève"</span> <span class="comment">&nbsp;# nom affiché au singulier</span>
+        verbose_name_plural = <span class="text">"Élèves"</span> <span class="comment">&nbsp;# nom affiché au pluriel</span></code></pre>
                     <p>
                         Ces modifications ne sont pas obligatoire au début, mais rendent l’interface beaucoup plus pratique.
                     </p>

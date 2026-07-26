@@ -107,9 +107,9 @@
                     <p>
                         On commence par modifier quelques paramètres dans<span class="comment"> settings.py </span>:
                     </p>
-                    <pre class="python"><code>LANGUAGE_CODE = 'fr-FR'
+                    <pre class="python"><code>LANGUAGE_CODE = <span class="text">"fr-FR"</span>
 
-TIME_ZONE = 'Europe/Paris'</code></pre>
+TIME_ZONE = <span class="text">"Europe/Paris"</span></code></pre>
                     <p>
                         Ces paramètres permettent d'adapter le projet à la langue et au fuseau horaire utilisés.
                     </p>
@@ -129,14 +129,14 @@ TIME_ZONE = 'Europe/Paris'</code></pre>
                         dans<span class="comment"> settings.py </span>.
                     </p>
                     <pre class="python"><code>INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+    <span class="text">"django.contrib.admin"</span>,
+    <span class="text">"django.contrib.auth"</span>,
+    <span class="text">"django.contrib.contenttypes"</span>,
+    <span class="text">"django.contrib.sessions"</span>,
+    <span class="text">"django.contrib.messages"</span>,
+    <span class="text">"django.contrib.staticfiles"</span>,
 
-    "apps.mon_app",                 <span class="comment">#  Ajouter le nom de chaque application du projet</span>
+    <span class="text">"apps.mon_app"</span>,                 <span class="comment">#  Ajouter le nom de chaque application du projet</span>
 ]</code></pre>
                     <p>
                         Une fois l'application ajoutée, Django peut utiliser ses modèles, ses templates, ses
@@ -166,16 +166,16 @@ TIME_ZONE = 'Europe/Paris'</code></pre>
                     </p>
                     <pre class="python"><code>TEMPLATES = [
     {...
-        'DIRS': [BASE_DIR / "templates"],
-        'APP_DIRS' = True,
+        <span class="text">'DIRS'</span>: [BASE_DIR / <span class="text">"templates"</span>],
+        <span class="text">'APP_DIRS'</span> = <span class="word">True</span>,
     ...}
 ]</code></pre>
                     <p>
                         Django cherchera alors les templates :
                     </p>
                     <ul>
-                        <li>dans le dossier global <span class="comment">templates</span> ;</li>
-                        <li>dans les dossiers <span class="comment">templates</span> des applications.</li>
+                        <li>dans le dossier global <span class="comment"> templates</span></li>
+                        <li>dans les dossiers<span class="comment"> templates </span>des applications</li>
                     </ul>
                 </div>
             </div>
@@ -211,13 +211,13 @@ TIME_ZONE = 'Europe/Paris'</code></pre>
                         On indique ensuite où se trouve ce dossier dans<span class="comment"> settings.py </span>:
                     </p>
                     <pre class="python"><code>STATICFILES_DIRS = [
-    BASE_DIR / "static"
+    BASE_DIR / <span class="text">"static"</span>
 ]</code></pre>
                     <p>
                         L'URL utilisée pour accéder aux fichiers statiques est définie par :
                     </p>
-                    <pre class="python"><code>STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles" <span class="comment"> # Cette ligne sera utilisée au moment du déploiement</span></code></pre>
+                    <pre class="python"><code>STATIC_URL = <span class="text">"/static/"</span>
+STATIC_ROOT = BASE_DIR / <span class="text">"staticfiles"</span> <span class="comment"> # Cette ligne sera utilisée au moment du déploiement</span></code></pre>
                 </div>
             </div>
         </section>
@@ -233,13 +233,13 @@ STATIC_ROOT = BASE_DIR / "staticfiles" <span class="comment"> # Cette ligne sera
                         images ou des documents. Le dossier <span class="comment"> media </span>existe déjà :
                     </p>
                     <pre class="console"><code>mon_projet/
-    │
-    └── media/</code></pre>
+│
+└── media/</code></pre>
                     <p>
                         On ajoute ensuite les paramètres suivants dans<span class="comment"> settings.py </span>:
                     </p>
-                    <pre class="python"><code>MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media" <span class="comment"> # Cette ligne sera utilisée au moment du déploiement</span></code></pre>
+                    <pre class="python"><code>MEDIA_URL = <span class="text">"/media/"</span>
+MEDIA_ROOT = BASE_DIR / <span class="text">"media"</span> <span class="comment"> # Cette ligne sera utilisée au moment du déploiement</span></code></pre>
                     <p>
                         Ces paramètres seront utilisés plus tard pour servir les fichiers médias. Selon les besoins, on
                         peut ajouter des sous-dossiers pour séparer les fichiers.

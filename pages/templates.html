@@ -161,10 +161,10 @@
                     <p>
                         Une fois le fichier HTML créé, il faut demander à la vue de l'afficher.
                     </p>
-                <pre class="python"><code>from django.shortcuts import render
+                <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
 
-def home(request):
-    return render(request, "home.html")</code></pre>
+<span class="word">def</span> <span class="function">home</span>(request):
+    <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"home.html"</span>)</code></pre>
                     <ul>
                         <li><span class="comment">render() </span>renvoie une réponse HTML</li>
                         <li><span class="comment">request </span>correspond à la requête reçue</li>

@@ -141,15 +141,15 @@
                         Pour créer un modèle, on importe le module<span class="comment"> models </span>de
                         Django, puis on écrit une classe.
                     </p>
-                    <pre class="python"><code>from django.db import models
+                    <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
 
 
-class Student(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+<span class="word">def</span> Student(models.Model):
+    first_name = models.CharField(max_length=<span class="number">50</span>)
+    last_name = models.CharField(max_length=<span class="number">50</span>)
     age = models.IntegerField()
     email = models.EmailField()
-    is_present = models.BooleanField(default=True)</code></pre>
+    is_present = models.BooleanField(default=<span class="word">True</span>)</code></pre>
                     <p>
                         Ici, le modèle<span class="comment"> Student </span>représente un élève.
                     </p>
@@ -207,18 +207,18 @@ class Student(models.Model):
                         une méthode<span class="comment"> __str__() </span>dans le modèle pour
                         obtenir un affichage plus clair, notamment dans l’administration Django.
                     </p>
-                    <pre class="python"><code>from django.db import models
+                    <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
 
 
-class Student(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+<span class="word">class</span> Student(models.Model):
+    first_name = models.CharField(max_length=<span class="number">50</span>)
+    last_name = models.CharField(max_length=<span class="number">50</span>)
     age = models.IntegerField()
     email = models.EmailField()
-    is_present = models.BooleanField(default=True)
+    is_present = models.BooleanField(default=<span class="word">True</span>)
 
     def __str__(self):
-        return f"{self.last_name} {self.first_name}"</code></pre>
+        return <span class="text">f"{self.last_name} {self.first_name}"</span></code></pre>
                     <p>
                         Ici, chaque objet<span class="comment"> Student </span>sera affiché avec son nom complet.
                     </p>
