@@ -1,124 +1,63 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/init.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script type="module" src="../js/script.js" defer></script>
-    <title>Créer une application</title>
-</head>
-<body>
-    <!-- ***************************************************************************************************************
-         HEADER
-    **************************************************************************************************************** -->
-    <header>
-        <h1>Créer une application</h1>
+---
+layout: base
+short: "Application"
+title: "Créer une application"
+---
 
-        <!-- navbar
-             ======================================================================================================= -->
-        <nav>
-            <ul class="navbar"></ul>
-        </nav>
-    </header>
+<!-- content section
+     ======================================================================================================= -->
+<section id="why">
+    <h2>Pourquoi créer une application ?</h2>
+    <div class="layout">
 
+        <!-- layout element -------------------------------------------------------------------------------- -->
+        <div class="layout__text">
+            <p>
+                Dans Django, un<span class="comment"> projet </span> correspond à l'ensemble du site,
+                alors qu'une<span class="comment"> application </span>correspond à une fonctionnalité précise.
+            </p>
+            <p>
+                Une application permet de regrouper dans un même dossier :
+            </p>
+            <ul>
+                <li>les vues</li>
+                <li>les modèles</li>
+                <li>les routes propres à la fonctionnalité</li>
+                <li>les templates HTML</li>
+                <li>les fichiers d'administration</li>
+            </ul>
+            <p>
+                Cette organisation rend le projet plus lisible et plus modulaire.
+                On peut ainsi séparer, par exemple, la page d'accueil, les utilisateurs,
+                le blog ou une API en plusieurs applications distinctes.
+            </p>
+        </div>
+    </div>
+</section>
 
-    <!-- ***************************************************************************************************************
-         ASIDE
-    **************************************************************************************************************** -->
-    <aside>
+<!-- content section
+     ======================================================================================================= -->
+<section id="command">
+    <h2>Créer une application avec<span> startapp</span></h2>
+    <div class="layout">
 
-        <!-- sidebar
-             ======================================================================================================= -->
-        <nav class="sidebar">
-
-            <!-- sidebar group ------------------------------------------------------------------------------------- -->
-            <section class="sidebar__group">
-                <h2>Dans cette page</h2>
-                <ul>
-                    <li class="sidebar__element">
-                        <a href="#why">Pourquoi créer une application ?</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#command">Créer une application avec startapp</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#naming">Bien nommer une application</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#errors">Erreurs fréquentes</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </aside>
-
-    <!-- ***************************************************************************************************************
-        MAIN
-    **************************************************************************************************************** -->
-    <main>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="why">
-            <h2>Pourquoi créer une application ?</h2>
-            <div class="layout">
-
-                <!-- layout element -------------------------------------------------------------------------------- -->
-                <div class="layout__text">
-                    <p>
-                        Dans Django, un<span class="comment"> projet </span> correspond à l'ensemble du site,
-                        alors qu'une<span class="comment"> application </span>correspond à une fonctionnalité précise.
-                    </p>
-                    <p>
-                        Une application permet de regrouper dans un même dossier :
-                    </p>
-                    <ul>
-                        <li>les vues</li>
-                        <li>les modèles</li>
-                        <li>les routes propres à la fonctionnalité</li>
-                        <li>les templates HTML</li>
-                        <li>les fichiers d'administration</li>
-                    </ul>
-                    <p>
-                        Cette organisation rend le projet plus lisible et plus modulaire.
-                        On peut ainsi séparer, par exemple, la page d'accueil, les utilisateurs,
-                        le blog ou une API en plusieurs applications distinctes.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="command">
-            <h2>Créer une application avec<span> startapp</span></h2>
-            <div class="layout">
-
-                <!-- layout element -------------------------------------------------------------------------------- -->
-                <div class="layout__text">
-                    <p>
-                        Une application se crée avec la commande<span class="comment"> startapp</span>,
-                        à lancer depuis le dossier contenant<span class="comment"> manage.py</span>.
-                    </p>
-                    <pre class="console"><code>python manage.py startapp mon_app apps/mon_app</code></pre>
-                    <p>
-                        Ici,<span class="comment"> mon_app </span>est le nom de
-                        l'application,<span class="comment"> apps/mon_app </span>est le dossier dans lequel Django crée
-                        ses fichiers. Attention, cette commande suppose que le dossier<span class="comment"> apps </span>
-                        existe déjà.
-                    </p>
-                    <p>
-                        Après la création, Django génère automatiquement la structure de base de l'application.
-                    </p>
-                    <pre class="console"><code>apps/
+        <!-- layout element -------------------------------------------------------------------------------- -->
+        <div class="layout__text">
+            <p>
+                Une application se crée avec la commande<span class="comment"> startapp</span>,
+                à lancer depuis le dossier contenant<span class="comment"> manage.py</span>.
+            </p>
+            <pre class="console"><code>python manage.py startapp mon_app apps/mon_app</code></pre>
+            <p>
+                Ici,<span class="comment"> mon_app </span>est le nom de
+                l'application,<span class="comment"> apps/mon_app </span>est le dossier dans lequel Django crée
+                ses fichiers. Attention, cette commande suppose que le dossier<span class="comment"> apps </span>
+                existe déjà.
+            </p>
+            <p>
+                Après la création, Django génère automatiquement la structure de base de l'application.
+            </p>
+            <pre class="console"><code>apps/
 └── mon_app/
     │
     ├── migrations/         <span class="comment">contient l'historique des changements de la base de données.</span>
@@ -130,78 +69,68 @@
     ├── models.py           <span class="comment">contient les classes représentant les données.</span>
     ├── tests.py            <span class="comment">permet d'écrire des tests.</span>
     └── views.py            <span class="comment">contient les vues qui répondront aux requêtes.</span></code></pre>
-                </div>
-            </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="naming">
-            <h2>Bien nommer une application</h2>
-            <div class="layout">
+<!-- content section
+     ======================================================================================================= -->
+<section id="naming">
+    <h2>Bien nommer une application</h2>
+    <div class="layout">
 
-                <!-- layout element -------------------------------------------------------------------------------- -->
-                <div class="layout__text">
-                    <p>
-                        Le nom d'une application doit être simple, court et lié à sa fonction.
-                    </p>
-                    <p>
-                        Bonnes pratiques :
-                    </p>
-                    <ul>
-                        <li>utiliser des lettres minuscules</li>
-                        <li>éviter les espaces et les tirets</li>
-                        <li>choisir un nom fonctionnel</li>
-                        <li>éviter un nom trop vague si le projet doit grandir</li>
-                    </ul>
-                    <p>
-                        Exemples corrects :
-                    </p>
+        <!-- layout element -------------------------------------------------------------------------------- -->
+        <div class="layout__text">
+            <p>
+                Le nom d'une application doit être simple, court et lié à sa fonction.
+            </p>
+            <p>
+                Bonnes pratiques :
+            </p>
+            <ul>
+                <li>utiliser des lettres minuscules</li>
+                <li>éviter les espaces et les tirets</li>
+                <li>choisir un nom fonctionnel</li>
+                <li>éviter un nom trop vague si le projet doit grandir</li>
+            </ul>
+            <p>
+                Exemples corrects :
+            </p>
 
-                    <pre class="console"><code>website
+            <pre class="console"><code>website
 pages
 blog
 accounts
 dashboard</code></pre>
-                    <p>
-                        Exemples à éviter :
-                    </p>
-                    <pre class="console"><code>MonAppli
+            <p>
+                Exemples à éviter :
+            </p>
+            <pre class="console"><code>MonAppli
 mon-app
 app1
 test
 site web</code></pre>
-                    <p>
-                        Une fois l'application créée, il faut encore l'intégrer au projet.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                Une fois l'application créée, il faut encore l'intégrer au projet.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="errors">
-            <h2>Erreurs fréquentes</h2>
-            <div class="layout">
+<!-- content section
+     ======================================================================================================= -->
+<section id="errors">
+    <h2>Erreurs fréquentes</h2>
+    <div class="layout">
 
-                <!-- layout element -------------------------------------------------------------------------------- -->
-                <div class="layout__text">
-                    <ul>
-                        <li>Créer une application sans se placer dans le dossier contenant<span class="comment"> manage.py </span>:<span class="error"> la commande échoue ou crée les fichiers au mauvais endroit</span>.</li>
-                        <li>Oublier de créer le dossier<span class="comment"> apps </span>avant d'utiliser<span class="comment"> startapp </span>avec un chemin :<span class="error"> impossible de créer l'application dans le dossier visé</span>.</li>
-                        <li>Choisir un nom trop générique comme<span class="comment"> app </span>ou<span class="comment"> test </span> :<span class="error"> nom peu clair</span>.</li>
-                        <li>Confondre le nom du projet et le nom de l'application :<span class="error"> organisation confuse</span>.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ***************************************************************************************************************
-         FOOTER
-    **************************************************************************************************************** -->
-    <footer>
-        <div>© Copyright - Guillaume Peyrard</div>
-    </footer>
-</body>
-</html>
+        <!-- layout element -------------------------------------------------------------------------------- -->
+        <div class="layout__text">
+            <ul>
+                <li>Créer une application sans se placer dans le dossier contenant<span class="comment"> manage.py </span>:<span class="error"> la commande échoue ou crée les fichiers au mauvais endroit</span>.</li>
+                <li>Oublier de créer le dossier<span class="comment"> apps </span>avant d'utiliser<span class="comment"> startapp </span>avec un chemin :<span class="error"> impossible de créer l'application dans le dossier visé</span>.</li>
+                <li>Choisir un nom trop générique comme<span class="comment"> app </span>ou<span class="comment"> test </span> :<span class="error"> nom peu clair</span>.</li>
+                <li>Confondre le nom du projet et le nom de l'application :<span class="error"> organisation confuse</span>.</li>
+            </ul>
+        </div>
+    </div>
+</section>

@@ -1,136 +1,67 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/init.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script type="module" src="../js/script.js" defer></script>
-    <title>Créer un template HTML</title>
-</head>
-<body>
-    <!-- ***************************************************************************************************************
-         HEADER
-    **************************************************************************************************************** -->
-    <header>
-        <h1>Créer un template HTML</h1>
+---
+layout: base
+short: "Templates"
+title: "Créer un template HTML"
+---
 
-        <!-- navbar
-             ======================================================================================================= -->
-        <nav>
-            <ul class="navbar"></ul>
-        </nav>
-    </header>
+<!-- content section
+     ======================================================================================================= -->
+<section id="role">
+    <h2>Rôle des templates</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Un template est un fichier HTML utilisé par Django pour afficher une page dans le navigateur.
+                Il permet de séparer :
+            </p>
+            <ul>
+                <li>la logique Python dans les vues</li>
+                <li>la structure HTML dans les templates</li>
+            </ul>
+            <p>
+                Cette séparation rend le code plus clair, plus modulaire et plus facile à maintenir : une
+                vue prépare la réponse, puis Django charge le template demandé
+                avec<span class="comment"> render()</span>.
+            </p>
+        </div>
+    </div>
+</section>
 
-    <!-- ***************************************************************************************************************
-         ASIDE
-    **************************************************************************************************************** -->
-    <aside>
-
-        <!-- sidebar
-             ======================================================================================================= -->
-        <nav class="sidebar">
-
-            <!-- sidebar group ------------------------------------------------------------------------------------- -->
-            <section class="sidebar__group">
-                <h2>Dans cette page</h2>
-                <ul>
-                    <li class="sidebar__element">
-                        <a href="#role">Rôle des templates</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#location">Où placer les fichiers HTML</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#create">Créer un premier template</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#render">Lier la vue au template</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#base">Préparer un template de base</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#extends">Hériter d’un template</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#errors">Erreurs fréquentes</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </aside>
-
-    <!-- ***************************************************************************************************************
-         MAIN
-    **************************************************************************************************************** -->
-    <main>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="role">
-            <h2>Rôle des templates</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Un template est un fichier HTML utilisé par Django pour afficher une page dans le navigateur.
-                        Il permet de séparer :
-                    </p>
-                    <ul>
-                        <li>la logique Python dans les vues</li>
-                        <li>la structure HTML dans les templates</li>
-                    </ul>
-                    <p>
-                        Cette séparation rend le code plus clair, plus modulaire et plus facile à maintenir : une
-                        vue prépare la réponse, puis Django charge le template demandé
-                        avec<span class="comment"> render()</span>.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="location">
-            <h2>Où placer les fichiers HTML</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Les templates sont généralement placés dans un dossier<span class="comment"> templates </span>
-                        à l'intérieur de l'application.
-                    </p>
-                    <pre class="console"><code>apps/
+<!-- content section
+     ======================================================================================================= -->
+<section id="location">
+    <h2>Où placer les fichiers HTML</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Les templates sont généralement placés dans un dossier<span class="comment"> templates </span>
+                à l'intérieur de l'application.
+            </p>
+            <pre class="console"><code>apps/
 └── mon_app/
     ├── views.py
     ├── urls.py
     └── templates/
         └── home.html</code></pre>
-                    <p>
-                        Cette organisation permet à Django de retrouver facilement les fichiers HTML appelés par les
-                        vues. Le nom du fichier indiqué dans<span class="comment"> render() </span>doit correspondre
-                        exactement au nom réel du template.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                Cette organisation permet à Django de retrouver facilement les fichiers HTML appelés par les
+                vues. Le nom du fichier indiqué dans<span class="comment"> render() </span>doit correspondre
+                exactement au nom réel du template.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="create">
-            <h2>Créer un premier template</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Un template peut être un simple fichier HTML classique.
-                    </p>
-                    <pre class="html"><code>&lt;!DOCTYPE html&gt;
+<!-- content section
+     ======================================================================================================= -->
+<section id="create">
+    <h2>Créer un premier template</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Un template peut être un simple fichier HTML classique.
+            </p>
+            <pre class="html"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="fr"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
@@ -141,63 +72,63 @@
     &lt;p&gt;Ceci est ma première page générée avec un template.&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-                    <p>
-                        Ce fichier peut être enregistré sous le nom<span class="comment"> home.html </span>
-                        dans le dossier<span class="comment"> templates</span>.
-                    </p>
-                    <p>
-                        À ce stade, le template ne contient encore aucune syntaxe spécifique à Django.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                Ce fichier peut être enregistré sous le nom<span class="comment"> home.html </span>
+                dans le dossier<span class="comment"> templates</span>.
+            </p>
+            <p>
+                À ce stade, le template ne contient encore aucune syntaxe spécifique à Django.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="render">
-            <h2>Lier la vue au template</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Une fois le fichier HTML créé, il faut demander à la vue de l'afficher.
-                    </p>
-                <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
+<!-- content section
+     ======================================================================================================= -->
+<section id="render">
+    <h2>Lier la vue au template</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Une fois le fichier HTML créé, il faut demander à la vue de l'afficher.
+            </p>
+        <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
 
 <span class="word">def</span> <span class="function">home</span>(request):
     <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"home.html"</span>)</code></pre>
-                    <ul>
-                        <li><span class="comment">render() </span>renvoie une réponse HTML</li>
-                        <li><span class="comment">request </span>correspond à la requête reçue</li>
-                        <li><span class="comment">"home.html" </span>est le nom du template à charger</li>
-                    </ul>
-                    <p>
-                        Si l'URL est correctement reliée à cette vue, la page HTML s'affichera dans le navigateur.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <ul>
+                <li><span class="comment">render() </span>renvoie une réponse HTML</li>
+                <li><span class="comment">request </span>correspond à la requête reçue</li>
+                <li><span class="comment">"home.html" </span>est le nom du template à charger</li>
+            </ul>
+            <p>
+                Si l'URL est correctement reliée à cette vue, la page HTML s'affichera dans le navigateur.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="base">
-            <h2>Créer un template de base</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Quand plusieurs pages partagent la même structure, il devient utile de créer un template commun,
-                        souvent nommé<span class="comment"> base.html</span>. Ce fichier peut contenir les éléments
-                        répétés sur toutes les pages :
-                    </p>
-                    <ul>
-                        <li>le squelette HTML</li>
-                        <li>l'en-tête</li>
-                        <li>la navigation</li>
-                        <li>le pied de page</li>
-                    </ul>
-                    <p>
-                        Cela évite de recopier le même code HTML dans chaque template.
-                    </p>
-                    <pre class="html"><code>&lt;!DOCTYPE html&gt;
+<!-- content section
+     ======================================================================================================= -->
+<section id="base">
+    <h2>Créer un template de base</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Quand plusieurs pages partagent la même structure, il devient utile de créer un template commun,
+                souvent nommé<span class="comment"> base.html</span>. Ce fichier peut contenir les éléments
+                répétés sur toutes les pages :
+            </p>
+            <ul>
+                <li>le squelette HTML</li>
+                <li>l'en-tête</li>
+                <li>la navigation</li>
+                <li>le pied de page</li>
+            </ul>
+            <p>
+                Cela évite de recopier le même code HTML dans chaque template.
+            </p>
+            <pre class="html"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="fr"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
@@ -208,78 +139,68 @@
         &lt;h1&gt;Mon site Django&lt;/h1&gt;
     &lt;/header&gt;
 
-    {% block content %}{% endblock %}
+    &#123;% block content %&#125;&#123;% endblock %&#125;
 
     &lt;footer&gt;
         &lt;p&gt;Pied de page&lt;/p&gt;
     &lt;/footer&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-                    <p>
-                        La zone définie par<span class="comment"> block content </span>sera remplacée par le contenu
-                        propre à chaque page.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                La zone définie par<span class="comment"> block content </span>sera remplacée par le contenu
+                propre à chaque page.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="extends">
-            <h2>Hériter d’un template</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Pour réutiliser le template de base, un autre template peut hériter
-                        de<span class="comment"> base.html </span>avec<span class="comment"> extends</span>.
-                    </p>
-                    <pre class="html"><code>{% extends "base.html" %}
+<!-- content section
+     ======================================================================================================= -->
+<section id="extends">
+    <h2>Hériter d’un template</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Pour réutiliser le template de base, un autre template peut hériter
+                de<span class="comment"> base.html </span>avec<span class="comment"> extends</span>.
+            </p>
+            <pre class="html"><code>&#123;% extends "base.html" %&#125;
 
-{% block content %}
+&#123;% block content %&#125;
     &lt;h2&gt;Accueil&lt;/h2&gt;
     &lt;p&gt;Bienvenue sur la page d'accueil.&lt;/p&gt;
-{% endblock %}</code></pre>
-                    <ul>
-                        <li><span class="comment">{% extends "base.html" %} </span>indique que ce template hérite du template de base</li>
-                        <li><span class="comment">{% block content %} </span>ouvre une zone de contenu</li>
-                        <li><span class="comment">{% endblock %} </span>ferme cette zone</li>
-                    </ul>
-                    <p>
-                        La ligne <span class="comment">{% extends "base.html" %} </span> doit être la première du fichier (hors commentaires).
-                    </p>
-                    <p>
-                        Django insère alors ce contenu dans le bloc correspondant du
-                        fichier<span class="comment"> base.html</span>. Ce système permet de construire plusieurs
-                        pages différentes tout en gardant une structure commune.
-                    </p>
-                </div>
-            </div>
-        </section>
+&#123;% endblock %&#125;</code></pre>
+            <ul>
+                <li><span class="comment">&#123;% extends "base.html" %&#125; </span>indique que ce template hérite du template de base</li>
+                <li><span class="comment">&#123;% block content %&#125; </span>ouvre une zone de contenu</li>
+                <li><span class="comment">&#123;% endblock %&#125; </span>ferme cette zone</li>
+            </ul>
+            <p>
+                La ligne <span class="comment">&#123;% extends "base.html" %&#125; </span> doit être la première du fichier (hors commentaires).
+            </p>
+            <p>
+                Django insère alors ce contenu dans le bloc correspondant du
+                fichier<span class="comment"> base.html</span>. Ce système permet de construire plusieurs
+                pages différentes tout en gardant une structure commune.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="errors">
-            <h2>Erreurs fréquentes</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <ul>
-                        <li>Créer le fichier HTML au mauvais endroit :<span class="error"> Django ne trouve pas le template</span>.</li>
-                        <li>Se tromper dans le nom du template dans<span class="comment"> render() </span>:<span class="error"> TemplateDoesNotExist</span>.</li>
-                        <li>Oublier de mettre<span class="comment"> {% extends %} </span> en première ligne:<span class="error"> le template ne fonctionne pas correctement</span>.</li>
-                        <li>Oublier<span class="comment"> {% endblock %} </span>:<span class="error"> le template devient invalide</span>.</li>
-                        <li>Placer du contenu en dehors du bloc principal dans un template enfant :<span class="error"> structure confuse ou résultat inattendu</span>.</li>
-                        <li>Confondre la logique Python des vues et l'affichage HTML :<span class="error"> code peu lisible</span>.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ***************************************************************************************************************
-         FOOTER
-    **************************************************************************************************************** -->
-    <footer>
-        <div>© Copyright - Guillaume Peyrard</div>
-    </footer>
-</body>
-</html>
+<!-- content section
+     ======================================================================================================= -->
+<section id="errors">
+    <h2>Erreurs fréquentes</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <ul>
+                <li>Créer le fichier HTML au mauvais endroit :<span class="error"> Django ne trouve pas le template</span>.</li>
+                <li>Se tromper dans le nom du template dans<span class="comment"> render() </span>:<span class="error"> TemplateDoesNotExist</span>.</li>
+                <li>Oublier de mettre<span class="comment"> &#123;% extends %&#125; </span> en première ligne:<span class="error"> le template ne fonctionne pas correctement</span>.</li>
+                <li>Oublier<span class="comment"> &#123;% endblock %&#125; </span>:<span class="error"> le template devient invalide</span>.</li>
+                <li>Placer du contenu en dehors du bloc principal dans un template enfant :<span class="error"> structure confuse ou résultat inattendu</span>.</li>
+                <li>Confondre la logique Python des vues et l'affichage HTML :<span class="error"> code peu lisible</span>.</li>
+            </ul>
+        </div>
+    </div>
+</section>

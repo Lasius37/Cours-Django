@@ -1,153 +1,89 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/init.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script type="module" src="../js/script.js" defer></script>
-    <title>Projet : un mini-site personnel</title>
-</head>
-<body>
-    <!-- ***************************************************************************************************************
-         HEADER
-    **************************************************************************************************************** -->
-    <header>
-        <h1>Projet : un mini-site personnel</h1>
+---
+layout: base
+short: "Projet - site personnel"
+title: "Projet : un mini-site personnel"
+---
 
-        <!-- navbar
-             ======================================================================================================= -->
-        <nav>
-            <ul class="navbar"></ul>
-        </nav>
-    </header>
+<!-- content section
+     ======================================================================================================= -->
+<section id="questions">
+    <h2>Énoncé</h2>
+    <div class="layout">
 
-    <!-- ***************************************************************************************************************
-         ASIDE
-    **************************************************************************************************************** -->
-    <aside>
-
-        <!-- sidebar
-             ======================================================================================================= -->
-        <nav class="sidebar">
-
-            <!-- sidebar group ------------------------------------------------------------------------------------- -->
-            <section class="sidebar__group">
-                <h2>Dans cette page</h2>
-                <ul>
-                    <li class="sidebar__element">
-                        <a href="#questions">Énoncé</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#help">Conseils de réalisation</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </aside>
-
-    <!-- ***************************************************************************************************************
-         MAIN
-    **************************************************************************************************************** -->
-    <main>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="questions">
-            <h2>Énoncé</h2>
-            <div class="layout">
-
-                <!-- layout element -------------------------------------------------------------------------------- -->
-                <div class="layout__text">
-                    <p>
-                        Vous devez réaliser un mini-site personnel avec Django.
-                    </p>
+        <!-- layout element -------------------------------------------------------------------------------- -->
+        <div class="layout__text">
+            <p>
+                Vous devez réaliser un mini-site personnel avec Django.
+            </p>
+            <ul>
+                <li>Le site doit présenter une personne réelle ou fictive.</li>
+                <li>Le projet doit utiliser<span class="comment"> Django</span>.</li>
+                <li>Le site contiendra au minimum 3 pages :
                     <ul>
-                        <li>Le site doit présenter une personne réelle ou fictive.</li>
-                        <li>Le projet doit utiliser<span class="comment"> Django </span>.</li>
-                        <li>Le site contiendra au minimum 3 pages :
-                            <ul>
-                                <li>une page d’accueil</li>
-                                <li>une page de présentation</li>
-                                <li>une page de contact ou de centres d’intérêt</li>
-                            </ul>
-                        </li>
-                        <li>Chaque page est affichée avec une<span class="comment"> vue </span>et un<span class="comment"> template HTML</span>.</li>
-                        <li>La navigation doit permettre de passer facilement d’une page à l’autre.</li>
-                        <li>Les pages doivent partager une présentation cohérente (en-tête, navigation, pied, styles).</li>
-                        <li>Le contenu doit comporter :
-                            <ul>
-                                <li>un titre clair</li>
-                                <li>des textes structurés</li>
-                                <li>au moins un fichier statique (une image)</li>
-                                <li>des liens de navigation visibles</li>
-                            </ul>
-                        </li>
-                        <li>Le projet doit fonctionner avec le serveur de développement Django.</li>
+                        <li>une page d’accueil</li>
+                        <li>une page de présentation</li>
+                        <li>une page de contact ou de centres d’intérêt</li>
                     </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="help">
-            <h2>Conseils de réalisation</h2>
-            <div class="layout">
-
-                <!-- layout element -------------------------------------------------------------------------------- -->
-                <div class="layout__text">
+                </li>
+                <li>Chaque page est affichée avec une<span class="comment"> vue </span>et un<span class="comment"> template HTML</span>.</li>
+                <li>La navigation doit permettre de passer facilement d’une page à l’autre.</li>
+                <li>Les pages doivent partager une présentation cohérente (en-tête, navigation, pied, styles).</li>
+                <li>Le contenu doit comporter :
                     <ul>
-                        <li>Préparer l’arborescence du projet</li>
-                        <li>Créer une application<span class="comment"> website </span></li>
-                        <li>
-                            Créer les pages HTML nécessaires dans le dossier<span class="comment"> templates </span>de
-                            l’application :
-                            <ul>
-                                <li><span class="comment">/ </span>ou<span class="comment"> /home/ </span>: page d’accueil</li>
-                                <li><span class="comment">/about/ </span>: présentation</li>
-                                <li><span class="comment">/contact/</span>,<span class="comment"> /hobbies/</span>, ... : page complémentaire</li>
-                            </ul>
-                        </li>
-                        <li>Créer les routes dans<span class="comment"> urls.py </span>dans l’application.</li>
-                        <li>Créer les vues nécessaires.</li>
-                        <li>Réutiliser une structure commune avec un fichier<span class="comment"> base.html </span></li>
-                        <li>Ajouter un dossier static contenant les images et les feuilles de style.</li>
-                        <li>
-                            Soigner le contenu :
-                            <ul>
-                                <li>Présenter la personne choisie.</li>
-                                <li>Ajouter quelques informations utiles : parcours, goûts, projets, compétences, loisirs.</li>
-                                <li>Utiliser des titres, des paragraphes et éventuellement des listes.</li>
-                                <li>Ajouter au moins une image pertinente.</li>
-                            </ul>
-                        </li>
-                        <li>
-                            Tester le projet avec un serveur Django, et vérifier que :
-                            <ul>
-                                <li>toutes les pages s’affichent</li>
-                                <li>les liens fonctionnent</li>
-                                <li>aucune<span class="error"> erreur 404 </span>ou<span class="error"> TemplateDoesNotExist </span>n’apparaît.</li>
-                            </ul>
-                        </li>
+                        <li>un titre clair</li>
+                        <li>des textes structurés</li>
+                        <li>au moins un fichier statique (une image)</li>
+                        <li>des liens de navigation visibles</li>
                     </ul>
-                </div>
-            </div>
-        </section>
-    </main>
+                </li>
+                <li>Le projet doit fonctionner avec le serveur de développement Django.</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-    <!-- ***************************************************************************************************************
-         FOOTER
-    **************************************************************************************************************** -->
-    <footer>
-        <div>© Copyright - Guillaume Peyrard</div>
-    </footer>
-</body>
-</html>
+<!-- content section
+     ======================================================================================================= -->
+<section id="help">
+    <h2>Conseils de réalisation</h2>
+    <div class="layout">
+
+        <!-- layout element -------------------------------------------------------------------------------- -->
+        <div class="layout__text">
+            <ul>
+                <li>Préparer l’arborescence du projet</li>
+                <li>Créer une application<span class="comment"> website </span></li>
+                <li>
+                    Créer les pages HTML nécessaires dans le dossier<span class="comment"> templates </span>de
+                    l’application :
+                    <ul>
+                        <li><span class="comment">/ </span>ou<span class="comment"> /home/ </span>: page d’accueil</li>
+                        <li><span class="comment">/about/ </span>: présentation</li>
+                        <li><span class="comment">/contact/</span>,<span class="comment"> /hobbies/</span>, ... : page complémentaire</li>
+                    </ul>
+                </li>
+                <li>Créer les routes dans<span class="comment"> urls.py </span>dans l’application.</li>
+                <li>Créer les vues nécessaires.</li>
+                <li>Réutiliser une structure commune avec un fichier<span class="comment"> base.html </span></li>
+                <li>Ajouter un dossier static contenant les images et les feuilles de style.</li>
+                <li>
+                    Soigner le contenu :
+                    <ul>
+                        <li>Présenter la personne choisie.</li>
+                        <li>Ajouter quelques informations utiles : parcours, goûts, projets, compétences, loisirs.</li>
+                        <li>Utiliser des titres, des paragraphes et éventuellement des listes.</li>
+                        <li>Ajouter au moins une image pertinente.</li>
+                    </ul>
+                </li>
+                <li>
+                    Tester le projet avec un serveur Django, et vérifier que :
+                    <ul>
+                        <li>toutes les pages s’affichent</li>
+                        <li>les liens fonctionnent</li>
+                        <li>aucune<span class="error"> erreur 404 </span>ou<span class="error"> TemplateDoesNotExist </span>n’apparaît.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

@@ -1,164 +1,96 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/init.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script type="module" src="../js/script.js" defer></script>
-    <title>Gérer les fichiers média de l'utilisateur</title>
-</head>
-<body>
-    <!-- ***************************************************************************************************************
-         HEADER
-    **************************************************************************************************************** -->
-    <header>
-        <h1>Gérer les fichiers média de l'utilisateur</h1>
+---
+layout: base
+short: "Fichiers médias"
+title: "Gérer les fichiers médias de l'utilisateur"
+---
 
-        <!-- navbar
-             ======================================================================================================= -->
-        <nav>
-            <ul class="navbar"></ul>
-        </nav>
-    </header>
 
-    <!-- ***************************************************************************************************************
-         ASIDE
-    **************************************************************************************************************** -->
-    <aside>
-
-        <!-- sidebar
-             ======================================================================================================= -->
-        <nav class="sidebar">
-
-            <!-- sidebar group ------------------------------------------------------------------------------------- -->
-            <section class="sidebar__group">
-                <h2>Dans cette page</h2>
-                <ul>
-                    <li class="sidebar__element">
-                        <a href="#file">Ajouter un fichier avec FileField</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#image">Ajouter une image avec ImageField</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#settings">Configurer MEDIA_URL et MEDIA_ROOT</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#urls">Servir les fichiers dans urls.py</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#form">Envoyer un fichier avec un formulaire</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#template">Afficher le fichier dans un template</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#errors">Erreurs fréquentes</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </aside>
-
-    <!-- ***************************************************************************************************************
-         MAIN
-    **************************************************************************************************************** -->
-    <main>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="file">
-            <h2>Ajouter un fichier avec FileField</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Pour enregistrer un fichier dans un modèle, on peut utiliser
-                        <span class="comment">FileField</span>.
-                    </p>
-                    <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
+<!-- content section
+     ======================================================================================================= -->
+<section id="file">
+    <h2>Ajouter un fichier avec FileField</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Pour enregistrer un fichier dans un modèle, on peut utiliser
+                <span class="comment">FileField</span>.
+            </p>
+            <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
 
 
 <span class="word">class</span> Document(models.Model):
     title = models.CharField(max_length=<span class="number">100</span>)
     file = models.FileField(upload_to=<span class="text">"documents/"</span>)</code></pre>
-                    <ul>
-                        <li><span class="comment">file </span>contient le fichier envoyé</li>
-                        <li><span class="comment">upload_to </span>indique le sous-dossier de destination</li>
-                    </ul>
-                    <p>
-                        Ici, les fichiers seront enregistrés dans le dossier<span class="comment"> documents/</span>.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <ul>
+                <li><span class="comment">file </span>contient le fichier envoyé</li>
+                <li><span class="comment">upload_to </span>indique le sous-dossier de destination</li>
+            </ul>
+            <p>
+                Ici, les fichiers seront enregistrés dans le dossier<span class="comment"> documents/</span>.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="image">
-            <h2>Ajouter une image avec ImageField</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Pour stocker une image, on utilise plutôt<span class="comment"> ImageField</span>.
-                    </p>
-                    <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
+<!-- content section
+     ======================================================================================================= -->
+<section id="image">
+    <h2>Ajouter une image avec ImageField</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Pour stocker une image, on utilise plutôt<span class="comment"> ImageField</span>.
+            </p>
+            <pre class="python"><code><span class="word">from</span> django.db <span class="word">import</span> models
 
 
 <span class="word">class</span> Book(models.Model):
     title = models.CharField(max_length=<span class="number">100</span>)
     cover = models.ImageField(upload_to=<span class="text">"covers/"</span>)</code></pre>
-                    <p>
-                        <span class="comment">ImageField </span>fonctionne comme<span class="comment"> FileField</span>,
-                        mais il est spécialisé pour les images. Il nécessite généralement l’installation de la
-                        bibliothèque <span class="comment"> Pillow</span>.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                <span class="comment">ImageField </span>fonctionne comme<span class="comment"> FileField</span>,
+                mais il est spécialisé pour les images. Il nécessite généralement l’installation de la
+                bibliothèque <span class="comment"> Pillow</span>.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="settings">
-            <h2>Configurer MEDIA_URL et MEDIA_ROOT</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Pour que Django sache où enregistrer et servir les fichiers<span class="comment"> media</span>,
-                        il faut ajouter deux variables dans<span class="comment"> settings.py</span>.
-                    </p>
-                    <pre class="python"><code>MEDIA_URL = <span class="text">"/media/"</span>
+<!-- content section
+     ======================================================================================================= -->
+<section id="settings">
+    <h2>Configurer MEDIA_URL et MEDIA_ROOT</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Pour que Django sache où enregistrer et servir les fichiers<span class="comment"> media</span>,
+                il faut ajouter deux variables dans<span class="comment"> settings.py</span>.
+            </p>
+            <pre class="python"><code>MEDIA_URL = <span class="text">"/media/"</span>
 MEDIA_ROOT = BASE_DIR / <span class="text">"media"</span></code></pre>
-                    <ul>
-                        <li><span class="comment">MEDIA_URL </span>définit l’URL de base des fichiers media</li>
-                        <li><span class="comment">MEDIA_ROOT </span>définit le dossier réel de stockage</li>
-                    </ul>
-                    <p>
-                        Ici, les fichiers seront enregistrés dans un dossier<span class="comment"> media </span>
-                        à la racine du projet.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <ul>
+                <li><span class="comment">MEDIA_URL </span>définit l’URL de base des fichiers media</li>
+                <li><span class="comment">MEDIA_ROOT </span>définit le dossier réel de stockage</li>
+            </ul>
+            <p>
+                Ici, les fichiers seront enregistrés dans un dossier<span class="comment"> media </span>
+                à la racine du projet.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="urls">
-            <h2>Servir les fichiers dans<span> urls.py</span></h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        En développement, il faut aussi configurer<span class="comment"> urls.py </span>pour que
-                        Django puisse afficher les fichiers envoyés.
-                    </p>
-                    <pre class="python"><code><span class="word">from</span> django.conf <span class="word">import</span> settings
+<!-- content section
+     ======================================================================================================= -->
+<section id="urls">
+    <h2>Servir les fichiers dans<span> urls.py</span></h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                En développement, il faut aussi configurer<span class="comment"> urls.py </span>pour que
+                Django puisse afficher les fichiers envoyés.
+            </p>
+            <pre class="python"><code><span class="word">from</span> django.conf <span class="word">import</span> settings
 <span class="word">from</span> django.conf.urls.static <span class="word">import</span> static
 <span class="word">from</span> django.urls <span class="word">import</span> path
 
@@ -168,34 +100,34 @@ urlpatterns = [
 
 <span class="word">if</span> settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)</code></pre>
-                    <p>
-                        Cette configuration permet d’accéder aux fichiers<span class="comment"> media </span>pendant
-                        le développement. En production, la gestion des fichiers media se fait généralement autrement.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                Cette configuration permet d’accéder aux fichiers<span class="comment"> media </span>pendant
+                le développement. En production, la gestion des fichiers media se fait généralement autrement.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="form">
-            <h2>Envoyer un fichier avec un formulaire</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Pour envoyer un fichier, le formulaire HTML doit utiliser
-                        l’attribut<span class="comment"> enctype="multipart/form-data"</span>.
-                    </p>
-                    <pre class="html"><code>&lt;form method="post" enctype="multipart/form-data"&gt;
-    {% csrf_token %}
-    {{ form.as_p }}
+<!-- content section
+     ======================================================================================================= -->
+<section id="form">
+    <h2>Envoyer un fichier avec un formulaire</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Pour envoyer un fichier, le formulaire HTML doit utiliser
+                l’attribut<span class="comment"> enctype="multipart/form-data"</span>.
+            </p>
+            <pre class="html"><code>&lt;form method="post" enctype="multipart/form-data"&gt;
+    &#123;% csrf_token %&#125;
+    &#123;&#123; form.as_p &#125;&#125;
     &lt;button type="submit"&gt;Envoyer&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-                    <p>
-                        Dans la vue, il faut transmettre à la fois<span class="comment"> request.POST </span>et
-                        <span class="comment">request.FILES</span>.
-                    </p>
-                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> redirect, render
+            <p>
+                Dans la vue, il faut transmettre à la fois<span class="comment"> request.POST </span>et
+                <span class="comment">request.FILES</span>.
+            </p>
+            <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> redirect, render
 <span class="word">from</span> .forms <span class="word">import</span> DocumentForm
 
 
@@ -211,60 +143,49 @@ urlpatterns = [
     context = {<span class="text">"form"</span>: form}
 
     <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"upload.html"</span>, context)</code></pre>
-                    <p>
-                        Sans<span class="comment"> request.FILES</span>, Django ne récupère pas le fichier envoyé.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                Sans<span class="comment"> request.FILES</span>, Django ne récupère pas le fichier envoyé.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="template">
-            <h2>Afficher le fichier dans un template</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Une fois le fichier enregistré, on peut accéder à son URL dans le template.
-                    </p>
-                    <pre class="html"><code>&lt;a href="{{ document.file.url }}"&gt;Télécharger le document&lt;/a&gt;</code></pre>
-                    <p>
-                        Pour une image, on peut l’afficher directement :
-                    </p>
-                    <pre class="html"><code>&lt;img src="{{ book.cover.url }}" alt="{{ book.title }}"&gt;</code></pre>
-                    <p>
-                        L’attribut<span class="comment"> .url </span>donne l’adresse du fichier enregistré.
-                    </p>
-                </div>
-            </div>
-        </section>
+<!-- content section
+     ======================================================================================================= -->
+<section id="template">
+    <h2>Afficher le fichier dans un template</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Une fois le fichier enregistré, on peut accéder à son URL dans le template.
+            </p>
+            <pre class="html"><code>&lt;a href="&#123;&#123; document.file.url &#125;&#125;"&gt;Télécharger le document&lt;/a&gt;</code></pre>
+            <p>
+                Pour une image, on peut l’afficher directement :
+            </p>
+            <pre class="html"><code>&lt;img src="&#123;&#123; book.cover.url &#125;&#125;" alt="&#123;&#123; book.title &#125;&#125;"&gt;</code></pre>
+            <p>
+                L’attribut<span class="comment"> .url </span>donne l’adresse du fichier enregistré.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="errors">
-            <h2>Erreurs fréquentes</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <ul>
-                        <li>Confondre<span class="comment"> static </span>et<span class="comment"> media </span>:<span class="error"> les fichiers utilisateur sont mal gérés</span>.</li>
-                        <li>Oublier<span class="comment"> MEDIA_URL </span>ou<span class="comment"> MEDIA_ROOT </span>dans<span class="comment"> settings.py </span>:<span class="error"> Django ne sait pas où stocker ou servir les fichiers</span>.</li>
-                        <li>Oublier la configuration<span class="comment"> static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) </span>dans<span class="comment"> urls.py </span>en développement :<span class="error"> les fichiers ne s’affichent pas</span>.</li>
-                        <li>Oublier<span class="comment"> enctype="multipart/form-data" </span>dans la balise<span class="comment"> &lt;form&gt; </span>:<span class="error"> le fichier n’est pas envoyé</span>.</li>
-                        <li>Oublier<span class="comment"> request.FILES </span>dans la vue :<span class="error"> le formulaire reçoit les champs texte mais pas le fichier</span>.</li>
-                        <li>Utiliser<span class="comment"> ImageField </span>sans installer<span class="comment"> Pillow </span>:<span class="error"> erreur lors de la gestion des images</span>.</li>
-                        <li>Essayer d’utiliser<span class="comment"> {{ document.file.url }} </span>alors qu’aucun fichier n’a été envoyé :<span class="error"> erreur d’affichage ou valeur absente</span>.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- ***************************************************************************************************************
-         FOOTER
-    **************************************************************************************************************** -->
-    <footer>
-        <div>© Copyright - Guillaume Peyrard</div>
-    </footer>
-</body>
-</html>
+<!-- content section
+     ======================================================================================================= -->
+<section id="errors">
+    <h2>Erreurs fréquentes</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <ul>
+                <li>Confondre<span class="comment"> static </span>et<span class="comment"> media </span>:<span class="error"> les fichiers utilisateur sont mal gérés</span>.</li>
+                <li>Oublier<span class="comment"> MEDIA_URL </span>ou<span class="comment"> MEDIA_ROOT </span>dans<span class="comment"> settings.py </span>:<span class="error"> Django ne sait pas où stocker ou servir les fichiers</span>.</li>
+                <li>Oublier la configuration<span class="comment"> static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) </span>dans<span class="comment"> urls.py </span>en développement :<span class="error"> les fichiers ne s’affichent pas</span>.</li>
+                <li>Oublier<span class="comment"> enctype="multipart/form-data" </span>dans la balise<span class="comment"> &lt;form&gt; </span>:<span class="error"> le fichier n’est pas envoyé</span>.</li>
+                <li>Oublier<span class="comment"> request.FILES </span>dans la vue :<span class="error"> le formulaire reçoit les champs texte mais pas le fichier</span>.</li>
+                <li>Utiliser<span class="comment"> ImageField </span>sans installer<span class="comment"> Pillow </span>:<span class="error"> erreur lors de la gestion des images</span>.</li>
+                <li>Essayer d’utiliser<span class="comment"> &#123;&#123; document.file.url &#125;&#125; </span>alors qu’aucun fichier n’a été envoyé :<span class="error"> erreur d’affichage ou valeur absente</span>.</li>
+            </ul>
+        </div>
+    </div>
+</section>

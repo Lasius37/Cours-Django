@@ -1,0 +1,76 @@
+<details id="menu-container">
+    <summary id="menu-opener" aria-label="Menu principal">
+        <i class="bi bi-list" aria-hidden="true"></i>
+    </summary>
+
+    <div id="full-menu">
+        <a class="menu" id="home-btn" href="{{ '/index.html' | relative_url }}">
+            <i class="bi bi-house-fill"></i>
+            <span>Accueil</span>
+        </a>
+
+        <div class="menu" id="main-menu">
+            <details class="sub-menu" name="sub-menu">
+                <summary class="sub-menu-opener">
+                    <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                    <span>Introduction</span>
+                </summary>
+
+                <ul>
+                    <li><a href="{{ '/pages/flask-django.html' | relative_url }}">Comparaison Django / Flask</a></li>
+                </ul>
+            </details>
+            <details class="sub-menu" name="sub-menu">
+                <summary class="sub-menu-opener">
+                    <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                    <span>Concepts de base</span>
+                </summary>
+
+                <ul>
+                    <li><a href="{{ '/pages/init.html' | relative_url }}">Initialiser un projet</a></li>
+                    <li><a href="{{ '/pages/app.html' | relative_url }}">Créer une application</a></li>
+                    <li><a href="{{ '/pages/settings.html' | relative_url }}">Paramétrer le projet</a></li>
+                    <li><a href="{{ '/pages/server.html' | relative_url }}">Démarrer le serveur</a></li>
+                    <li><a href="{{ '/pages/urls.html' | relative_url }}">Configurer urls.py</a></li>
+                    <li><a href="{{ '/pages/functions.html' | relative_url }}">Créer une vue avec une fonction</a></li>
+                    <li><a href="{{ '/pages/templates.html' | relative_url }}">Créer un template HTML</a></li>
+                    <li><a href="{{ '/pages/static.html' | relative_url }}">Configurer les fichiers statiques</a></li>
+                    <li><a href="{{ '/pages/project-personal-site.html' | relative_url }}">Projet : un mini-site personnel</a></li>
+                </ul>
+            </details>
+
+            <details class="sub-menu" name="sub-menu">
+                <summary class="sub-menu-opener">
+                    <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                    <span>Concepts intermédiaires</span>
+                </summary>
+
+                <ul>
+                    <li><a href="{{ '/pages/models.html' | relative_url }}">Définir un modèle</a></li>
+                    <li><a href="{{ '/pages/database.html' | relative_url }}">Interroger la base de données</a></li>
+                    <li><a href="{{ '/pages/dependencies.html' | relative_url }}">Définir les relations entre modèles</a></li>
+                    <li><a href="{{ '/pages/admin.html' | relative_url }}">Utiliser l'interface d'administration</a></li>
+                    <li><a href="{{ '/pages/display-data.html' | relative_url }}">Afficher les données dans un template</a></li>
+                    <li><a href="{{ '/pages/project-library.html' | relative_url }}">Projet : la bibliothèque</a></li>
+                </ul>
+            </details>
+
+            <details class="sub-menu" name="sub-menu">
+                <summary class="sub-menu-opener">
+                    <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                    <span>Concepts avancés</span>
+                </summary>
+
+                <ul>
+                    <li><a href="{{ '/pages/classes.html' | relative_url }}">Créer une vue avec une classe</a></li>
+                    <li><a href="{{ '/pages/forms.html' | relative_url }}">Créer des formulaires</a></li>
+                    <li><a href="{{ '/pages/form-data.html' | relative_url }}">Traiter les données issues d'un formulaire</a></li>
+                    <li><a href="{{ '/pages/validation.html' | relative_url }}">Valider un formulaire</a></li>
+                    <li><a href="{{ '/pages/media.html' | relative_url }}">Gérer les fichiers média de l'utilisateur</a></li>
+                    <li><a href="{{ '/pages/mixins.html' | relative_url }}">Réutiliser du code dans les vues avec les mixins</a></li>
+                    <li><a href="{{ '/pages/project-project-manager.html' | relative_url }}">Projet : le gestionnaire de projet</a></li>
+                </ul>
+            </details>
+        </div>
+    </div>
+</details>

@@ -1,80 +1,20 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/init.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script type="module" src="../js/script.js" defer></script>
-    <title>Configurer les fichiers statiques</title>
-</head>
-<body>
-    <!-- ***************************************************************************************************************
-         HEADER
-    **************************************************************************************************************** -->
-    <header>
-        <h1>Configurer les fichiers statiques</h1>
+---
+layout: base
+short: "Fichiers statiques"
+title: "Configurer les fichiers statiques"
+---
 
-        <!-- navbar
-             ======================================================================================================= -->
-        <nav>
-            <ul class="navbar"></ul>
-        </nav>
-    </header>
+<!-- content section ====================================================================================== -->
+<section id="structure">
+    <h2>Structure des dossiers de fichiers statiques</h2>
+    <div class="layout">
 
-    <!-- ***************************************************************************************************************
-         ASIDE
-    **************************************************************************************************************** -->
-    <aside>
+        <div class="layout__text">
+            <p>
+                Les fichiers statiques sont regroupés dans un dossier<span class="comment"> static </span>.
+            </p>
 
-        <!-- sidebar
-             ======================================================================================================= -->
-        <nav class="sidebar">
-
-            <!-- sidebar group ------------------------------------------------------------------------------------- -->
-            <section class="sidebar__group">
-                <h2>Dans cette page</h2>
-                <ul>
-                    <li class="sidebar__element">
-                        <a href="#structure">Structure des dossiers de fichiers statiques</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#settings">Configuration des fichiers statiques</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#templates">Utilisation dans les templates</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#errors">Erreurs fréquentes</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </aside>
-
-    <!-- ***************************************************************************************************************
-         MAIN
-    **************************************************************************************************************** -->
-    <main>
-
-        <!-- content section ====================================================================================== -->
-        <section id="structure">
-            <h2>Structure des dossiers de fichiers statiques</h2>
-            <div class="layout">
-
-                <div class="layout__text">
-                    <p>
-                        Les fichiers statiques sont regroupés dans un dossier<span class="comment"> static </span>.
-                    </p>
-
-                    <pre class="console"><code>Mon_Projet/
+            <pre class="console"><code>Mon_Projet/
 ├── static/
 │   ├── css/
 │   │   └── style.css
@@ -83,91 +23,81 @@
 │   └── js/
 │       └── script.js</code></pre>
 
-                    <p>
-                        Cette organisation permet de séparer clairement les types de fichiers.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                Cette organisation permet de séparer clairement les types de fichiers.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section ====================================================================================== -->
-        <section id="settings">
-            <h2>Configuration des fichiers statiques</h2>
-            <div class="layout">
+<!-- content section ====================================================================================== -->
+<section id="settings">
+    <h2>Configuration des fichiers statiques</h2>
+    <div class="layout">
 
-                <div class="layout__text">
-                    <p>
-                        Django doit savoir où trouver les fichiers statiques. Il les trouve grâce aux lignes suivantes
-                        dans<span class="comment"> settings.py</span> :
-                    </p>
-                    <pre class="python"><code>STATIC_URL = <span class="text">"/static/"</span>
+        <div class="layout__text">
+            <p>
+                Django doit savoir où trouver les fichiers statiques. Il les trouve grâce aux lignes suivantes
+                dans<span class="comment"> settings.py</span> :
+            </p>
+            <pre class="python"><code>STATIC_URL = <span class="text">"/static/"</span>
 
 STATICFILES_DIRS = [
     BASE_DIR / <span class="text">"static"</span>
 ]</code></pre>
-                    <ul>
-                        <li><span class="comment">STATIC_URL </span>: chemin utilisé dans le navigateur</li>
-                        <li><span class="comment">STATICFILES_DIRS </span> : dossiers où sont stockés les fichiers</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+            <ul>
+                <li><span class="comment">STATIC_URL </span>: chemin utilisé dans le navigateur</li>
+                <li><span class="comment">STATICFILES_DIRS </span> : dossiers où sont stockés les fichiers</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-        <!-- content section ====================================================================================== -->
-        <section id="templates">
-            <h2>Utilisation dans les templates</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Pour utiliser un fichier statique, il faut charger la balise Django :
-                    </p>
-                    <pre class="html"><code>{% load static %}</code></pre>
-                    <ul>
-                        <li>
-                            Dans un template combiné, cette balise se place juste après
-                            <span class="comment"> {% extends ... %}</span>.
-                        </li>
-                        <li>
-                            Dans un template de base, elle se place au début du fichier.
-                        </li>
-                    </ul>
-                    <p>
-                        Ensuite, on utilise<span class="comment"> static </span>pour construire le chemin :
-                    </p>
-                    <ul>
-                        <li>
-                            Dans le<span class="comment"> head </span>:
-                            <pre class="html"><code>&lt;link rel="stylesheet" href="{% static 'css/style.css' %}"&gt;</code></pre>
-                        </li>
-                        <li>
-                            Dans le<span class="comment"> body </span>:
-                            <pre class="html"><code>&lt;img src="{% static 'img/photo.jpg' %}" alt="une photo"&gt;</code></pre>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+<!-- content section ====================================================================================== -->
+<section id="templates">
+    <h2>Utilisation dans les templates</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Pour utiliser un fichier statique, il faut charger la balise Django :
+            </p>
+            <pre class="html"><code>&#123;% load static &#125;}</code></pre>
+            <ul>
+                <li>
+                    Dans un template combiné, cette balise se place juste après
+                    <span class="comment"> &#123;% extends ... &#125;}</span>.
+                </li>
+                <li>
+                    Dans un template de base, elle se place au début du fichier.
+                </li>
+            </ul>
+            <p>
+                Ensuite, on utilise<span class="comment"> static </span>pour construire le chemin :
+            </p>
+            <ul>
+                <li>
+                    Dans le<span class="comment"> head </span>:
+                    <pre class="html"><code>&lt;link rel="stylesheet" href="&#123;% static 'css/style.css' %&#125;"&gt;</code></pre>
+                </li>
+                <li>
+                    Dans le<span class="comment"> body </span>:
+                    <pre class="html"><code>&lt;img src="&#123;% static 'img/photo.jpg' %&#125;" alt="une photo"&gt;</code></pre>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-        <!-- content section ====================================================================================== -->
-        <section id="errors">
-            <h2>Erreurs fréquentes</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <ul>
-                        <li>Oublier<span class="comment"> {% load static %} </span>:<span class="error"> fichiers non trouvés</span>.</li>
-                        <li>Chemin mal saisi :<span class="error"> pas de prise en compte du fichier statique</span>.</li>
-                        <li>Serveur non relancé :<span class="error"> les modifications ne sont pas prises en compte</span>.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ***************************************************************************************************************
-         FOOTER
-    **************************************************************************************************************** -->
-    <footer>
-        <div>© Copyright - Guillaume Peyrard</div>
-    </footer>
-</body>
-</html>
+<!-- content section ====================================================================================== -->
+<section id="errors">
+    <h2>Erreurs fréquentes</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <ul>
+                <li>Oublier<span class="comment"> &#123;% load static %&#125; </span>:<span class="error"> fichiers non trouvés</span>.</li>
+                <li>Chemin mal saisi :<span class="error"> pas de prise en compte du fichier statique</span>.</li>
+                <li>Serveur non relancé :<span class="error"> les modifications ne sont pas prises en compte</span>.</li>
+            </ul>
+        </div>
+    </div>
+</section>

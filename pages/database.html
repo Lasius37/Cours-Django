@@ -1,201 +1,124 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/init.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script type="module" src="../js/script.js" defer></script>
-    <title>Interroger la base de données</title>
-</head>
-<body>
-    <!-- ***************************************************************************************************************
-         HEADER
-    **************************************************************************************************************** -->
-    <header>
-        <h1>Interroger la base de données</h1>
+---
+layout: base
+short: "Base de données"
+title: "Interroger la base de données"
+---
 
-        <!-- navbar
-             ======================================================================================================= -->
-        <nav>
-            <ul class="navbar"></ul>
-        </nav>
-    </header>
+<!-- content section ====================================================================================== -->
+<section id="all">
+    <h2>Récupérer toutes les données</h2>
+    <div class="layout">
 
-    <!-- ***************************************************************************************************************
-         ASIDE
-    **************************************************************************************************************** -->
-    <aside>
+        <div class="layout__text">
+            <p>
+                Une fois les modèles créés et les migrations appliquées, Django permet d'interroger la base de
+                données. Ces requêtes se font à l'aide des<span class="comment"> QuerySets</span>. Un QuerySet
+                est une collection d'objets récupérés depuis la base de données.
+            </p>
+            <pre class="python"><code>students = Student.objects.<span class="function">all</span>()</code></pre>
+            <p>
+                Cette requête récupère tous les objets du modèle<span class="comment"> Student</span>.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- sidebar
-             ======================================================================================================= -->
-        <nav class="sidebar">
+<!-- content section ====================================================================================== -->
+<section id="get">
+    <h2>Récupérer un objet</h2>
+    <div class="layout">
 
-            <!-- sidebar group ------------------------------------------------------------------------------------- -->
-            <section class="sidebar__group">
-                <h2>Dans cette page</h2>
-                <ul>
-                    <li class="sidebar__element">
-                        <a href="#all">Récupérer toutes les données</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#get">Récupérer un objet</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#filter">Filtrer les données</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#order">Trier les résultats</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#view">Utilisation dans une vue</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#errors">Erreurs fréquentes</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </aside>
+        <div class="layout__text">
+            <p>Parfois, on cherche à récupérer un seul objet du modèle.</p>
+            <pre class="python"><code>student = Student.objects.<span class="function">get</span>(id=<span class="number">1</span>)</code></pre>
+            <p>
+                Cette méthode permet de récupérer un seul objet (ici, par son
+                identifiant<span class="comment"> id</span>). Si aucun objet ou plusieurs objets
+                correspondent, Django renvoie une erreur.
+            </p>
+        </div>
+    </div>
+</section>
 
-    <!-- ***************************************************************************************************************
-         MAIN
-    **************************************************************************************************************** -->
-    <main>
+<!-- content section ====================================================================================== -->
+<section id="filter">
+    <h2>Filtrer les données</h2>
+    <div class="layout">
 
-        <!-- content section ====================================================================================== -->
-        <section id="all">
-            <h2>Récupérer toutes les données</h2>
-            <div class="layout">
+        <div class="layout__text">
+            <pre class="python"><code>students = Student.objects.<span class="function">filter</span>(age=<span class="number">14</span>)</code></pre>
+            <p>
+                Cette requête retourne tous les élèves ayant 14 ans. Contrairement
+                à<span class="comment"> get()</span>, elle peut renvoyer plusieurs résultats.
+            </p>
+            <pre class="python"><code>students = Student.objects.<span class="function">exclude</span>(age=<span class="number">14</span>)</code></pre>
+            <p>
+                Ce filtre permet d'exclure certains résultats.
+            </p>
 
-                <div class="layout__text">
-                    <p>
-                        Une fois les modèles créés et les migrations appliquées, Django permet d'interroger la base de
-                        données. Ces requêtes se font à l'aide des<span class="comment"> QuerySets</span>. Un QuerySet
-                        est une collection d'objets récupérés depuis la base de données.
-                    </p>
-                    <pre class="python"><code>students = Student.objects.<span class="function">all</span>()</code></pre>
-                    <p>
-                        Cette requête récupère tous les objets du modèle<span class="comment"> Student</span>.
-                    </p>
-                </div>
-            </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <!-- content section ====================================================================================== -->
-        <section id="get">
-            <h2>Récupérer un objet</h2>
-            <div class="layout">
+<!-- content section ====================================================================================== -->
+<section id="order">
+    <h2>Trier les résultats</h2>
+    <div class="layout">
 
-                <div class="layout__text">
-                    <p>Parfois, on cherche à récupérer un seul objet du modèle.</p>
-                    <pre class="python"><code>student = Student.objects.<span class="function">get</span>(id=<span class="number">1</span>)</code></pre>
-                    <p>
-                        Cette méthode permet de récupérer un seul objet (ici, par son
-                        identifiant<span class="comment"> id</span>). Si aucun objet ou plusieurs objets
-                        correspondent, Django renvoie une erreur.
-                    </p>
-                </div>
-            </div>
-        </section>
+        <div class="layout__text">
+            <pre class="python"><code>students = Student.objects.<span class="function">order_by</span>(<span class="text">"last_name"</span>)</code></pre>
+            <p>Ici, on trie les élèves par ordre alphabétique de leur nom.</p>
+            <pre class="python"><code>students = Student.objects.<span class="function">order_by</span>(<span class="text">"-age"</span>)</code></pre>
+            <p>Le signe<span class="comment"> - </span>permet de trier en ordre inverse (décroissant dans ce cas).</p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section ====================================================================================== -->
-        <section id="filter">
-            <h2>Filtrer les données</h2>
-            <div class="layout">
-
-                <div class="layout__text">
-                    <pre class="python"><code>students = Student.objects.<span class="function">filter</span>(age=<span class="number">14</span>)</code></pre>
-                    <p>
-                        Cette requête retourne tous les élèves ayant 14 ans. Contrairement
-                        à<span class="comment"> get()</span>, elle peut renvoyer plusieurs résultats.
-                    </p>
-                    <pre class="python"><code>students = Student.objects.<span class="function">exclude</span>(age=<span class="number">14</span>)</code></pre>
-                    <p>
-                        Ce filtre permet d'exclure certains résultats.
-                    </p>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- content section ====================================================================================== -->
-        <section id="order">
-            <h2>Trier les résultats</h2>
-            <div class="layout">
-
-                <div class="layout__text">
-                    <pre class="python"><code>students = Student.objects.<span class="function">order_by</span>(<span class="text">"last_name"</span>)</code></pre>
-                    <p>Ici, on trie les élèves par ordre alphabétique de leur nom.</p>
-                    <pre class="python"><code>students = Student.objects.<span class="function">order_by</span>(<span class="text">"-age"</span>)</code></pre>
-                    <p>Le signe<span class="comment"> - </span>permet de trier en ordre inverse (décroissant dans ce cas).</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- content section ====================================================================================== -->
-        <section id="view">
-            <h2>Utilisation dans une vue</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
+<!-- content section ====================================================================================== -->
+<section id="view">
+    <h2>Utilisation dans une vue</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
 <span class="word">from</span> .models <span class="word">import</span> Student
 
 
 <span class="word">def</span> student_list(request):
     students = Student.objects.<span class="function">all</span>()
     <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"students.html"</span>, {<span class="text">"students"</span>: students})</code></pre>
-                    <p>
-                        Les données sont ensuite accessibles dans le template.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                Les données sont ensuite accessibles dans le template.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section ====================================================================================== -->
-        <section id="errors">
-            <h2>Erreurs fréquentes</h2>
-            <div class="layout">
+<!-- content section ====================================================================================== -->
+<section id="errors">
+    <h2>Erreurs fréquentes</h2>
+    <div class="layout">
 
-                <div class="layout__text">
+        <div class="layout__text">
 
-                    <ul>
-                        <li>
-                            Oublier d'importer le modèle :
-                            <span class="error"> NameError</span>
-                        </li>
-                        <li>
-                            Utiliser<span class="comment"> get()</span> avec plusieurs résultats :
-                            <span class="error"> erreur</span>
-                        </li>
-                        <li>
-                            Utiliser un mauvais nom de champ :
-                            <span class="error"> FieldError</span>
-                        </li>
-                        <li>
-                            Oublier les migrations :
-                            <span class="error"> table inexistante</span>
-                        </li>
-                    </ul>
+            <ul>
+                <li>
+                    Oublier d'importer le modèle :
+                    <span class="error"> NameError</span>
+                </li>
+                <li>
+                    Utiliser<span class="comment"> get()</span> avec plusieurs résultats :
+                    <span class="error"> erreur</span>
+                </li>
+                <li>
+                    Utiliser un mauvais nom de champ :
+                    <span class="error"> FieldError</span>
+                </li>
+                <li>
+                    Oublier les migrations :
+                    <span class="error"> table inexistante</span>
+                </li>
+            </ul>
 
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- ***************************************************************************************************************
-         FOOTER
-    **************************************************************************************************************** -->
-    <footer>
-        <div>© Copyright - Guillaume Peyrard</div>
-    </footer>
-</body>
-</html>
+        </div>
+    </div>
+</section>

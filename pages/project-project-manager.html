@@ -1,325 +1,261 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/init.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script type="module" src="../js/script.js" defer></script>
-    <title>Projet : le gestionnaire de projet</title>
-</head>
-<body>
-    <!-- ***************************************************************************************************************
-         HEADER
-    **************************************************************************************************************** -->
-    <header>
-        <h1>Projet : le gestionnaire de projet</h1>
+---
+layout: base
+short: "Projet : gestionnaire de projet"
+title: "Projet : le gestionnaire de projet"
+---
 
-        <!-- navbar
-             ======================================================================================================= -->
-        <nav>
-            <ul class="navbar"></ul>
-        </nav>
-    </header>
+<!-- content section
+     ======================================================================================================= -->
+<section id="questions">
+    <h2>Énoncé</h2>
+    <div class="layout">
 
-    <!-- ***************************************************************************************************************
-         ASIDE
-    **************************************************************************************************************** -->
-    <aside>
+        <!-- layout element -------------------------------------------------------------------------------- -->
+        <div class="layout__text">
+            <p>
+                Vous devez réaliser une application de gestion de projet avec Django.
+            </p>
 
-        <!-- sidebar
-             ======================================================================================================= -->
-        <nav class="sidebar">
-
-            <!-- sidebar group ------------------------------------------------------------------------------------- -->
-            <section class="sidebar__group">
-                <h2>Dans cette page</h2>
-                <ul>
-                    <li class="sidebar__element">
-                        <a href="#questions">Énoncé</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#help">Conseils de réalisation</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </aside>
-
-    <!-- ***************************************************************************************************************
-         MAIN
-    **************************************************************************************************************** -->
-    <main>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="questions">
-            <h2>Énoncé</h2>
-            <div class="layout">
-
-                <!-- layout element -------------------------------------------------------------------------------- -->
-                <div class="layout__text">
-                    <p>
-                        Vous devez réaliser une application de gestion de projet avec Django.
-                    </p>
-
-                    <ol>
-                        <li>
-                            <h3>Objectif général</h3>
-                            <ul>
-                                <li>L’application permet de gérer plusieurs projets.</li>
-                                <li>Chaque projet contient des tâches.</li>
-                                <li>Chaque tâche possède un état d’avancement.</li>
-                                <li>L’utilisateur peut consulter les projets, leurs détails et les tâches associées.</li>
-                            </ul>
-                        </li>
-
-                        <div class="separator"></div>
-
-                        <li>
-                            <h3>Données à gérer</h3>
-                            <ul>
-                                <li>Un projet est caractérisé par :
-                                    <ul>
-                                        <li>un nom</li>
-                                        <li>une description</li>
-                                        <li>une date de début</li>
-                                        <li>une date de fin prévue</li>
-                                        <li>une image facultative</li>
-                                    </ul>
-                                </li>
-                                <li>Une tâche est caractérisée par :
-                                    <ul>
-                                        <li>un titre</li>
-                                        <li>une description</li>
-                                        <li>une date limite</li>
-                                        <li>un niveau de priorité</li>
-                                        <li>un état<span class="comment"> à faire </span>/<span class="comment"> en cours </span>/<span class="comment"> terminée</span></li>
-                                        <li>le projet auquel elle est rattachée.</li>
-                                    </ul>
-                                </li>
-                                <li>Un membre est caractérisé par :
-                                    <ul>
-                                        <li>un nom</li>
-                                        <li>une adresse email</li>
-                                        <li>un rôle dans le projet</li>
-                                    </ul>
-                                </li>
-                                <li>Un projet peut avoir plusieurs membres.</li>
-                                <li>Une tâche peut être attribuée à un seul membre.</li>
-                                <li>Les données sont accessibles depuis l’interface d’administration.</li>
-                            </ul>
-                        </li>
-
-                        <div class="separator"></div>
-
-                        <li>
-                            <h3>Fonctionnement</h3>
-                            <ul>
-                                <li>L’application comporte plusieurs pages :
-                                    <ul>
-                                        <li>une page d’accueil</li>
-                                        <li>une page affichant la liste complète des projets</li>
-                                        <li>une page affichant les détails d’un projet</li>
-                                        <li>une page affichant la liste complète des tâches</li>
-                                        <li>une page affichant les détails d’une tâche</li>
-                                        <li>une page permettant d’ajouter un projet</li>
-                                        <li>une page permettant d’ajouter une tâche</li>
-                                    </ul>
-                                </li>
-                                <li>Des liens permettent de naviguer dans l’ensemble du projet :
-                                    <ul>
-                                        <li>retour à l’accueil</li>
-                                        <li>accès à la liste des projets</li>
-                                        <li>accès à la liste des tâches</li>
-                                        <li>accès au détail d’un projet dès que son nom apparaît</li>
-                                        <li>accès au détail d’une tâche dès que son titre apparaît</li>
-                                    </ul>
-                                </li>
-                                <li>Les projets et les tâches doivent être affichés dans un ordre cohérent.</li>
-                                <li>L’utilisateur peut créer des projets ou des tâches via des formulaires Django.</li>
-                                <li>Les formulaires doivent être validés.</li>
-                                <li>Les images envoyées par l’utilisateur doivent être gérées correctement.</li>
-                                <li>L’application doit fonctionner avec le serveur de développement Django.</li>
-                            </ul>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="help">
-            <h2>Conseils de réalisation</h2>
-            <div class="layout">
-
-                <!-- layout element -------------------------------------------------------------------------------- -->
-                <div class="layout__text">
-                    <h3>Modèles</h3>
+            <ol>
+                <li>
+                    <h3>Objectif général</h3>
                     <ul>
-                        <li>Créer les modèles dans<span class="comment"> models.py</span>.</li>
-                        <li>Définir<span class="comment"> Project</span>,<span class="comment"> Task</span> et<span class="comment"> Member</span>.</li>
-                        <li>Ajouter les relations adaptées entre les tables.</li>
-                        <li>Ajouter un<span class="comment"> ImageField </span>sur le modèle<span class="comment"> Project</span>.</li>
-                        <li>Ajouter les méthodes<span class="comment"> __str__()</span>.</li>
+                        <li>L’application permet de gérer plusieurs projets.</li>
+                        <li>Chaque projet contient des tâches.</li>
+                        <li>Chaque tâche possède un état d’avancement.</li>
+                        <li>L’utilisateur peut consulter les projets, leurs détails et les tâches associées.</li>
                     </ul>
+                </li>
 
-                    <div class="separator"></div>
+                <div class="separator"></div>
 
-                    <h3>Base de données et administration</h3>
+                <li>
+                    <h3>Données à gérer</h3>
                     <ul>
-                        <li>Créer les migrations et les appliquer.</li>
-                        <li>Enregistrer les modèles dans<span class="comment"> admin.py</span>.</li>
-                        <li>Créer un superutilisateur.</li>
-                        <li>Ajouter quelques données de test :
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Projet</th>
-                                        <th>Tâche</th>
-                                        <th>Membre</th>
-                                        <th>État</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Site vitrine</td>
-                                        <td>Créer la page d’accueil</td>
-                                        <td>Alice Martin</td>
-                                        <td>Terminée</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Site vitrine</td>
-                                        <td>Créer la page contact</td>
-                                        <td>Lucas Bernard</td>
-                                        <td>En cours</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gestion scolaire</td>
-                                        <td>Créer le modèle Student</td>
-                                        <td>Emma Dupont</td>
-                                        <td>Terminée</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gestion scolaire</td>
-                                        <td>Créer le formulaire d’ajout</td>
-                                        <td>Emma Dupont</td>
-                                        <td>À faire</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Application météo</td>
-                                        <td>Ajouter l’upload d’images</td>
-                                        <td>Noah Petit, Lucas Bernard</td>
-                                        <td>En cours</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <li>Un projet est caractérisé par :
+                            <ul>
+                                <li>un nom</li>
+                                <li>une description</li>
+                                <li>une date de début</li>
+                                <li>une date de fin prévue</li>
+                                <li>une image facultative</li>
+                            </ul>
                         </li>
+                        <li>Une tâche est caractérisée par :
+                            <ul>
+                                <li>un titre</li>
+                                <li>une description</li>
+                                <li>une date limite</li>
+                                <li>un niveau de priorité</li>
+                                <li>un état<span class="comment"> à faire </span>/<span class="comment"> en cours </span>/<span class="comment"> terminée</span></li>
+                                <li>le projet auquel elle est rattachée.</li>
+                            </ul>
+                        </li>
+                        <li>Un membre est caractérisé par :
+                            <ul>
+                                <li>un nom</li>
+                                <li>une adresse email</li>
+                                <li>un rôle dans le projet</li>
+                            </ul>
+                        </li>
+                        <li>Un projet peut avoir plusieurs membres.</li>
+                        <li>Une tâche peut être attribuée à un seul membre.</li>
+                        <li>Les données sont accessibles depuis l’interface d’administration.</li>
                     </ul>
+                </li>
 
-                    <div class="separator"></div>
+                <div class="separator"></div>
 
-                    <h3>Vues</h3>
+                <li>
+                    <h3>Fonctionnement</h3>
                     <ul>
-                        <li>Créer des routes et les associer à des vues.</li>
-                        <li>Prévoir au minimum :
+                        <li>L’application comporte plusieurs pages :
                             <ul>
-                                <li>la route<span class="comment"> / </span>pour la vue<span class="comment"> "home"</span></li>
-                                <li>la route<span class="comment"> /projects/ </span>pour la vue<span class="comment"> "project_list"</span></li>
-                                <li>la route<span class="comment"> /projects/&lt;int:pk&gt;/ </span>pour la vue<span class="comment"> "project_detail"</span></li>
-                                <li>la route<span class="comment"> /tasks/ </span>pour la vue<span class="comment"> "task_list"</span></li>
-                                <li>la route<span class="comment"> /tasks/&lt;int:pk&gt;/ </span>pour la vue<span class="comment"> "task_detail"</span></li>
-                                <li>la route<span class="comment"> /projects/create/ </span>pour ajouter un projet</li>
-                                <li>la route<span class="comment"> /tasks/create/ </span>pour ajouter une tâche</li>
+                                <li>une page d’accueil</li>
+                                <li>une page affichant la liste complète des projets</li>
+                                <li>une page affichant les détails d’un projet</li>
+                                <li>une page affichant la liste complète des tâches</li>
+                                <li>une page affichant les détails d’une tâche</li>
+                                <li>une page permettant d’ajouter un projet</li>
+                                <li>une page permettant d’ajouter une tâche</li>
                             </ul>
                         </li>
-                        <li>Utiliser :
+                        <li>Des liens permettent de naviguer dans l’ensemble du projet :
                             <ul>
-                                <li><span class="comment">TemplateView</span> pour l’accueil ;</li>
-                                <li><span class="comment">ListView</span> pour les listes ;</li>
-                                <li><span class="comment">DetailView</span> pour les détails ;</li>
-                                <li><span class="comment">CreateView</span> pour les formulaires de création.</li>
+                                <li>retour à l’accueil</li>
+                                <li>accès à la liste des projets</li>
+                                <li>accès à la liste des tâches</li>
+                                <li>accès au détail d’un projet dès que son nom apparaît</li>
+                                <li>accès au détail d’une tâche dès que son titre apparaît</li>
                             </ul>
                         </li>
-                        <li>Ordonner les projets par nom ou par date.</li>
-                        <li>Ordonner les tâches par date limite.</li>
-                        <li>Envoyer les données avec un<span class="comment"> context </span>clair dans les vues.</li>
+                        <li>Les projets et les tâches doivent être affichés dans un ordre cohérent.</li>
+                        <li>L’utilisateur peut créer des projets ou des tâches via des formulaires Django.</li>
+                        <li>Les formulaires doivent être validés.</li>
+                        <li>Les images envoyées par l’utilisateur doivent être gérées correctement.</li>
+                        <li>L’application doit fonctionner avec le serveur de développement Django.</li>
                     </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
 
-                    <div class="separator"></div>
+<!-- content section
+     ======================================================================================================= -->
+<section id="help">
+    <h2>Conseils de réalisation</h2>
+    <div class="layout">
 
-                    <h3>Formulaires</h3>
+        <!-- layout element -------------------------------------------------------------------------------- -->
+        <div class="layout__text">
+            <h3>Modèles</h3>
+            <ul>
+                <li>Créer les modèles dans<span class="comment"> models.py</span>.</li>
+                <li>Définir<span class="comment"> Project</span>,<span class="comment"> Task</span> et<span class="comment"> Member</span>.</li>
+                <li>Ajouter les relations adaptées entre les tables.</li>
+                <li>Ajouter un<span class="comment"> ImageField </span>sur le modèle<span class="comment"> Project</span>.</li>
+                <li>Ajouter les méthodes<span class="comment"> __str__()</span>.</li>
+            </ul>
+
+            <div class="separator"></div>
+
+            <h3>Base de données et administration</h3>
+            <ul>
+                <li>Créer les migrations et les appliquer.</li>
+                <li>Enregistrer les modèles dans<span class="comment"> admin.py</span>.</li>
+                <li>Créer un superutilisateur.</li>
+                <li>Ajouter quelques données de test :
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Projet</th>
+                                <th>Tâche</th>
+                                <th>Membre</th>
+                                <th>État</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Site vitrine</td>
+                                <td>Créer la page d’accueil</td>
+                                <td>Alice Martin</td>
+                                <td>Terminée</td>
+                            </tr>
+                            <tr>
+                                <td>Site vitrine</td>
+                                <td>Créer la page contact</td>
+                                <td>Lucas Bernard</td>
+                                <td>En cours</td>
+                            </tr>
+                            <tr>
+                                <td>Gestion scolaire</td>
+                                <td>Créer le modèle Student</td>
+                                <td>Emma Dupont</td>
+                                <td>Terminée</td>
+                            </tr>
+                            <tr>
+                                <td>Gestion scolaire</td>
+                                <td>Créer le formulaire d’ajout</td>
+                                <td>Emma Dupont</td>
+                                <td>À faire</td>
+                            </tr>
+                            <tr>
+                                <td>Application météo</td>
+                                <td>Ajouter l’upload d’images</td>
+                                <td>Noah Petit, Lucas Bernard</td>
+                                <td>En cours</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+
+            <div class="separator"></div>
+
+            <h3>Vues</h3>
+            <ul>
+                <li>Créer des routes et les associer à des vues.</li>
+                <li>Prévoir au minimum :
                     <ul>
-                        <li>Créer les formulaires dans<span class="comment"> forms.py</span>.</li>
-                        <li>Utiliser <span class="comment"> ModelForm </span>pour créer un projet et une tâche.</li>
-                        <li>Vérifier les données avec<span class="comment"> is_valid()</span>.</li>
-                        <li>Utiliser<span class="comment"> cleaned_data </span>.</li>
-                        <li>Ajouter des validations utiles, par exemple :
-                            <ul>
-                                <li>la date de fin d’un projet ne doit pas être antérieure à la date de début</li>
-                                <li>la date limite d’une tâche ne doit pas être postérieure à la date de fin du projet</li>
-                                <li>le titre d’une tâche ne doit pas être vide</li>
-                            </ul>
-                        </li>
-                        <li>Si un projet contient une image, la récupérer dans<span class="comment"> /media/ </span>
-                        </li>
+                        <li>la route<span class="comment"> / </span>pour la vue<span class="comment"> "home"</span></li>
+                        <li>la route<span class="comment"> /projects/ </span>pour la vue<span class="comment"> "project_list"</span></li>
+                        <li>la route<span class="comment"> /projects/&lt;int:pk&gt;/ </span>pour la vue<span class="comment"> "project_detail"</span></li>
+                        <li>la route<span class="comment"> /tasks/ </span>pour la vue<span class="comment"> "task_list"</span></li>
+                        <li>la route<span class="comment"> /tasks/&lt;int:pk&gt;/ </span>pour la vue<span class="comment"> "task_detail"</span></li>
+                        <li>la route<span class="comment"> /projects/create/ </span>pour ajouter un projet</li>
+                        <li>la route<span class="comment"> /tasks/create/ </span>pour ajouter une tâche</li>
                     </ul>
-
-                    <div class="separator"></div>
-
-                    <h3>Templates</h3>
+                </li>
+                <li>Utiliser :
                     <ul>
-                        <li>Créer les pages HTML nécessaires.</li>
-                        <li>Créer un fichier<span class="comment"> base.html </span>commun.</li>
-                        <li>Afficher clairement :
-                            <ul>
-                                <li>la liste des projets</li>
-                                <li>les détails d’un projet</li>
-                                <li>la liste des tâches d’un projet</li>
-                                <li>les détails d’une tâche</li>
-                                <li>les formulaires d’ajout</li>
-                            </ul>
-                        </li>
-                        <li>Dans le détail d’un projet, afficher :
-                            <ul>
-                                <li>son nom</li>
-                                <li>sa description</li>
-                                <li>ses dates</li>
-                                <li>son image si elle existe</li>
-                                <li>la liste des membres</li>
-                                <li>la liste des tâches liées</li>
-                            </ul>
-                        </li>
-                        <li>Dans le détail d’une tâche, afficher :
-                            <ul>
-                                <li>son titre</li>
-                                <li>sa description</li>
-                                <li>son état</li>
-                                <li>sa priorité</li>
-                                <li>son projet</li>
-                                <li>son membre responsable</li>
-                            </ul>
-                        </li>
-                        <li>Ajouter une navigation simple et cohérente sur toutes les pages.</li>
+                        <li><span class="comment">TemplateView</span> pour l’accueil ;</li>
+                        <li><span class="comment">ListView</span> pour les listes ;</li>
+                        <li><span class="comment">DetailView</span> pour les détails ;</li>
+                        <li><span class="comment">CreateView</span> pour les formulaires de création.</li>
                     </ul>
-                </div>
-            </div>
-        </section>
-    </main>
+                </li>
+                <li>Ordonner les projets par nom ou par date.</li>
+                <li>Ordonner les tâches par date limite.</li>
+                <li>Envoyer les données avec un<span class="comment"> context </span>clair dans les vues.</li>
+            </ul>
 
-    <!-- ***************************************************************************************************************
-         FOOTER
-    **************************************************************************************************************** -->
-    <footer>
-        <div>© Copyright - Guillaume Peyrard</div>
-    </footer>
-</body>
-</html>
+            <div class="separator"></div>
+
+            <h3>Formulaires</h3>
+            <ul>
+                <li>Créer les formulaires dans<span class="comment"> forms.py</span>.</li>
+                <li>Utiliser <span class="comment"> ModelForm </span>pour créer un projet et une tâche.</li>
+                <li>Vérifier les données avec<span class="comment"> is_valid()</span>.</li>
+                <li>Utiliser<span class="comment"> cleaned_data </span>.</li>
+                <li>Ajouter des validations utiles, par exemple :
+                    <ul>
+                        <li>la date de fin d’un projet ne doit pas être antérieure à la date de début</li>
+                        <li>la date limite d’une tâche ne doit pas être postérieure à la date de fin du projet</li>
+                        <li>le titre d’une tâche ne doit pas être vide</li>
+                    </ul>
+                </li>
+                <li>Si un projet contient une image, la récupérer dans<span class="comment"> /media/ </span>
+                </li>
+            </ul>
+
+            <div class="separator"></div>
+
+            <h3>Templates</h3>
+            <ul>
+                <li>Créer les pages HTML nécessaires.</li>
+                <li>Créer un fichier<span class="comment"> base.html </span>commun.</li>
+                <li>Afficher clairement :
+                    <ul>
+                        <li>la liste des projets</li>
+                        <li>les détails d’un projet</li>
+                        <li>la liste des tâches d’un projet</li>
+                        <li>les détails d’une tâche</li>
+                        <li>les formulaires d’ajout</li>
+                    </ul>
+                </li>
+                <li>Dans le détail d’un projet, afficher :
+                    <ul>
+                        <li>son nom</li>
+                        <li>sa description</li>
+                        <li>ses dates</li>
+                        <li>son image si elle existe</li>
+                        <li>la liste des membres</li>
+                        <li>la liste des tâches liées</li>
+                    </ul>
+                </li>
+                <li>Dans le détail d’une tâche, afficher :
+                    <ul>
+                        <li>son titre</li>
+                        <li>sa description</li>
+                        <li>son état</li>
+                        <li>sa priorité</li>
+                        <li>son projet</li>
+                        <li>son membre responsable</li>
+                    </ul>
+                </li>
+                <li>Ajouter une navigation simple et cohérente sur toutes les pages.</li>
+            </ul>
+        </div>
+    </div>
+</section>

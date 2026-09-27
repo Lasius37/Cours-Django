@@ -1,139 +1,70 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/init.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script type="module" src="../js/script.js" defer></script>
-    <title>Traiter les données envoyées par l'utilisateur</title>
-</head>
-<body>
-    <!-- ***************************************************************************************************************
-         HEADER
-    **************************************************************************************************************** -->
-    <header>
-        <h1>Traiter les données envoyées par l'utilisateur</h1>
+---
+layout: base
+short: "Données de formulaires"
+title: "Traiter les données issues d'un formulaire"
+---
 
-        <!-- navbar
-             ======================================================================================================= -->
-        <nav>
-            <ul class="navbar"></ul>
-        </nav>
-    </header>
+<!-- content section
+     ======================================================================================================= -->
+<section id="role">
+    <h2>Traiter les données d’un formulaire</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Une fois le formulaire affiché dans le template, l’étape suivante consiste à
+                récupérer et traiter les données envoyées par l’utilisateur.
+            </p>
+            <p>
+                En Django, ce traitement se fait généralement dans la vue. La vue doit :
+            </p>
+            <ul>
+                <li>détecter si le formulaire a été envoyé</li>
+                <li>récupérer les données</li>
+                <li>vérifier si elles sont valides</li>
+                <li>utiliser ces données ou réafficher le formulaire avec les erreurs</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-    <!-- ***************************************************************************************************************
-         ASIDE
-    **************************************************************************************************************** -->
-    <aside>
-
-        <!-- sidebar
-             ======================================================================================================= -->
-        <nav class="sidebar">
-
-            <!-- sidebar group ------------------------------------------------------------------------------------- -->
-            <section class="sidebar__group">
-                <h2>Dans cette page</h2>
-                <ul>
-                    <li class="sidebar__element">
-                        <a href="#role">Traiter les données d’un formulaire</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#method">Vérifier la méthode de requête</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#post">Récupérer les données avec request.POST</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#valid">Vérifier le formulaire avec is_valid()</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#cleaned">Utiliser cleaned_data</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#response">Réagir après l’envoi</a>
-                    </li>
-                    <li class="sidebar__element">
-                        <a href="#errors">Erreurs fréquentes</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </aside>
-
-    <!-- ***************************************************************************************************************
-         MAIN
-    **************************************************************************************************************** -->
-    <main>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="role">
-            <h2>Traiter les données d’un formulaire</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Une fois le formulaire affiché dans le template, l’étape suivante consiste à
-                        récupérer et traiter les données envoyées par l’utilisateur.
-                    </p>
-                    <p>
-                        En Django, ce traitement se fait généralement dans la vue. La vue doit :
-                    </p>
-                    <ul>
-                        <li>détecter si le formulaire a été envoyé</li>
-                        <li>récupérer les données</li>
-                        <li>vérifier si elles sont valides</li>
-                        <li>utiliser ces données ou réafficher le formulaire avec les erreurs</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="method">
-            <h2>Vérifier la méthode de requête</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Quand un utilisateur affiche la page pour la première fois, la requête est souvent
-                        de type<span class="comment"> GET</span>. Quand il envoie le formulaire, la requête
-                        est généralement de type<span class="comment"> POST</span>.
-                    </p>
-                    <pre class="python"><code><span class="word">def</span> <span class="function">contact</span>(request):
+<!-- content section
+     ======================================================================================================= -->
+<section id="method">
+    <h2>Vérifier la méthode de requête</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Quand un utilisateur affiche la page pour la première fois, la requête est souvent
+                de type<span class="comment"> GET</span>. Quand il envoie le formulaire, la requête
+                est généralement de type<span class="comment"> POST</span>.
+            </p>
+            <pre class="python"><code><span class="word">def</span> <span class="function">contact</span>(request):
     <span class="word">if</span> request.method == <span class="text">"POST"</span>:
         <span class="word">pass</span>
     <span class="word">else</span>:
         <span class="word">pass</span></code></pre>
-                    <p>
-                        Cette structure permet à la vue de distinguer :
-                    </p>
-                    <ul>
-                        <li>l’affichage initial du formulaire</li>
-                        <li>le traitement des données envoyées</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+            <p>
+                Cette structure permet à la vue de distinguer :
+            </p>
+            <ul>
+                <li>l’affichage initial du formulaire</li>
+                <li>le traitement des données envoyées</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="post">
-            <h2>Récupérer les données avec request.POST</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Quand le formulaire est envoyé avec<span class="comment"> method="post"</span>,
-                        les données saisies sont accessibles dans<span class="comment"> request.POST</span>.
-                    </p>
-                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
+<!-- content section
+     ======================================================================================================= -->
+<section id="post">
+    <h2>Récupérer les données avec request.POST</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Quand le formulaire est envoyé avec<span class="comment"> method="post"</span>,
+                les données saisies sont accessibles dans<span class="comment"> request.POST</span>.
+            </p>
+            <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> render
 <span class="word">from</span> .forms <span class="word">import</span> ContactForm
 
 
@@ -146,26 +77,26 @@
     context = {<span class="text">"form"</span>: form}
 
     <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"contact.html"</span>, context)</code></pre>
-                    <p>
-                        Ici, Django remplit le formulaire avec les données reçues. Cela permet ensuite
-                        de vérifier si les champs contiennent des valeurs correctes.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                Ici, Django remplit le formulaire avec les données reçues. Cela permet ensuite
+                de vérifier si les champs contiennent des valeurs correctes.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="valid">
-            <h2>Vérifier le formulaire avec is_valid()</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Une fois le formulaire rempli avec<span class="comment"> request.POST</span>,
-                        on peut demander à Django de vérifier les données avec la
-                        méthode<span class="comment"> is_valid()</span>.
-                    </p>
-                    <pre class="python"><code><span class="word">def</span> <span class="function">contact</span>(request):
+<!-- content section
+     ======================================================================================================= -->
+<section id="valid">
+    <h2>Vérifier le formulaire avec is_valid()</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Une fois le formulaire rempli avec<span class="comment"> request.POST</span>,
+                on peut demander à Django de vérifier les données avec la
+                méthode<span class="comment"> is_valid()</span>.
+            </p>
+            <pre class="python"><code><span class="word">def</span> <span class="function">contact</span>(request):
     <span class="word">if</span> request.method == "POST":
         form = ContactForm(request.POST)
         <span class="word">if</span> form.<span class="function">is_valid</span>():
@@ -176,32 +107,32 @@
     context = {<span class="text">"form"</span>: form}
 
     <span class="word">return <span class="function">render</span></span>(request, <span class="text">"contact.html"</span>, context)</code></pre>
-                    <p>
-                        La méthode<span class="comment"> is_valid() </span>retourne :
-                    </p>
-                    <ul>
-                        <li><span class="comment">True </span>si les données respectent les règles du formulaire</li>
-                        <li><span class="comment">False </span>si certaines données sont manquantes ou invalides</li>
-                    </ul>
-                    <p>
-                        Si le formulaire n’est pas valide, Django peut réafficher automatiquement les champs
-                        avec les messages d’erreur associés.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                La méthode<span class="comment"> is_valid() </span>retourne :
+            </p>
+            <ul>
+                <li><span class="comment">True </span>si les données respectent les règles du formulaire</li>
+                <li><span class="comment">False </span>si certaines données sont manquantes ou invalides</li>
+            </ul>
+            <p>
+                Si le formulaire n’est pas valide, Django peut réafficher automatiquement les champs
+                avec les messages d’erreur associés.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="cleaned">
-            <h2>Utiliser cleaned_data</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Quand<span class="comment"> form.is_valid() </span>renvoie<span class="comment"> True</span>,
-                        les données validées sont disponibles dans<span class="comment"> form.cleaned_data</span>.
-                    </p>
-                    <pre class="python"><code><span class="word">def</span> <span class="function">contact</span>(request):
+<!-- content section
+     ======================================================================================================= -->
+<section id="cleaned">
+    <h2>Utiliser cleaned_data</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Quand<span class="comment"> form.is_valid() </span>renvoie<span class="comment"> True</span>,
+                les données validées sont disponibles dans<span class="comment"> form.cleaned_data</span>.
+            </p>
+            <pre class="python"><code><span class="word">def</span> <span class="function">contact</span>(request):
     <span class="word">if</span> request.method == <span class="text">"POST"</span>:
         form = ContactForm(request.POST)
         <span class="word">if</span> form.<span class="function">is_valid</span>():
@@ -214,32 +145,32 @@
     context = {<span class="text">"form"</span>: form}
 
     <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"contact.html"</span>, context)</code></pre>
-                    <p>
-                        <span class="comment">cleaned_data </span>contient les valeurs déjà vérifiées et converties
-                        dans un format utilisable par Python. Il vaut mieux
-                        utiliser<span class="comment"> cleaned_data </span>plutôt que lire directement
-                        les valeurs dans<span class="comment"> request.POST</span>.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                <span class="comment">cleaned_data </span>contient les valeurs déjà vérifiées et converties
+                dans un format utilisable par Python. Il vaut mieux
+                utiliser<span class="comment"> cleaned_data </span>plutôt que lire directement
+                les valeurs dans<span class="comment"> request.POST</span>.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="response">
-            <h2>Réagir après l’envoi</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <p>
-                        Une fois les données récupérées et validées, la vue peut faire plusieurs choses :
-                    </p>
-                    <ul>
-                        <li>afficher un message de confirmation</li>
-                        <li>enregistrer un objet dans la base de données</li>
-                        <li>envoyer un email</li>
-                        <li>rediriger l’utilisateur vers une autre page</li>
-                    </ul>
-                    <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> redirect, render
+<!-- content section
+     ======================================================================================================= -->
+<section id="response">
+    <h2>Réagir après l’envoi</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <p>
+                Une fois les données récupérées et validées, la vue peut faire plusieurs choses :
+            </p>
+            <ul>
+                <li>afficher un message de confirmation</li>
+                <li>enregistrer un objet dans la base de données</li>
+                <li>envoyer un email</li>
+                <li>rediriger l’utilisateur vers une autre page</li>
+            </ul>
+            <pre class="python"><code><span class="word">from</span> django.shortcuts <span class="word">import</span> redirect, render
 <span class="word">from</span> .forms <span class="word">import</span> ContactForm
 
 
@@ -254,39 +185,28 @@
     context = {<span class="text">"form"</span>: form}
 
     <span class="word">return</span> <span class="function">render</span>(request, <span class="text">"contact.html"</span>, context)</code></pre>
-                    <p>
-                        Ici, si le formulaire est valide, l’utilisateur est redirigé vers la
-                        page<span class="comment"> "home"</span>.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>
+                Ici, si le formulaire est valide, l’utilisateur est redirigé vers la
+                page<span class="comment"> "home"</span>.
+            </p>
+        </div>
+    </div>
+</section>
 
-        <!-- content section
-             ======================================================================================================= -->
-        <section id="errors">
-            <h2>Erreurs fréquentes</h2>
-            <div class="layout">
-                <div class="layout__text">
-                    <ul>
-                        <li>Tester<span class="comment"> request.method </span>avec<span class="comment"> "post" </span>au lieu de<span class="comment"> "POST" </span>:<span class="error"> la condition ne fonctionne pas</span>.</li>
-                        <li>Créer<span class="comment"> ContactForm() </span>au lieu de<span class="comment"> ContactForm(request.POST) </span>dans le bloc<span class="comment"> POST </span>:<span class="error"> les données envoyées ne sont pas récupérées</span>.</li>
-                        <li>Utiliser<span class="comment"> cleaned_data </span>avant<span class="comment"> is_valid() </span>:<span class="error"> les données ne sont pas encore validées</span>.</li>
-                        <li>Lire directement les champs dans<span class="comment"> request.POST </span>au lieu d’utiliser<span class="comment"> form.cleaned_data </span>:<span class="error"> on contourne le système de validation de Django</span>.</li>
-                        <li>Oublier de renvoyer le formulaire au template quand il n’est pas valide :<span class="error"> la page ne peut pas réafficher les erreurs</span>.</li>
-                        <li>Oublier<span class="comment"> method="post" </span>dans la balise<span class="comment"> &lt;form&gt; </span>:<span class="error"> les données ne sont pas envoyées comme prévu</span>.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- ***************************************************************************************************************
-         FOOTER
-    **************************************************************************************************************** -->
-    <footer>
-        <div>© Copyright - Guillaume Peyrard</div>
-    </footer>
-</body>
-</html>
+<!-- content section
+     ======================================================================================================= -->
+<section id="errors">
+    <h2>Erreurs fréquentes</h2>
+    <div class="layout">
+        <div class="layout__text">
+            <ul>
+                <li>Tester<span class="comment"> request.method </span>avec<span class="comment"> "post" </span>au lieu de<span class="comment"> "POST" </span>:<span class="error"> la condition ne fonctionne pas</span>.</li>
+                <li>Créer<span class="comment"> ContactForm() </span>au lieu de<span class="comment"> ContactForm(request.POST) </span>dans le bloc<span class="comment"> POST </span>:<span class="error"> les données envoyées ne sont pas récupérées</span>.</li>
+                <li>Utiliser<span class="comment"> cleaned_data </span>avant<span class="comment"> is_valid() </span>:<span class="error"> les données ne sont pas encore validées</span>.</li>
+                <li>Lire directement les champs dans<span class="comment"> request.POST </span>au lieu d’utiliser<span class="comment"> form.cleaned_data </span>:<span class="error"> on contourne le système de validation de Django</span>.</li>
+                <li>Oublier de renvoyer le formulaire au template quand il n’est pas valide :<span class="error"> la page ne peut pas réafficher les erreurs</span>.</li>
+                <li>Oublier<span class="comment"> method="post" </span>dans la balise<span class="comment"> &lt;form&gt; </span>:<span class="error"> les données ne sont pas envoyées comme prévu</span>.</li>
+            </ul>
+        </div>
+    </div>
+</section>
